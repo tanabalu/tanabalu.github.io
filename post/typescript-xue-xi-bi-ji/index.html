@@ -1,0 +1,1340 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Typescript学习笔记 | 白山</title>
+<meta name="description" content="温故而知新。" />
+<link rel="shortcut icon" href="https://hbuecx.com/favicon.ico">
+<link rel="stylesheet" href="https://hbuecx.com/styles/main.css">
+
+<script src="https://hbuecx.com/media/js/jquery.min.js"></script>
+<script src="https://hbuecx.com/media/js/masonry.pkgd.min.js"></script>
+<script src="https://hbuecx.com/media/js/aos.js"></script>
+<script src="https://hbuecx.com/media/js/pace.min.js"></script>
+<script src="https://hbuecx.com/media/js/view-image.min.js"></script>
+<script src="https://hbuecx.com/media/js/functions.js"></script>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?3349a47f297f4ca395881d504c2856e6";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+    <script src="https://hbuecx.com/media/js/waterfall.min.js"></script>
+    <script src="https://hbuecx.com/media/js/prism.min.js"></script>
+    
+  </head>
+  <body>
+            <header id="header" class="grid-container">
+        <!-- start: .menu-wrapper -->
+        <div class="menu-mobile"> 
+          <i class="fa fa-reorder"></i>
+        </div>
+        <div class="menu-wrapper">
+          <div class="">
+            <div class="logo">
+              <a href="https://hbuecx.com"><img src="https://hbuecx.com/media/images/logoo.png" alt=""></a>
+            </div>
+            <!-- start: .main-nav -->
+
+            <nav class="main-nav grid-container grid-parent">
+              <ul id="menu-header" class="menu gradient-effect">
+                
+                  <li class=""><a href="https://hbuecx.com" class="menu">首页</a></li>
+                
+                
+                  <li class="" >
+                    <a href="/archives" class="menu">
+                      归档
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/tags" class="menu">
+                      标签
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/post/message" class="menu">
+                      小记
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/collection" class="menu">
+                      工具
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/friends" class="menu">
+                      Space
+                    </a>
+                  </li>
+                
+              </ul>
+            </nav>
+            <!-- end: .main-nav -->
+            <div class="clear"></div>
+            <div class="border hide-on-tablet hide-on-mobile"></div>
+          </div>    
+          <div class="clear"></div>
+        </div>
+        <!-- end: .menu-wrapper -->
+        <div class="clear"></div>
+      </header>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('https://hbuecx.com/media/images/lQxKPGr7h.jpg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2020-05-10 10:07:10"><i class="fa fa-calendar"></i><span class="lately">6 年前</span></time>
+               
+               
+               <span id="/post/typescript-xue-xi-bi-ji/" class="leancloud_visitors views-counter meta-info">
+                <i class="fa fa-leancloud"></i><span class="leancloud-visitors-count" style="vertical-align: middle;">0</span>
+               </span>
+               
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://hbuecx.com/tag/lQxKPGr7h/" class="ctag ctag-0 ctag-lQxKPGr7h" aria-label="">Typescript</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">Typescript学习笔记</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <h1 id="安装">安装</h1>
+<pre><code>npm install typescript -D
+</code></pre>
+<h1 id="生成配置文件tsconfigjson">生成配置文件：tsconfig.json</h1>
+<pre><code>npx tsc --init
+</code></pre>
+<h1 id="ts中的数据类型">ts中的数据类型</h1>
+<ul>
+<li>boolean：布尔</li>
+<li>number：数字</li>
+<li>string：字符串</li>
+<li>array：数组</li>
+<li>tuple：元组</li>
+<li>enum：枚举</li>
+<li>any：任意类型</li>
+<li>null 和 undefined</li>
+<li>void</li>
+<li>never</li>
+</ul>
+<h2 id="数据类型定义方法">数据类型定义方法</h2>
+<h3 id="定义原始类型">定义原始类型</h3>
+<p>boolean、number、string</p>
+<pre><code class="language-ts">const flag: boolean = false;
+</code></pre>
+<h3 id="定义数组类型">定义数组类型</h3>
+<p>第一种方式：</p>
+<pre><code class="language-ts">const sArr: string[] = ['1', 'dhdh'];
+let nArr: number[] = [1, 2, 10];
+
+// 定义任意类型的数组
+let aArr: any[] = ['dd', 123];
+</code></pre>
+<p>第二种方式（使用泛型）：</p>
+<pre><code class="language-ts">let arr: Array&lt;number&gt; = [1, 45, 67];
+</code></pre>
+<pre><code class="language-ts">let arr: Array&lt;any&gt; = ['dd', 123];
+</code></pre>
+<h3 id="定义元组类型">定义元组类型</h3>
+<p>属于数组的一种，定义数组中每一项的类型</p>
+<pre><code class="language-ts">let arr: [string, number, boolean] = ['哈哈', 23, false];
+</code></pre>
+<h3 id="定义枚举类型">定义枚举类型</h3>
+<p>如果给枚举类型赋值了，使用的是赋值的数据</p>
+<pre><code class="language-ts">enum Flag {
+    success = 1,
+    error = -1
+}
+
+let flag: Flag = Flag.success;  // 1
+</code></pre>
+<p>如果没有给枚举类型赋值，使用的是索引值（index）</p>
+<pre><code class="language-ts">enum Color {
+    red, blue, orange
+}
+
+let a: Color = Color.red;  // 0
+let b: Color = Color.blue;  // 1
+let c: Color = Color.orange;  // 2
+</code></pre>
+<p>如果给其中某写枚举值赋值了，其他一些枚举值没有赋值，后面的枚举值会在前面已经定义的枚举值基础上递增</p>
+<pre><code class="language-ts">enum Color {
+    red,
+    blue = 5,
+    orange
+}
+
+let a: Color = Color.red;  // 0
+let b: Color = Color.blue;  // 5
+let c: Color = Color.orange;  // 6
+</code></pre>
+<h3 id="定义任意类型">定义任意类型</h3>
+<pre><code class="language-ts">let num: any = 123;
+num = '456';
+num = false;
+</code></pre>
+<h3 id="定义-null-和-undefined-类型">定义 null 和 undefined 类型</h3>
+<p>其他（never类型）数据类型的子类型</p>
+<pre><code class="language-ts">var num: undefined;
+console.log(num);
+</code></pre>
+<pre><code class="language-ts">var num: number | undefined;
+num = 123;
+console.log(num);
+</code></pre>
+<h3 id="定义-void-类型">定义 void 类型</h3>
+<p>一般用于定义没有返回值的方法</p>
+<pre><code class="language-ts">function run(): void {
+    console.log('我没有return哦');
+}
+</code></pre>
+<h3 id="定义其他类型never">定义其他类型（never）</h3>
+<p>是其他类型（包括 null 和 undefined）的子类型，表示从不会出现的值。</p>
+<p>这个类型基本不会用到。</p>
+<pre><code class="language-ts">var a: undefined;
+a = undefined;
+</code></pre>
+<pre><code class="language-ts">var a: never;
+
+a = (() =&gt; {
+    throw new Error('报错');
+})();
+</code></pre>
+<h2 id="函数的定义">函数的定义</h2>
+<p>定义返回值</p>
+<pre><code class="language-ts">function run(): string {
+    return 'haha';
+}
+
+const fun = function(): number {
+    return 123;
+}
+</code></pre>
+<p>定义传参</p>
+<pre><code class="language-ts">function run(name: string, age: number): string {
+    return `${name}--${age}`;
+}
+
+const fun = function(name: string, age: number): string {
+    return `${name}--${age}`;
+};
+
+// 加上 ? 表示可选参数，可传可不传
+// 【注意】可选参数必须放在参数的最后面！！！
+const fun2 = function(name: string, age?: number): string {
+    if (age) {
+        return `${name}--${age}`;
+    } else {
+        return `${name}--保密`;
+    }
+};
+
+// 默认参数
+const fun3 = function(name: string, age: number = 20): string {
+    if (age) {
+        return `${name}--${age}`;
+    } else {
+        return `${name}--保密`;
+    }
+};
+
+// 剩余参数
+const fun4 = function(a, b, ...rest:number[]): void {
+    let sum = 0;
+    for (let i = 0; i &lt; rest.length; i++) {
+        sum += rest[i];
+    }
+    console.log(a, b, sum);
+};
+fun4(1, 2, 3, 4);  // 1 2 7
+
+// 函数重载
+function getInfo(age: number): string;
+function getInfo(name: string): string;
+function getInfo(str: any):any {
+    if (typeof str === 'number') {
+        return `我今年${str}岁`;
+    } 
+    return `我叫${str}`;
+}
+
+getInfo(12);  // 我今年12岁
+getInfo('明明');  // 我叫明明
+// 报错，因为没有定义 boolean 类型
+// getInfo(false); 
+</code></pre>
+<h1 id="ts中的类">ts中的类</h1>
+<h2 id="类的定义">类的定义</h2>
+<pre><code class="language-ts">class Person {
+    name: string;  // 属性 前面省略了public关键词
+
+    constructor(name: tring) {
+        this.name = name;
+    }
+
+    getName(): void {
+        console.log(this.name);
+    }
+
+    setName(name: string): void {
+        this.name = name;
+    }
+}
+
+const p = new Person('张三');
+p.getName();  // 张三
+p.setName('李四');
+p.getName();  // 李四
+</code></pre>
+<h2 id="继承extends-super">继承：extends + super</h2>
+<pre><code class="language-ts">class Person {
+    name: string;  // 属性 前面省略了public关键词
+
+    constructor(name: tring) {
+        this.name = name;
+    }
+
+    run(): string {
+        return this.name;
+    }
+}
+
+class Web extends Person {
+    constructor(name: string) {
+        super(name);
+    }
+}
+
+const w = new Web('张三');
+w.run();  // 张三
+</code></pre>
+<h2 id="类里面的修饰符">类里面的修饰符</h2>
+<p>public、protected、private</p>
+<p>属性的修饰符默认是公有（public）。</p>
+<h1 id="ts中的接口">ts中的接口</h1>
+<p>使用 <code>interface</code> 关键字定义接口。</p>
+<h2 id="属性接口">属性接口</h2>
+<pre><code class="language-ts">interface FullName {
+    firstName: string;
+    secondName: string;
+}
+
+function printName(name: FullName) {
+    console.log(name.firstName + '--' + name.secondName);
+}
+
+// 这种写法不允许对象中传入多余的属性
+printName({
+    firstName: '张',
+    secondName: '三',
+})
+
+// 待确认？：可以传入其他的属性
+const obj = {
+    age: 18,
+    firstName: '张',
+    secondName: '三',
+};
+printName(obj);
+</code></pre>
+<h3 id="可选属性">可选属性</h3>
+<pre><code class="language-ts">interface FullName {
+    firstName: string;
+    secondName: string;
+    // 可选属性
+    age?: number;
+}
+
+function getName(name: FullName) {
+    console.log(name.firstName + name.secondName + name.age);
+}
+
+getName({
+    firstName: '张',
+    secondName: '三',
+})
+
+getName({
+    firstName: '张',
+    secondName: '三',
+    age: 18,
+})
+</code></pre>
+<h2 id="函数类型接口">函数类型接口</h2>
+<pre><code class="language-ts">interface encrypt {
+    (key: string, value: string): string;
+}
+
+const md5: encrypt = function(key: string, value: string): string {
+    return key + value;
+};
+console.log(md5('name', 'zhangsan'));
+
+const test: encrypt = function(key: string, value: string): string {
+    return key + '--' + value;
+};
+console.log(test('name', 'zhangsan'));
+</code></pre>
+<h2 id="可索引接口数组-对象的约束不常用">可索引接口：数组、对象的约束（不常用）</h2>
+<pre><code class="language-ts">// 数组约束
+interface UserArr {
+    // 规定数组每一项数据都是 string 类型
+    [index: number]: string;
+}
+
+const arr: UserArr = ['aaa', 'bbb'];
+// const arr: UserArr = [123, 'bbb'];  // 错误写法
+
+// 对象约束
+interface UserObj {
+    [index: string]: string;
+}
+
+const obj: UserObj ={
+    name: '张三',
+};
+</code></pre>
+<h2 id="类类型接口">类类型接口</h2>
+<pre><code class="language-ts">interface Animal {
+    name: string;
+    eat(str: string): void;
+}
+
+class Dog implements Animal {
+    name: string;
+
+    constructor(name: string) {
+        this.name = name;
+    }
+
+    // 虽然定义传了参数，但是不传参数也是可以的
+    // 虽然可以不传参数，但是这个方法必须定义
+    eat() {
+        console.log(this.name + '吃粮食');
+    }
+}
+
+const d = new Dog('旺财');
+d.eat();
+</code></pre>
+<h2 id="接口扩展接口可以继承接口">接口扩展：接口可以继承接口</h2>
+<pre><code class="language-ts">interface Animal {
+    eat(): void;
+}
+
+interface Personal extends Animal {
+    work(): void;
+}
+
+class Web implements Personal {
+    public name: string;
+
+    constructor(name: string) {
+        this.name = name;
+    }
+
+    // 当类所继承的接口继承了其他接口的时候，这个类还必须实现其父级接口的方法
+    eat() {
+        console.log(this.name + '吃');
+    }
+
+    work() {
+        console.log(this.name + '工作');
+    }
+}
+
+const w = new Web('李四');
+w.eat();
+w.work();
+</code></pre>
+<h1 id="ts中的泛型">ts中的泛型</h1>
+<p>作用是校验类型，却不固定类型。一般用于模板通用方法。</p>
+<h2 id="泛型函数">泛型函数</h2>
+<p>简单示例：</p>
+<pre><code class="language-ts">function a&lt;T&gt;(value: T): T {
+    return value;
+}
+</code></pre>
+<h2 id="泛型类">泛型类</h2>
+<pre><code class="language-ts">// 这里的 T 就是泛型，通过对最外面的 T 的类型的定义，决定了其内部的所有的 T 的类型的定义。
+class Min&lt;T&gt; {
+    public list: T[] = [];
+
+    add(value: T): void {
+        this.list.push(value);
+    }
+
+    min(): T {
+        let minNum = this.list[0];
+        for (let i = 0; i &lt; minNum.length; i++) {
+            if (minNum &gt; this.list[i]) {
+                minNum = this.list[i];
+            }
+        }
+        return minNum;
+    }
+}
+
+const m1 = new Min&lt;number&gt;();
+m1.add(12);
+m1.add(3);
+m1.add(9);
+console.log(m1.min());  // 3
+
+const m2 = new Min&lt;string&gt;();
+m2.add('j');
+m2.add('v');
+m2.add('a');
+console.log(m2.min());  // a
+</code></pre>
+<h2 id="泛型接口">泛型接口</h2>
+<p>第一种写法：</p>
+<pre><code class="language-ts">interface ConfigFn {
+    &lt;T&gt;(value: T): T;
+}
+
+const getData: ConfigFn = function&lt;T&gt;(value: T): T {
+    return value;
+}
+
+getData&lt;string&gt;('张三');
+</code></pre>
+<p>第二种写法：</p>
+<pre><code class="language-ts">interface ConfigFn&lt;T&gt; {
+    (value: T): T;
+}
+
+function getData&lt;T&gt;(value: T): T {
+    return value;
+}
+
+const myGetData: ConfigFn&lt;string&gt; = getData;
+
+myGetData('20');
+</code></pre>
+<h1 id="装饰器">装饰器</h1>
+<p>装饰器是一种特殊类型的声明，它能够被附加到类声明，方法，属性或者参数上，可以修改类的行为。</p>
+<p>常见的装饰器有：类装饰器，属性装饰器，方法装饰器，参数装饰器。</p>
+<h2 id="类装饰器">类装饰器</h2>
+<h3 id="普通装饰器">普通装饰器</h3>
+<pre><code class="language-ts">// 装饰器
+function logClass(params: any) {
+    console.log(params);  // 打印的就是被装饰的类
+    params.prototype.apiUrl = '动态扩展的属性';
+}
+
+@logClass
+class HttpClient {
+    constructor() {
+
+    }
+
+    getData() {
+
+    }
+}
+
+const http: any = new HttpClient();
+console.log(http.apiUrl);
+</code></pre>
+<h3 id="装饰器工厂">装饰器工厂</h3>
+<p>可以传入参数</p>
+<pre><code class="language-ts">function logClass(params: string) {
+    return  function(target: any) {
+        console.log(target);  // HttpClient
+        console.log(params);  // hello
+    };
+}
+
+@logClass('hello')
+class HttpClient {
+    constructor() {
+
+    }
+
+    getData() {
+
+    }
+}
+</code></pre>
+<h2 id="属性装饰器">属性装饰器</h2>
+<p>属性装饰器表达式会在运行时当做函数被调用，传入下列两个参数：</p>
+<ol>
+<li>对于静态成员来说是类的构造函数，对于实例成员是类的原型对象。</li>
+<li>成员的名字。</li>
+</ol>
+<pre><code class="language-ts">function logProperty(params: any) {
+    return function(target: any, attr: any) {
+        console.log(target);  // HttpClient
+        console.log(attr);  // 'url'
+
+        target[attr] = params;  // 修改URL
+    }
+}
+
+class HttpClient {
+    @logProperty('http://www.baidu.com')
+    public url : anty | undefined;
+
+    constructor() {}
+
+    getData() {
+        console.log(this.url);
+    }
+}
+
+const http = new HttpClient();
+http.getData();  // 'http://www.baidu.com'
+</code></pre>
+<h2 id="方法装饰器">方法装饰器</h2>
+<p>它被应用到方法的属性描述符上，可以用来监视，修改或者替换方法定义。方法装饰器会在运行时传入下列三个参数：</p>
+<ol>
+<li>对于静态成员来说是类的构造函数，对于实例成员是类的原型对象。</li>
+<li>成员的名字。</li>
+<li>成员的属性描述符。</li>
+</ol>
+<pre><code class="language-ts">function logMethod(params: any) {
+    return function (target: any, methodName: any, desc: any) {
+        console.log(target);
+        console.log(methodName);
+        console.log(desc);  // getData
+
+        // 添加属性和方法
+        target.apiUrl = 'xxx';
+        target.run = function() {
+            console.log('run');
+        };
+
+        // 修改装饰器的方法，把装饰器方法里面传入的所有参数改为 string 类型
+        // 先将原始方法保留
+        const oMethod = desc.value;
+        // 修改方法
+        desc.value = function (...args: any[]) {
+            args = args.map(item =&gt; {
+                return String(value);
+            });
+
+            // 对象冒充
+            // 如果去掉这句话，原始方法就不会执行了，等同于替换了原始方法；加上这句话，会先执行这个被修改的方法，然后运行原始方法
+            oMethod.apply(this, args);
+        }
+    };
+}
+
+class HttpClient{
+    public url: any | undefined;
+
+    constructor() {}
+
+    @logMethod('http://www.baidu.com')
+    getData() {
+        consoe.log(this.url);
+    }
+}
+
+const http: any = new HttpClient();
+console.log(http.apiUrl);
+http.run();
+</code></pre>
+<h2 id="参数装饰器">参数装饰器</h2>
+<p>参数装饰器表达式会在运行时当做函数调用，可以使用参数装饰器为类的原型增加一些元素数据，传入下列3个参数：</p>
+<ol>
+<li>对于静态成员来说是类的构造函数，对于实例成员是类的原型对象。</li>
+<li>方法的名字。</li>
+<li>参数在函数参数列表中的索引。</li>
+</ol>
+<pre><code class="language-ts">function logParams(params: any) {
+    return function (target: any, methodName: any, paramsIndex: any) {
+        console.log(params);  // haha
+        console.log(target);  // HttpClient
+        console.log(methodName);  // getData
+        console.log(paramsIndex);  // 0
+
+        targrt.apiUrl = params;
+    };
+}
+
+class HttpClient {
+    public url: any | undefined;
+
+    constructor() {}
+
+    getData(@logParams('haha') uuid: any) {
+        console.log(uuid);  // 123456
+    }
+}
+
+const http = new HttpClient();
+http.getData(123456);
+console.log(http.apiUrl);  // haha
+</code></pre>
+<h2 id="装饰器执行顺序">装饰器执行顺序</h2>
+<p>属性 》方法 》方法参数 》类。</p>
+<p>如果有多个同样的装饰器，在后面的装饰器会先执行。</p>
+<h1 id="参考链接">参考链接</h1>
+<p><a href="https://www.bilibili.com/video/BV1yt411e7xV">Typescript教程</a>.</p>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hbuecx.com/media/images/RQ3JGtQmI.jpg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></div>
+                 <a href="https://hbuecx.com/post/yin-pin-bei-su-bo-fang/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2020-05-11 02:43:59">2020-05-11 02:43:59</time>
+                  <h4 class="title white no-margin">音频倍速播放原来这么简单🍳！</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hbuecx.com/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hbuecx.com/media/images/M9JFSzGuU.jpg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></div>
+                 <a href="https://hbuecx.com/post/react-proptypes-ke-xuan-lei-xing/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2020-05-06 03:10:06">2020-05-06 03:10:06</time>
+                  <h4 class="title white no-margin">React PropTypes可选类型</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hbuecx.com/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+
+              <div id="comments" class="bg-white hosted ">
+
+              
+                
+                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '1c7817279f236848ef3b',
+    clientSecret: 'cc9a052a730aca58df4ac91361957979a7fb5396',
+    repo: 'tanabalu.github.io',
+    owner: 'tanabalu',
+    admin: ['tanabalu'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+                
+                
+              
+                <div class="clear"></div>
+              </div>
+
+              <div class="clear"></div>
+            </div>
+          </div>
+      </main>
+
+          <footer id="footer" class="grid-container">
+        <div class="widgets row gradient-effect">
+            <div class="default-sidebar border-effect">
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+                  <h4 class="widget-title title white bordered">最新文章</h4>
+                  
+                  
+                  <article class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hbuecx.com/post/gridea-shang-shou-jiao-cheng/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display: block;background-image: url('https://hbuecx.com/media/images/logo.jpeg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2026-02-11 10:00:01">2026-02-11 10:00:01</time>
+                      <h4 class="title usmall">
+                        <a href="https://hbuecx.com/post/gridea-shang-shou-jiao-cheng/">Gridea 上手教程</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hbuecx.com/post/zhuang-shi-qi-de-miao-yong/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display: block;background-image: url('https://hbuecx.com/post-images/zhuang-shi-qi-de-miao-yong.png'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2024-03-18 10:38:08">2024-03-18 10:38:08</time>
+                      <h4 class="title usmall">
+                        <a href="https://hbuecx.com/post/zhuang-shi-qi-de-miao-yong/">装饰器的妙用</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hbuecx.com/post/kai-jia-yu-lao-long/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display: block;background-image: url('https://hbuecx.com/post-images/kai-jia-yu-lao-long.jpg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2024-02-25 11:40:58">2024-02-25 11:40:58</time>
+                      <h4 class="title usmall">
+                        <a href="https://hbuecx.com/post/kai-jia-yu-lao-long/">铠甲与牢笼</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+                  <h4 class="widget-title title white bordered">标签云</h4>
+                  <div class="tagcloud">
+                    
+                      <a href="https://hbuecx.com/tag/VlIS0yH5e/" class="ctag ctag-0 ctag-VlIS0yH5e" aria-label="">三省吾身</a>
+                    
+                      <a href="https://hbuecx.com/tag/ufGbQYqvJv/" class="ctag ctag-1 ctag-ufGbQYqvJv" aria-label="">踩坑</a>
+                    
+                      <a href="https://hbuecx.com/tag/9tN60Dg0i/" class="ctag ctag-2 ctag-9tN60Dg0i" aria-label="">随笔</a>
+                    
+                      <a href="https://hbuecx.com/tag/6WltqJasa/" class="ctag ctag-3 ctag-6WltqJasa" aria-label="">学习笔记</a>
+                    
+                      <a href="https://hbuecx.com/tag/8JblbPCl7/" class="ctag ctag-4 ctag-8JblbPCl7" aria-label="">游记</a>
+                    
+                      <a href="https://hbuecx.com/tag/i8tx5BWEe/" class="ctag ctag-5 ctag-i8tx5BWEe" aria-label="">面经</a>
+                    
+                      <a href="https://hbuecx.com/tag/M9JFSzGuU/" class="ctag ctag-6 ctag-M9JFSzGuU" aria-label="">React</a>
+                    
+                      <a href="https://hbuecx.com/tag/upoIx-adY/" class="ctag ctag-7 ctag-upoIx-adY" aria-label="">JS</a>
+                    
+                      <a href="https://hbuecx.com/tag/PyjodOK1i/" class="ctag ctag-8 ctag-PyjodOK1i" aria-label="">CSS</a>
+                    
+                      <a href="https://hbuecx.com/tag/Qd6JthZND/" class="ctag ctag-9 ctag-Qd6JthZND" aria-label="">Webpack</a>
+                    
+                      <a href="https://hbuecx.com/tag/gf_3G38fZ/" class="ctag ctag-10 ctag-gf_3G38fZ" aria-label="">Antd</a>
+                    
+                      <a href="https://hbuecx.com/tag/YePweIBlg/" class="ctag ctag-11 ctag-YePweIBlg" aria-label="">程序人生</a>
+                    
+                      <a href="https://hbuecx.com/tag/QXbkbGufZ/" class="ctag ctag-12 ctag-QXbkbGufZ" aria-label="">Jenkins</a>
+                    
+                      <a href="https://hbuecx.com/tag/7NGOks4Ws/" class="ctag ctag-13 ctag-7NGOks4Ws" aria-label="">产品</a>
+                    
+                      <a href="https://hbuecx.com/tag/_HICEyo5P3/" class="ctag ctag-14 ctag-_HICEyo5P3" aria-label="">微信小程序</a>
+                    
+                      <a href="https://hbuecx.com/tag/HBuRD1neJ/" class="ctag ctag-15 ctag-HBuRD1neJ" aria-label="">总结</a>
+                    
+                      <a href="https://hbuecx.com/tag/vau2C2Y2S/" class="ctag ctag-16 ctag-vau2C2Y2S" aria-label="">Github</a>
+                    
+                      <a href="https://hbuecx.com/tag/38T520puD/" class="ctag ctag-17 ctag-38T520puD" aria-label="">Git</a>
+                    
+                      <a href="https://hbuecx.com/tag/k3pxvspvg/" class="ctag ctag-18 ctag-k3pxvspvg" aria-label="">编码规范</a>
+                    
+                      <a href="https://hbuecx.com/tag/lQxKPGr7h/" class="ctag ctag-19 ctag-lQxKPGr7h" aria-label="">Typescript</a>
+                    
+                      <a href="https://hbuecx.com/tag/1sQlWB8GD/" class="ctag ctag-20 ctag-1sQlWB8GD" aria-label="">工具</a>
+                    
+                      <a href="https://hbuecx.com/tag/I4gSiRMrr/" class="ctag ctag-21 ctag-I4gSiRMrr" aria-label="">源码</a>
+                    
+                      <a href="https://hbuecx.com/tag/MaE4DBsGs/" class="ctag ctag-22 ctag-MaE4DBsGs" aria-label="">微信</a>
+                    
+                      <a href="https://hbuecx.com/tag/vDt64AfE0/" class="ctag ctag-23 ctag-vDt64AfE0" aria-label="">移动端</a>
+                    
+                      <a href="https://hbuecx.com/tag/mwHk1wpwf/" class="ctag ctag-24 ctag-mwHk1wpwf" aria-label="">适配</a>
+                    
+                      <a href="https://hbuecx.com/tag/VH7lmHwnZ/" class="ctag ctag-25 ctag-VH7lmHwnZ" aria-label="">每日一题</a>
+                    
+                      <a href="https://hbuecx.com/tag/RQ3JGtQmI/" class="ctag ctag-26 ctag-RQ3JGtQmI" aria-label="">音视频</a>
+                    
+                      <a href="https://hbuecx.com/tag/Wv66WQAJ8/" class="ctag ctag-27 ctag-Wv66WQAJ8" aria-label="">Redux</a>
+                    
+                      <a href="https://hbuecx.com/tag/nUUykT2A1/" class="ctag ctag-28 ctag-nUUykT2A1" aria-label="">职场</a>
+                    
+                      <a href="https://hbuecx.com/tag/PEMhkj0cS/" class="ctag ctag-29 ctag-PEMhkj0cS" aria-label="">ES6</a>
+                    
+                      <a href="https://hbuecx.com/tag/b0N2FFH8U/" class="ctag ctag-30 ctag-b0N2FFH8U" aria-label="">测试</a>
+                    
+                      <a href="https://hbuecx.com/tag/X9yVzPzJP/" class="ctag ctag-31 ctag-X9yVzPzJP" aria-label="">iOS</a>
+                    
+                  </div>
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+                  <h4 class="widget-title title white bordered">关于我</h4>
+                  <div class="avatar">
+                    <a href="" class="translate-effect thumb"><span class="fullimage cover" style="background-image: url(https://hbuecx.com/images/avatar.png),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span></a>
+                  </div>
+                  <div class="info">
+                    <h4 class="title small author-name gradient-effect no-margin"><a href="">白山</a></h4>
+                    <p class="founder">温故而知新。</p>
+                    <div class="social">
+                      
+                          
+                            <a href="https://github.com/AWhiteMouse/AWhiteMouse.github.io" class="translate-effect" target="_blank"><i class="fa fa-github"></i></a>
+                        
+                      
+                          
+                            <a href="https://blog.csdn.net/i_dont_know_a" class="translate-effect" target="_blank"><i class="fa fa-csdn"></i></a>
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                    </div> 
+                  </div>
+                  <div class="clear"></div>
+                  </section>
+              </div>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="logo">
+          <a href="https://hbuecx.com"><img class="" src="https://hbuecx.com/media/images/logo.png" alt=""></a>
+        </div>
+        <p class="published border-effect">
+          ©2019 共 171 篇文章
+          <br/>
+          Theme <a href="https://gridea.dev/" target="_blank">「breek」</a> Powered by <a href="https://gridea.dev/" target="_blank">「Gridea」</a>
+        </p>
+        
+        <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+          <i class="fa fa-arrow"></i>
+        </a>
+    </footer>
+    <div class="clear"></div>
+    <script src="https://player.lzti.com/api/player/1665675851148" id="myhk" key="1665675851148" m="1"></script>
+
+      <script type="text/javascript">
+       jQuery(document).ready(function($){
+          $("photos img").each(function(){
+              var _a = $("<a></a>").attr("href",this.src);
+              $(this).wrap("<div class='photo'></div>").wrap(_a);
+          })
+          $("figure img").each(function(){
+              var _b = $("<a></a>").attr("href",this.src);
+              $(this).wrap(_b);
+          })
+          isImgLoad(function(){
+            var photos = document.querySelector('photos');
+            if(photos){
+              waterfall(photos);
+            }
+            $(window).resize(function() {
+             if(photos){
+                  waterfall(photos);
+            }
+          });
+        });
+        var t_img;
+        var isLoad = true;
+        function isImgLoad(callback){
+          $('photos img').each(function(){
+            if(this.height === 0){
+              isLoad = false;
+              return false;
+            }
+          });
+          if(isLoad){
+            clearTimeout(t_img);
+            callback();
+          }else{
+            isLoad = true;
+            t_img = setTimeout(function(){
+              isImgLoad(callback);
+            },500);
+          }
+        }
+      });
+      </script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>

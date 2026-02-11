@@ -1,0 +1,1204 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>常用JS工具代码集合 | 白山</title>
+<meta name="description" content="温故而知新。" />
+<link rel="shortcut icon" href="https://hbuecx.com/favicon.ico">
+<link rel="stylesheet" href="https://hbuecx.com/styles/main.css">
+
+<script src="https://hbuecx.com/media/js/jquery.min.js"></script>
+<script src="https://hbuecx.com/media/js/masonry.pkgd.min.js"></script>
+<script src="https://hbuecx.com/media/js/aos.js"></script>
+<script src="https://hbuecx.com/media/js/pace.min.js"></script>
+<script src="https://hbuecx.com/media/js/view-image.min.js"></script>
+<script src="https://hbuecx.com/media/js/functions.js"></script>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?3349a47f297f4ca395881d504c2856e6";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+    <script src="https://hbuecx.com/media/js/waterfall.min.js"></script>
+    <script src="https://hbuecx.com/media/js/prism.min.js"></script>
+    
+  </head>
+  <body>
+            <header id="header" class="grid-container">
+        <!-- start: .menu-wrapper -->
+        <div class="menu-mobile"> 
+          <i class="fa fa-reorder"></i>
+        </div>
+        <div class="menu-wrapper">
+          <div class="">
+            <div class="logo">
+              <a href="https://hbuecx.com"><img src="https://hbuecx.com/media/images/logoo.png" alt=""></a>
+            </div>
+            <!-- start: .main-nav -->
+
+            <nav class="main-nav grid-container grid-parent">
+              <ul id="menu-header" class="menu gradient-effect">
+                
+                  <li class=""><a href="https://hbuecx.com" class="menu">首页</a></li>
+                
+                
+                  <li class="" >
+                    <a href="/archives" class="menu">
+                      归档
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/tags" class="menu">
+                      标签
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/post/message" class="menu">
+                      小记
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/collection" class="menu">
+                      工具
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/friends" class="menu">
+                      Space
+                    </a>
+                  </li>
+                
+              </ul>
+            </nav>
+            <!-- end: .main-nav -->
+            <div class="clear"></div>
+            <div class="border hide-on-tablet hide-on-mobile"></div>
+          </div>    
+          <div class="clear"></div>
+        </div>
+        <!-- end: .menu-wrapper -->
+        <div class="clear"></div>
+      </header>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20190506/2efe9e4ed3394d48885bd862b2f6a868.jpeg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2020-02-04 07:00:32"><i class="fa fa-calendar"></i><span class="lately">6 年前</span></time>
+               
+               
+               <span id="/post/chang-yong-dai-ma-duan-ji-he/" class="leancloud_visitors views-counter meta-info">
+                <i class="fa fa-leancloud"></i><span class="leancloud-visitors-count" style="vertical-align: middle;">0</span>
+               </span>
+               
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://hbuecx.com/tag/YePweIBlg/" class="ctag ctag-0 ctag-YePweIBlg" aria-label="">程序人生</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">常用JS工具代码集合</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <p>我们在开发中，经常会遇到相同的场景，需要用到相同的代码，所以这篇文章就总结一下。</p>
+<!-- more -->
+<h1 id="去掉字符串首尾字符串">去掉字符串首尾字符串</h1>
+<pre><code class="language-js">// 删除左右两端的空格
+function trim(str){
+    return str.replace(/(^\s*)|(\s*$)/g, &quot;&quot;);
+}
+// 删除左边的空格
+function ltrim(str){
+    return str.replace(/(^\s*)/g,&quot;&quot;);
+}
+// 删除右边的空格
+function rtrim(str){
+    return str.replace(/(\s*$)/g,&quot;&quot;);
+}
+</code></pre>
+<h1 id="捕获页面当前滚动位置">捕获页面当前滚动位置</h1>
+<pre><code class="language-js">// 为保证兼容性，两者缺一不可
+const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+</code></pre>
+<h1 id="阻止冒泡">阻止冒泡</h1>
+<pre><code class="language-js">// JavaScript
+document.getElementById('btn').addEventListener('click', function (event) {
+    event = event || window.event；
+ 
+    if (event.stopPropagation){
+        // W3C
+        event.stopPropagation();
+    } else{
+        // IE
+        event.cancelBubble = true;
+    }
+}, false);
+ 
+// jQuery
+$('#btn').on('click', function (event) {
+    event.stopPropagation();
+});
+</code></pre>
+<h1 id="检测浏览器是否支持svg">检测浏览器是否支持svg</h1>
+<pre><code class="language-js">function isSupportSVG() {
+    var SVG_NS = 'http://www.w3.org/2000/svg';
+    return !!document.createElementNS &amp;&amp;!!document.createElementNS(SVG_NS,'svg').createSVGRect;
+}
+ 
+console.log(isSupportSVG());
+</code></pre>
+<h1 id="检测浏览器是否支持canvas">检测浏览器是否支持canvas</h1>
+<pre><code class="language-js">function isSupportCanvas() {
+    if(document.createElement('canvas').getContext){
+        return true;
+    }else{
+        return false;
+    }
+}
+ 
+console.log(isSupportCanvas());
+</code></pre>
+<h1 id="检测是否是微信浏览器">检测是否是微信浏览器</h1>
+<pre><code class="language-js">function isWeiXinClient() {
+    var ua = navigator.userAgent.toLowerCase();
+    if (ua.match(/MicroMessenger/i)==&quot;micromessenger&quot;) {
+        return true;
+    } else {
+        return false;
+    }
+}
+ 
+alert(isWeiXinClient());
+</code></pre>
+<h1 id="检测是否移动端及浏览器内核">检测是否移动端及浏览器内核</h1>
+<pre><code class="language-js">var browser = {
+    versions: function() {
+        var u = navigator.userAgent;
+        return {
+            trident: u.indexOf('Trident') &gt; -1, //IE内核
+            presto: u.indexOf('Presto') &gt; -1, //opera内核
+            webKit: u.indexOf('AppleWebKit') &gt; -1, //苹果、谷歌内核
+            gecko: u.indexOf('Firefox') &gt; -1, //火狐内核Gecko
+            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否移动终端
+            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios
+            android: u.indexOf('Android') &gt; -1 || u.indexOf('Linux') &gt; -1, //android
+            iPhone: u.indexOf('iPhone') &gt; -1 , //iPhone
+            iPad: u.indexOf('iPad') &gt; -1, //iPad
+            webApp: u.indexOf('Safari') &gt; -1 //Safari
+        };
+    }
+}
+ 
+if (browser.versions.mobile() || browser.versions.ios() || browser.versions.android() ||browser.versions.iPhone() || browser.versions.iPad()) {
+    alert('移动端');
+}
+</code></pre>
+<h1 id="检测是否电脑端移动端">检测是否电脑端/移动端</h1>
+<pre><code class="language-js">var browser={
+    versions:function(){
+        var u = navigator.userAgent, app = navigator.appVersion;
+        var sUserAgent = navigator.userAgent;
+        return {
+        trident: u.indexOf('Trident') &gt; -1,
+        presto: u.indexOf('Presto') &gt; -1,
+        isChrome: u.indexOf(&quot;chrome&quot;) &gt; -1,
+        isSafari: !u.indexOf(&quot;chrome&quot;) &gt; -1 &amp;&amp; (/webkit|khtml/).test(u),
+        isSafari3: !u.indexOf(&quot;chrome&quot;) &gt; -1 &amp;&amp; (/webkit|khtml/).test(u) &amp;&amp; u.indexOf('webkit/5') != -1,
+        webKit: u.indexOf('AppleWebKit') &gt; -1,
+        gecko: u.indexOf('Gecko') &gt; -1 &amp;&amp; u.indexOf('KHTML') == -1,
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/),
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+        android: u.indexOf('Android') &gt; -1 || u.indexOf('Linux') &gt; -1,
+        iPhone: u.indexOf('iPhone') &gt; -1,
+        iPad: u.indexOf('iPad') &gt; -1,
+        iWinPhone: u.indexOf('Windows Phone') &gt; -1
+        };
+    }()
+}
+if(browser.versions.mobile || browser.versions.iWinPhone){
+    window.location = &quot;http:/www.baidu.com/m/&quot;;
+}
+</code></pre>
+<h1 id="检测浏览器内核">检测浏览器内核</h1>
+<pre><code class="language-js">function getInternet(){    
+    if(navigator.userAgent.indexOf(&quot;MSIE&quot;)&gt;0) {    
+      return &quot;MSIE&quot;;       //IE浏览器  
+    }  
+ 
+    if(isFirefox=navigator.userAgent.indexOf(&quot;Firefox&quot;)&gt;0){    
+      return &quot;Firefox&quot;;     //Firefox浏览器  
+    }  
+ 
+    if(isSafari=navigator.userAgent.indexOf(&quot;Safari&quot;)&gt;0) {    
+      return &quot;Safari&quot;;      //Safan浏览器  
+    }  
+ 
+    if(isCamino=navigator.userAgent.indexOf(&quot;Camino&quot;)&gt;0){    
+      return &quot;Camino&quot;;   //Camino浏览器  
+    }  
+    if(isMozilla=navigator.userAgent.indexOf(&quot;Gecko/&quot;)&gt;0){    
+      return &quot;Gecko&quot;;    //Gecko浏览器  
+    }    
+}
+</code></pre>
+<h1 id="强制移动端页面横屏显示">强制移动端页面横屏显示</h1>
+<pre><code class="language-js">$( window ).on( &quot;orientationchange&quot;, function( event ) {
+    if (event.orientation=='portrait') {
+        $('body').css('transform', 'rotate(90deg)');
+    } else {
+        $('body').css('transform', 'rotate(0deg)');
+    }
+});
+$( window ).orientationchange();
+</code></pre>
+<h1 id="电脑端页面全屏显示">电脑端页面全屏显示</h1>
+<pre><code class="language-js">function fullscreen(element) {
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.mozRequestFullScreen) {
+        element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+    }
+}
+ 
+fullscreen(document.documentElement);
+</code></pre>
+<h1 id="获得失去焦点">获得/失去焦点</h1>
+<p>1、JavaScript实现</p>
+<pre><code class="language-html">&lt;input id=&quot;i_input&quot; type=&quot;text&quot; value=&quot;会员卡号/手机号&quot;/&gt;
+</code></pre>
+<pre><code class="language-js">// JavaScript
+window.onload = function(){
+    var oIpt = document.getElementById(&quot;i_input&quot;);
+ 
+    if(oIpt.value == &quot;会员卡号/手机号&quot;){
+        oIpt.style.color = &quot;#888&quot;;
+    }else{
+        oIpt.style.color = &quot;#000&quot;;
+    };
+ 
+    oIpt.onfocus = function(){
+        if(this.value == &quot;会员卡号/手机号&quot;){
+            this.value=&quot;&quot;;
+            this.style.color = &quot;#000&quot;;
+            this.type = &quot;password&quot;;
+        }else{
+            this.style.color = &quot;#000&quot;;
+        }
+    };
+    
+    oIpt.onblur = function(){
+        if(this.value == &quot;&quot;){
+            this.value=&quot;会员卡号/手机号&quot;;
+            this.style.color = &quot;#888&quot;;
+            this.type = &quot;text&quot;;
+        }
+    };
+}
+</code></pre>
+<p>2、jQuery实现</p>
+<pre><code class="language-html">&lt;input type=&quot;text&quot; class=&quot;oldpsw&quot; id=&quot;showPwd&quot; value=&quot;请输入您的注册密码&quot;/&gt;
+&lt;input type=&quot;password&quot; name=&quot;psw&quot; class=&quot;oldpsw&quot; id=&quot;password&quot; value=&quot;&quot; style=&quot;display:none;&quot;/&gt;
+</code></pre>
+<pre><code>// jQuery
+$(&quot;#showPwd&quot;).focus(function() {
+    var text_value=$(this).val();
+    if (text_value =='请输入您的注册密码') {
+        $(&quot;#showPwd&quot;).hide();
+        $(&quot;#password&quot;).show().focus();
+    }
+});
+$(&quot;#password&quot;).blur(function() {
+    var text_value = $(this).val();
+    if (text_value == &quot;&quot;) {
+        $(&quot;#showPwd&quot;).show();
+        $(&quot;#password&quot;).hide();
+    }
+});
+</code></pre>
+<h1 id="获取上传文件大小">获取上传文件大小</h1>
+<pre><code class="language-html">&lt;input type=&quot;file&quot; id=&quot;filePath&quot; onchange=&quot;getFileSize(this)&quot;/&gt;
+</code></pre>
+<pre><code class="language-js">// 兼容IE9低版本
+function getFileSize(obj){
+    var filesize;
+    
+    if(obj.files){
+        filesize = obj.files[0].size;
+    }else{
+        try{
+            var path,fso;
+            path = document.getElementById('filePath').value;
+            fso = new ActiveXObject(&quot;Scripting.FileSystemObject&quot;);
+            filesize = fso.GetFile(path).size;
+        }
+        catch(e){
+            // 在IE9及低版本浏览器，如果不容许ActiveX控件与页面交互，点击了否，就无法获取size
+            console.log(e.message); // Automation 服务器不能创建对象
+            filesize = 'error'; // 无法获取
+        }
+    }
+    return filesize;
+}
+</code></pre>
+<h1 id="限制上传文件类型">限制上传文件类型</h1>
+<p>1、高版本浏览器</p>
+<pre><code class="language-html">&lt;input type=&quot;file&quot; name=&quot;filePath&quot; accept=&quot;.jpg,.jpeg,.doc,.docxs,.pdf&quot;/&gt;
+</code></pre>
+<p>2、限制图片</p>
+<pre><code class="language-html">&lt;input type=&quot;file&quot; class=&quot;file&quot; value=&quot;上传&quot; accept=&quot;image/*&quot;&gt;
+</code></pre>
+<p>3、低版本浏览器</p>
+<pre><code class="language-html">&lt;input type=&quot;file&quot; id=&quot;filePath&quot; onchange=&quot;limitTypes()&quot;&gt;
+</code></pre>
+<pre><code class="language-js">/* 通过扩展名，检验文件格式。
+* @parma filePath{string} 文件路径
+* @parma acceptFormat{Array} 允许的文件类型
+* @result 返回值{Boolen}：true or false
+*/
+ 
+function checkFormat(filePath,acceptFormat){
+    var resultBool= false,
+        ex = filePath.substring(filePath.lastIndexOf('.') + 1);
+        ex = ex.toLowerCase();
+        
+    for(var i = 0; i &lt; acceptFormat.length; i++){
+    　　if(acceptFormat[i] == ex){
+            resultBool = true;
+            break;
+    　　}
+    }
+    return resultBool;
+};
+        
+function limitTypes(){
+    var obj = document.getElementById('filePath');
+    var path = obj.value;
+    var result = checkFormat(path,['bmp','jpg','jpeg','png']);
+    
+    if(!result){
+        alert('上传类型错误，请重新上传');
+        obj.value = '';
+    }
+}
+</code></pre>
+<h1 id="阻止默认行为">阻止默认行为</h1>
+<pre><code class="language-js">// JavaScript
+document.getElementById('btn').addEventListener('click', function (event) {
+    event = event || window.event；
+ 
+    if (event.preventDefault){
+        // W3C
+        event.preventDefault();
+    } else{
+        // IE
+        event.returnValue = false;
+    }
+}, false);
+ 
+// jQuery
+$('#btn').on('click', function (event) {
+    event.preventDefault();
+});
+</code></pre>
+<h1 id="禁止移动端浏览器页面滚动">禁止移动端浏览器页面滚动</h1>
+<p>HTML实现：</p>
+<pre><code class="language-html">&lt;body ontouchmove=&quot;event.preventDefault()&quot;&gt;
+</code></pre>
+<p>JavaScript实现：</p>
+<pre><code class="language-js">document.addEventListener('touchmove', function (e) {
+    event.preventDefault();
+});
+</code></pre>
+<h1 id="图片懒加载">图片懒加载</h1>
+<pre><code class="language-js">// 获取所有的内容图片
+const imgList = $('img.child-page-img');
+
+// 检查图片是否已经被显示
+check();
+
+// 滚动监听，如滚动则触发check函数
+$('.main-content-right-wrap').on('scroll', check);
+
+/**
+ * 检查检查图片是否已经被显示
+ */
+function check() {
+    // 选中imgList中没有展示的图片，然后判断未被展示的图片是否已经进入可视区域
+    imgList.not('.show').each(function () {
+        if (isShow($(this))) {
+            showImg($(this));
+        }
+    });
+}
+
+/**
+ * 判断元素是否进入可视区域
+ * @Param node 元素节点
+ */
+function isShow(node) {
+    const windowHeight = $(window).height();
+    const scrollTop = $(window).scrollTop();
+    const offsetTop = node.offset().top;
+    const nodeHeight = node.height();
+    return windowHeight + scrollTop &gt; offsetTop &amp;&amp; scrollTop &lt; offsetTop + nodeHeight;
+}
+
+/**
+ * 展示图片
+ * @Param imgs 图片节点数组
+ */
+function showImg(imgs) {
+    imgs.each(function () {
+        var imgUrl = $(this).attr('data-src');
+        $(this).attr('src', imgUrl);
+        $(this).addClass('show');
+    })
+}
+</code></pre>
+<h1 id="回到页面顶部">回到页面顶部</h1>
+<pre><code class="language-js">// jQuery
+$('.container')[0].scrollTop = 0;
+
+// js
+document.getElementsByClassName('container')[0].scrollTop = 0;
+</code></pre>
+<h1 id="隐式转换">隐式转换</h1>
+<p>这是一个很有意思的转换，但是一般没什么卵用。</p>
+<pre><code class="language-js">const obj = {
+    valueOf: function() {
+        return 42;
+    },
+    toString: function() {
+        return 4;
+    },
+};
+
+obj + '';   // 42，直接作为变量会执行valueOf方法。
+String(obj);   // 4，用String类包裹会调用toString方法。
+</code></pre>
+<h1 id="数据检查类型">数据检查类型</h1>
+<p>普通类型检查可以使用typeof来检查，但是遇到对象、数组就无法明显的区分开，所以可以这样区分：</p>
+<pre><code class="language-js">function isObject(value) {
+    return Object.prototype.toString.call(value).slice(8, -1) === 'Object';
+}
+
+function isArray(value) {
+    return Object.prototype.toString.call(value).slice(8, -1) === 'Array';
+}
+
+// 这种方法同样也适用于Function等
+function isFunction(value) {
+    return Object.prototype.toString.call(value).slice(8, -1) === 'Function';
+}
+</code></pre>
+<h1 id="多维数组变一维">多维数组变一维</h1>
+<p>这种情况经常出现在笔试题和面试题中。</p>
+<pre><code class="language-js">const arr = [1, 2, ['3', 4], [5]];
+
+arr.toString().split(',');   // 结果全部变为字符类型
+JSON.parse(`[${JSON.stringify(foo).replace(/\[|]/g, '')}]`);   // 元素类型不变
+</code></pre>
+<h1 id="动态插入js">动态插入js</h1>
+<pre><code class="language-js">function injectScript(src) {    
+    var s, t;
+    s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = src;
+    t = document.getElementsByTagName('script')[0];
+    t.parentNode.insertBefore(s, t);
+}
+</code></pre>
+<h1 id="大数字格式化">大数字格式化</h1>
+<p>一般在表示大金额、大数据的时候，为了便于阅读，会进行格式化处理。</p>
+<pre><code class="language-js">'2313123'.replace(/\B(?=(\d{3})+(?!\d))/g, ',');   // &quot;2,313,123&quot;
+</code></pre>
+<h1 id="浮点数取整">浮点数取整</h1>
+<p>浮点数取整，除了parseInt，还有别的方法：</p>
+<pre><code class="language-js">const a = 12.34;
+a | 0;   // 12
+a &gt;&gt; 0;   // 12
+~~a;   // 12
+Math.floor(a);   // 13
+
+const b = -12.34;
+b | 0;   // -12
+b &gt;&gt; 0;   // -12
+~~b;   // -12
+Math.floor(b);   // -13
+</code></pre>
+<h1 id="生成验证码">生成验证码</h1>
+<p>js生成验证码可以使用Math.random函数：</p>
+<pre><code class="language-js">Math.random().toString().slice(-6);
+
+Math.random().toFixed(6).slice(-6);
+
+'' + Math.floor(Math.random() * 999999);
+</code></pre>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('http://img.mp.sohu.com/q_70,c_zoom,w_640/upload/20170804/bd96d1d49e4740178005edb628164a8b_th.jpg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></div>
+                 <a href="https://hbuecx.com/post/cai-keng-or-setstate-hou-shu-ju-wei-geng-xin/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2020-02-04 07:10:27">2020-02-04 07:10:27</time>
+                  <h4 class="title white no-margin">踩坑 | setState后数据更新，但页面不重新渲染</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hbuecx.com/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('http://5b0988e595225.cdn.sohucs.com/images/20191028/471f3e6e7f8b4eeab34bbd058d8bc65f.jpeg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></div>
+                 <a href="https://hbuecx.com/post/webpack-yi-dong-duan-gua-pei/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2020-02-02 08:01:49">2020-02-02 08:01:49</time>
+                  <h4 class="title white no-margin">移动端通用适配</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hbuecx.com/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+
+              <div id="comments" class="bg-white hosted ">
+
+              
+                
+                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '1c7817279f236848ef3b',
+    clientSecret: 'cc9a052a730aca58df4ac91361957979a7fb5396',
+    repo: 'tanabalu.github.io',
+    owner: 'tanabalu',
+    admin: ['tanabalu'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+                
+                
+              
+                <div class="clear"></div>
+              </div>
+
+              <div class="clear"></div>
+            </div>
+          </div>
+      </main>
+
+          <footer id="footer" class="grid-container">
+        <div class="widgets row gradient-effect">
+            <div class="default-sidebar border-effect">
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+                  <h4 class="widget-title title white bordered">最新文章</h4>
+                  
+                  
+                  <article class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hbuecx.com/post/gridea-shang-shou-jiao-cheng/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display: block;background-image: url('https://hbuecx.com/media/images/logo.jpeg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2026-02-11 10:00:01">2026-02-11 10:00:01</time>
+                      <h4 class="title usmall">
+                        <a href="https://hbuecx.com/post/gridea-shang-shou-jiao-cheng/">Gridea 上手教程</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hbuecx.com/post/zhuang-shi-qi-de-miao-yong/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display: block;background-image: url('https://hbuecx.com/post-images/zhuang-shi-qi-de-miao-yong.png'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2024-03-18 10:38:08">2024-03-18 10:38:08</time>
+                      <h4 class="title usmall">
+                        <a href="https://hbuecx.com/post/zhuang-shi-qi-de-miao-yong/">装饰器的妙用</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hbuecx.com/post/kai-jia-yu-lao-long/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display: block;background-image: url('https://hbuecx.com/post-images/kai-jia-yu-lao-long.jpg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2024-02-25 11:40:58">2024-02-25 11:40:58</time>
+                      <h4 class="title usmall">
+                        <a href="https://hbuecx.com/post/kai-jia-yu-lao-long/">铠甲与牢笼</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+                  <h4 class="widget-title title white bordered">标签云</h4>
+                  <div class="tagcloud">
+                    
+                      <a href="https://hbuecx.com/tag/VlIS0yH5e/" class="ctag ctag-0 ctag-VlIS0yH5e" aria-label="">三省吾身</a>
+                    
+                      <a href="https://hbuecx.com/tag/ufGbQYqvJv/" class="ctag ctag-1 ctag-ufGbQYqvJv" aria-label="">踩坑</a>
+                    
+                      <a href="https://hbuecx.com/tag/9tN60Dg0i/" class="ctag ctag-2 ctag-9tN60Dg0i" aria-label="">随笔</a>
+                    
+                      <a href="https://hbuecx.com/tag/6WltqJasa/" class="ctag ctag-3 ctag-6WltqJasa" aria-label="">学习笔记</a>
+                    
+                      <a href="https://hbuecx.com/tag/8JblbPCl7/" class="ctag ctag-4 ctag-8JblbPCl7" aria-label="">游记</a>
+                    
+                      <a href="https://hbuecx.com/tag/i8tx5BWEe/" class="ctag ctag-5 ctag-i8tx5BWEe" aria-label="">面经</a>
+                    
+                      <a href="https://hbuecx.com/tag/M9JFSzGuU/" class="ctag ctag-6 ctag-M9JFSzGuU" aria-label="">React</a>
+                    
+                      <a href="https://hbuecx.com/tag/upoIx-adY/" class="ctag ctag-7 ctag-upoIx-adY" aria-label="">JS</a>
+                    
+                      <a href="https://hbuecx.com/tag/PyjodOK1i/" class="ctag ctag-8 ctag-PyjodOK1i" aria-label="">CSS</a>
+                    
+                      <a href="https://hbuecx.com/tag/Qd6JthZND/" class="ctag ctag-9 ctag-Qd6JthZND" aria-label="">Webpack</a>
+                    
+                      <a href="https://hbuecx.com/tag/gf_3G38fZ/" class="ctag ctag-10 ctag-gf_3G38fZ" aria-label="">Antd</a>
+                    
+                      <a href="https://hbuecx.com/tag/YePweIBlg/" class="ctag ctag-11 ctag-YePweIBlg" aria-label="">程序人生</a>
+                    
+                      <a href="https://hbuecx.com/tag/QXbkbGufZ/" class="ctag ctag-12 ctag-QXbkbGufZ" aria-label="">Jenkins</a>
+                    
+                      <a href="https://hbuecx.com/tag/7NGOks4Ws/" class="ctag ctag-13 ctag-7NGOks4Ws" aria-label="">产品</a>
+                    
+                      <a href="https://hbuecx.com/tag/_HICEyo5P3/" class="ctag ctag-14 ctag-_HICEyo5P3" aria-label="">微信小程序</a>
+                    
+                      <a href="https://hbuecx.com/tag/HBuRD1neJ/" class="ctag ctag-15 ctag-HBuRD1neJ" aria-label="">总结</a>
+                    
+                      <a href="https://hbuecx.com/tag/vau2C2Y2S/" class="ctag ctag-16 ctag-vau2C2Y2S" aria-label="">Github</a>
+                    
+                      <a href="https://hbuecx.com/tag/38T520puD/" class="ctag ctag-17 ctag-38T520puD" aria-label="">Git</a>
+                    
+                      <a href="https://hbuecx.com/tag/k3pxvspvg/" class="ctag ctag-18 ctag-k3pxvspvg" aria-label="">编码规范</a>
+                    
+                      <a href="https://hbuecx.com/tag/lQxKPGr7h/" class="ctag ctag-19 ctag-lQxKPGr7h" aria-label="">Typescript</a>
+                    
+                      <a href="https://hbuecx.com/tag/1sQlWB8GD/" class="ctag ctag-20 ctag-1sQlWB8GD" aria-label="">工具</a>
+                    
+                      <a href="https://hbuecx.com/tag/I4gSiRMrr/" class="ctag ctag-21 ctag-I4gSiRMrr" aria-label="">源码</a>
+                    
+                      <a href="https://hbuecx.com/tag/MaE4DBsGs/" class="ctag ctag-22 ctag-MaE4DBsGs" aria-label="">微信</a>
+                    
+                      <a href="https://hbuecx.com/tag/vDt64AfE0/" class="ctag ctag-23 ctag-vDt64AfE0" aria-label="">移动端</a>
+                    
+                      <a href="https://hbuecx.com/tag/mwHk1wpwf/" class="ctag ctag-24 ctag-mwHk1wpwf" aria-label="">适配</a>
+                    
+                      <a href="https://hbuecx.com/tag/VH7lmHwnZ/" class="ctag ctag-25 ctag-VH7lmHwnZ" aria-label="">每日一题</a>
+                    
+                      <a href="https://hbuecx.com/tag/RQ3JGtQmI/" class="ctag ctag-26 ctag-RQ3JGtQmI" aria-label="">音视频</a>
+                    
+                      <a href="https://hbuecx.com/tag/Wv66WQAJ8/" class="ctag ctag-27 ctag-Wv66WQAJ8" aria-label="">Redux</a>
+                    
+                      <a href="https://hbuecx.com/tag/nUUykT2A1/" class="ctag ctag-28 ctag-nUUykT2A1" aria-label="">职场</a>
+                    
+                      <a href="https://hbuecx.com/tag/PEMhkj0cS/" class="ctag ctag-29 ctag-PEMhkj0cS" aria-label="">ES6</a>
+                    
+                      <a href="https://hbuecx.com/tag/b0N2FFH8U/" class="ctag ctag-30 ctag-b0N2FFH8U" aria-label="">测试</a>
+                    
+                      <a href="https://hbuecx.com/tag/X9yVzPzJP/" class="ctag ctag-31 ctag-X9yVzPzJP" aria-label="">iOS</a>
+                    
+                  </div>
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+                  <h4 class="widget-title title white bordered">关于我</h4>
+                  <div class="avatar">
+                    <a href="" class="translate-effect thumb"><span class="fullimage cover" style="background-image: url(https://hbuecx.com/images/avatar.png),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span></a>
+                  </div>
+                  <div class="info">
+                    <h4 class="title small author-name gradient-effect no-margin"><a href="">白山</a></h4>
+                    <p class="founder">温故而知新。</p>
+                    <div class="social">
+                      
+                          
+                            <a href="https://github.com/AWhiteMouse/AWhiteMouse.github.io" class="translate-effect" target="_blank"><i class="fa fa-github"></i></a>
+                        
+                      
+                          
+                            <a href="https://blog.csdn.net/i_dont_know_a" class="translate-effect" target="_blank"><i class="fa fa-csdn"></i></a>
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                    </div> 
+                  </div>
+                  <div class="clear"></div>
+                  </section>
+              </div>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="logo">
+          <a href="https://hbuecx.com"><img class="" src="https://hbuecx.com/media/images/logo.png" alt=""></a>
+        </div>
+        <p class="published border-effect">
+          ©2019 共 171 篇文章
+          <br/>
+          Theme <a href="https://gridea.dev/" target="_blank">「breek」</a> Powered by <a href="https://gridea.dev/" target="_blank">「Gridea」</a>
+        </p>
+        
+        <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+          <i class="fa fa-arrow"></i>
+        </a>
+    </footer>
+    <div class="clear"></div>
+    <script src="https://player.lzti.com/api/player/1665675851148" id="myhk" key="1665675851148" m="1"></script>
+
+      <script type="text/javascript">
+       jQuery(document).ready(function($){
+          $("photos img").each(function(){
+              var _a = $("<a></a>").attr("href",this.src);
+              $(this).wrap("<div class='photo'></div>").wrap(_a);
+          })
+          $("figure img").each(function(){
+              var _b = $("<a></a>").attr("href",this.src);
+              $(this).wrap(_b);
+          })
+          isImgLoad(function(){
+            var photos = document.querySelector('photos');
+            if(photos){
+              waterfall(photos);
+            }
+            $(window).resize(function() {
+             if(photos){
+                  waterfall(photos);
+            }
+          });
+        });
+        var t_img;
+        var isLoad = true;
+        function isImgLoad(callback){
+          $('photos img').each(function(){
+            if(this.height === 0){
+              isLoad = false;
+              return false;
+            }
+          });
+          if(isLoad){
+            clearTimeout(t_img);
+            callback();
+          }else{
+            isLoad = true;
+            t_img = setTimeout(function(){
+              isImgLoad(callback);
+            },500);
+          }
+        }
+      });
+      </script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>

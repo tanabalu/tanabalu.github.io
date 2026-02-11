@@ -1,0 +1,858 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Redux state设计原则 | 白山</title>
+<meta name="description" content="温故而知新。" />
+<link rel="shortcut icon" href="https://hbuecx.com/favicon.ico">
+<link rel="stylesheet" href="https://hbuecx.com/styles/main.css">
+
+<script src="https://hbuecx.com/media/js/jquery.min.js"></script>
+<script src="https://hbuecx.com/media/js/masonry.pkgd.min.js"></script>
+<script src="https://hbuecx.com/media/js/aos.js"></script>
+<script src="https://hbuecx.com/media/js/pace.min.js"></script>
+<script src="https://hbuecx.com/media/js/view-image.min.js"></script>
+<script src="https://hbuecx.com/media/js/functions.js"></script>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?3349a47f297f4ca395881d504c2856e6";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+    <script src="https://hbuecx.com/media/js/waterfall.min.js"></script>
+    <script src="https://hbuecx.com/media/js/prism.min.js"></script>
+    
+  </head>
+  <body>
+            <header id="header" class="grid-container">
+        <!-- start: .menu-wrapper -->
+        <div class="menu-mobile"> 
+          <i class="fa fa-reorder"></i>
+        </div>
+        <div class="menu-wrapper">
+          <div class="">
+            <div class="logo">
+              <a href="https://hbuecx.com"><img src="https://hbuecx.com/media/images/logoo.png" alt=""></a>
+            </div>
+            <!-- start: .main-nav -->
+
+            <nav class="main-nav grid-container grid-parent">
+              <ul id="menu-header" class="menu gradient-effect">
+                
+                  <li class=""><a href="https://hbuecx.com" class="menu">首页</a></li>
+                
+                
+                  <li class="" >
+                    <a href="/archives" class="menu">
+                      归档
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/tags" class="menu">
+                      标签
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/post/message" class="menu">
+                      小记
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/collection" class="menu">
+                      工具
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/friends" class="menu">
+                      Space
+                    </a>
+                  </li>
+                
+              </ul>
+            </nav>
+            <!-- end: .main-nav -->
+            <div class="clear"></div>
+            <div class="border hide-on-tablet hide-on-mobile"></div>
+          </div>    
+          <div class="clear"></div>
+        </div>
+        <!-- end: .menu-wrapper -->
+        <div class="clear"></div>
+      </header>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('https://hbuecx.com/post-images/redux-state-she-ji-yuan-ze.jpeg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2020-02-28 01:40:54"><i class="fa fa-calendar"></i><span class="lately">6 年前</span></time>
+               
+               
+               <span id="/post/redux-state-she-ji-yuan-ze/" class="leancloud_visitors views-counter meta-info">
+                <i class="fa fa-leancloud"></i><span class="leancloud-visitors-count" style="vertical-align: middle;">0</span>
+               </span>
+               
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://hbuecx.com/tag/Wv66WQAJ8/" class="ctag ctag-0 ctag-Wv66WQAJ8" aria-label="">Redux</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">Redux state设计原则</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <p>Redux state设计原则：<code>像设计数据库一样设计state</code>。</p>
+<!-- more -->
+<h1 id="前言">前言</h1>
+<p>在数据库的设计中，数据库是由1到多个数据表构成的，数据表就是用来存储数据的。在功能与Redux有些微的类似，都是用来保存数据的，而且这些数据在不设权限的情况下是共享的。</p>
+<p>在前辈开发人员的探索下，发现Redux state最好的设计方式就是像数据库一样设计。</p>
+<h1 id="数据库是怎样设计的">数据库是怎样设计的</h1>
+<p>来看一个简单的例子：</p>
+<figure data-type="image" tabindex="1"><img src="https://hbuecx.com/post-images/1584871237131.png" alt="" loading="lazy"></figure>
+<p>上图是一张表格，在这张表格中有一个数据列的名称是“标识”。可以看到这一列的标识中，每一项都是不同的数字。</p>
+<p>而这样每一个不同的数字，对应着横向一行数据，它们的关系是<code>一对一的关系</code>。每一个唯一标识都对应着唯一的数据项。</p>
+<p>那么在查找数据的时候就可以通过这个唯一的“标识”来查找与之唯一对应的数据项（可能包含一个数据，也可能包含多个数据），在后端领域，将这个“标识”称之为主键。以下是对“主键”的科学定义：</p>
+<blockquote>
+<p>主键，又称主码（英語：primary key或unique key）。 数据库表中对储存数据对象予以唯一和完整标识的数据列或属性的组合。 一个数据表只能有一个主键，且主键的取值不能缺失，即不能为空值（Null）。</p>
+</blockquote>
+<p>以上都是比较直白话的说法，下面这三点是比较官方化的数据库设计基本原则的介绍：</p>
+<ol>
+<li>数据按照领域分类，存储在不同的表中，不同的表中存储的列数据不能重复。</li>
+<li>表中的每一列的数据都依赖于这个这张表的主键。</li>
+<li>表中除了主键以外的其他列，互相之间不能有直接依赖关系。</li>
+</ol>
+<h1 id="redux-state该如何设计">Redux state该如何设计</h1>
+<p>上面已经说过了，Redux state的设计原则应该是仿照数据库设计原则的。所以，针对以上数据库基本设计原则，套用在Redux state的设计中，可以得到如下结论：</p>
+<ol>
+<li>数据按照领域把整个应用的状态按照领域分成若干个子state，子state之间保存的数据是不重复的。</li>
+<li>表中的state以键值对的结构存储数据，以记录的key/ID作为记录的索引，记录中的其他字段都依赖于索引。</li>
+<li>state中不能保存可以通过已有数据计算而来的数据，即state中的字段不互相依赖。</li>
+</ol>
+<h1 id="示例">示例</h1>
+<p>如果现在有一个文章列表，后端以数组的形式将数据传给前端，传递的数据是这样的（暂时称之为<strong>结构体</strong>）：</p>
+<pre><code class="language-json">{
+    posts: [
+        {
+            id: 1,
+            title: 'First Blog',
+            content: 'some thing',
+            comments: [
+                {
+                    id: 454,
+                    userId: 23,
+                    content: 'haha',
+                },
+                {
+                    id: 759,
+                    userId: 23,
+                    content: 'baibai',
+                }
+            ]
+        }
+    ]
+}
+</code></pre>
+<p>使用上面所讲的设计原则，可以将这样的数据做扁平化操作，结果如下（暂时称之为<strong>扁平体</strong>）：</p>
+<pre><code class="language-json">{
+    posts: {
+        1: {
+            id: 1,
+            title: 'First Blog',
+            content: 'some thing',
+            commentIds: [454, 759],
+        }
+    },
+    postIds: [1],
+    comments: {
+        454: {
+            id: 454,
+            userId: 23,
+            content: 'haha',
+        },
+        759: {
+            id: 759,
+            userId: 23,
+            content: 'baibai',
+        }
+    }
+}
+</code></pre>
+<p>上面的结构发生的什么样的改变呢？简单来说就是将数组转化成了以键值对形式存在的对象。</p>
+<p>为什么要这样设计呢？这样设计的好处是什么？原因是<code>扁平化的state，具有更好的灵活性和扩展性</code>。</p>
+<p>这样的一句说明可能还不太好理解这样改写的好处，现在在此基础上提出一个需求，来帮助理解这么设计的好处究竟在哪里。</p>
+<p><em>产品经理：“需要允许用户在原来的评论上进行修改。”</em><br>
+<em>程序员：“了解。”</em></p>
+<p>需求到位，首先需要获取到用户原来的评论，当然可以使用评论id直接请求后端数据来获取原始评论内容，但是在当前场景下从后端获取数据是不健康的方式，因为前端既然可以拿到准确的数据，就不应该调用后端的接口，给服务器增加压力。所以前端开发者需要直接从已经拿到的数据中获取原始评论内容。现在分别对这两种设计，在实现该需求上所做的工作做一下比较。</p>
+<p>原来的数组结构拿到原始评论数据，首先需要遍历posts查找到该评论所在的文章，然后需要遍历posts下的comments，找到相应的评论对象，获取到原始评论内容。</p>
+<p>而经过改写后的数据结构，只需要在comments对象中直接使用对象取值的方式来获取原始评论内容。</p>
+<p>两者工作量差别之大显而易见，虽然这个需求是临时编的，但是通过两者的对比，很容易就可以发现：改写后端数据结构避免了嵌套层级过深的问题，数据查找非常方便。</p>
+<p>当然，这种设计也并不全是好处，在某些方面也是存在相对劣势的。比如现在需要在文章列表中需要新加一篇文章，改写后的数据结构可能就需要同时操作posts和postIds这两个字段值，而改写前的数据结构只需要操作posts这一个字段就够了。</p>
+<p>经过优劣两相对比，本文中命名的的<strong>扁平体</strong>应该是更胜一筹的。因为在实际的开发场景中，同时操作两个字段的影响并不是特别大，而嵌套层级过深的数据结构在数据修改时产生的影响是致命的。</p>
+<h1 id="总结">总结</h1>
+<p>Redux state的设计原则是：像设计数据库一样设计state。</p>
+<h1 id="观点来源">观点来源</h1>
+<ol>
+<li><a href="https://coding.imooc.com/class/313.html">React16+Redux 实战企业级大众点评Web App - 慕课网</a>.</li>
+</ol>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://img.freepik.com/free-psd/laptop-mock-up-with-headphones_23-2148373205.jpg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></div>
+                 <a href="https://hbuecx.com/post/ru-he-mock-ben-di-shu-ju/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2020-03-04 03:24:33">2020-03-04 03:24:33</time>
+                  <h4 class="title white no-margin">有哪些mock本地数据的方案？</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hbuecx.com/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hbuecx.com/post-images/redux-state-she-ji-yuan-ze.jpeg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></div>
+                 <a href="https://hbuecx.com/post/redux-xiang-mu-jie-gou-zu-zhi-fang-shi/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2020-02-28 01:32:19">2020-02-28 01:32:19</time>
+                  <h4 class="title white no-margin">Redux项目结构组织方式设计原则</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hbuecx.com/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+
+              <div id="comments" class="bg-white hosted ">
+
+              
+                
+                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '1c7817279f236848ef3b',
+    clientSecret: 'cc9a052a730aca58df4ac91361957979a7fb5396',
+    repo: 'tanabalu.github.io',
+    owner: 'tanabalu',
+    admin: ['tanabalu'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+                
+                
+              
+                <div class="clear"></div>
+              </div>
+
+              <div class="clear"></div>
+            </div>
+          </div>
+      </main>
+
+          <footer id="footer" class="grid-container">
+        <div class="widgets row gradient-effect">
+            <div class="default-sidebar border-effect">
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+                  <h4 class="widget-title title white bordered">最新文章</h4>
+                  
+                  
+                  <article class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hbuecx.com/post/gridea-shang-shou-jiao-cheng/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display: block;background-image: url('https://hbuecx.com/media/images/logo.jpeg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2026-02-11 10:00:01">2026-02-11 10:00:01</time>
+                      <h4 class="title usmall">
+                        <a href="https://hbuecx.com/post/gridea-shang-shou-jiao-cheng/">Gridea 上手教程</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hbuecx.com/post/zhuang-shi-qi-de-miao-yong/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display: block;background-image: url('https://hbuecx.com/post-images/zhuang-shi-qi-de-miao-yong.png'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2024-03-18 10:38:08">2024-03-18 10:38:08</time>
+                      <h4 class="title usmall">
+                        <a href="https://hbuecx.com/post/zhuang-shi-qi-de-miao-yong/">装饰器的妙用</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hbuecx.com/post/kai-jia-yu-lao-long/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display: block;background-image: url('https://hbuecx.com/post-images/kai-jia-yu-lao-long.jpg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2024-02-25 11:40:58">2024-02-25 11:40:58</time>
+                      <h4 class="title usmall">
+                        <a href="https://hbuecx.com/post/kai-jia-yu-lao-long/">铠甲与牢笼</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+                  <h4 class="widget-title title white bordered">标签云</h4>
+                  <div class="tagcloud">
+                    
+                      <a href="https://hbuecx.com/tag/VlIS0yH5e/" class="ctag ctag-0 ctag-VlIS0yH5e" aria-label="">三省吾身</a>
+                    
+                      <a href="https://hbuecx.com/tag/ufGbQYqvJv/" class="ctag ctag-1 ctag-ufGbQYqvJv" aria-label="">踩坑</a>
+                    
+                      <a href="https://hbuecx.com/tag/9tN60Dg0i/" class="ctag ctag-2 ctag-9tN60Dg0i" aria-label="">随笔</a>
+                    
+                      <a href="https://hbuecx.com/tag/6WltqJasa/" class="ctag ctag-3 ctag-6WltqJasa" aria-label="">学习笔记</a>
+                    
+                      <a href="https://hbuecx.com/tag/8JblbPCl7/" class="ctag ctag-4 ctag-8JblbPCl7" aria-label="">游记</a>
+                    
+                      <a href="https://hbuecx.com/tag/i8tx5BWEe/" class="ctag ctag-5 ctag-i8tx5BWEe" aria-label="">面经</a>
+                    
+                      <a href="https://hbuecx.com/tag/M9JFSzGuU/" class="ctag ctag-6 ctag-M9JFSzGuU" aria-label="">React</a>
+                    
+                      <a href="https://hbuecx.com/tag/upoIx-adY/" class="ctag ctag-7 ctag-upoIx-adY" aria-label="">JS</a>
+                    
+                      <a href="https://hbuecx.com/tag/PyjodOK1i/" class="ctag ctag-8 ctag-PyjodOK1i" aria-label="">CSS</a>
+                    
+                      <a href="https://hbuecx.com/tag/Qd6JthZND/" class="ctag ctag-9 ctag-Qd6JthZND" aria-label="">Webpack</a>
+                    
+                      <a href="https://hbuecx.com/tag/gf_3G38fZ/" class="ctag ctag-10 ctag-gf_3G38fZ" aria-label="">Antd</a>
+                    
+                      <a href="https://hbuecx.com/tag/YePweIBlg/" class="ctag ctag-11 ctag-YePweIBlg" aria-label="">程序人生</a>
+                    
+                      <a href="https://hbuecx.com/tag/QXbkbGufZ/" class="ctag ctag-12 ctag-QXbkbGufZ" aria-label="">Jenkins</a>
+                    
+                      <a href="https://hbuecx.com/tag/7NGOks4Ws/" class="ctag ctag-13 ctag-7NGOks4Ws" aria-label="">产品</a>
+                    
+                      <a href="https://hbuecx.com/tag/_HICEyo5P3/" class="ctag ctag-14 ctag-_HICEyo5P3" aria-label="">微信小程序</a>
+                    
+                      <a href="https://hbuecx.com/tag/HBuRD1neJ/" class="ctag ctag-15 ctag-HBuRD1neJ" aria-label="">总结</a>
+                    
+                      <a href="https://hbuecx.com/tag/vau2C2Y2S/" class="ctag ctag-16 ctag-vau2C2Y2S" aria-label="">Github</a>
+                    
+                      <a href="https://hbuecx.com/tag/38T520puD/" class="ctag ctag-17 ctag-38T520puD" aria-label="">Git</a>
+                    
+                      <a href="https://hbuecx.com/tag/k3pxvspvg/" class="ctag ctag-18 ctag-k3pxvspvg" aria-label="">编码规范</a>
+                    
+                      <a href="https://hbuecx.com/tag/lQxKPGr7h/" class="ctag ctag-19 ctag-lQxKPGr7h" aria-label="">Typescript</a>
+                    
+                      <a href="https://hbuecx.com/tag/1sQlWB8GD/" class="ctag ctag-20 ctag-1sQlWB8GD" aria-label="">工具</a>
+                    
+                      <a href="https://hbuecx.com/tag/I4gSiRMrr/" class="ctag ctag-21 ctag-I4gSiRMrr" aria-label="">源码</a>
+                    
+                      <a href="https://hbuecx.com/tag/MaE4DBsGs/" class="ctag ctag-22 ctag-MaE4DBsGs" aria-label="">微信</a>
+                    
+                      <a href="https://hbuecx.com/tag/vDt64AfE0/" class="ctag ctag-23 ctag-vDt64AfE0" aria-label="">移动端</a>
+                    
+                      <a href="https://hbuecx.com/tag/mwHk1wpwf/" class="ctag ctag-24 ctag-mwHk1wpwf" aria-label="">适配</a>
+                    
+                      <a href="https://hbuecx.com/tag/VH7lmHwnZ/" class="ctag ctag-25 ctag-VH7lmHwnZ" aria-label="">每日一题</a>
+                    
+                      <a href="https://hbuecx.com/tag/RQ3JGtQmI/" class="ctag ctag-26 ctag-RQ3JGtQmI" aria-label="">音视频</a>
+                    
+                      <a href="https://hbuecx.com/tag/Wv66WQAJ8/" class="ctag ctag-27 ctag-Wv66WQAJ8" aria-label="">Redux</a>
+                    
+                      <a href="https://hbuecx.com/tag/nUUykT2A1/" class="ctag ctag-28 ctag-nUUykT2A1" aria-label="">职场</a>
+                    
+                      <a href="https://hbuecx.com/tag/PEMhkj0cS/" class="ctag ctag-29 ctag-PEMhkj0cS" aria-label="">ES6</a>
+                    
+                      <a href="https://hbuecx.com/tag/b0N2FFH8U/" class="ctag ctag-30 ctag-b0N2FFH8U" aria-label="">测试</a>
+                    
+                      <a href="https://hbuecx.com/tag/X9yVzPzJP/" class="ctag ctag-31 ctag-X9yVzPzJP" aria-label="">iOS</a>
+                    
+                  </div>
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+                  <h4 class="widget-title title white bordered">关于我</h4>
+                  <div class="avatar">
+                    <a href="" class="translate-effect thumb"><span class="fullimage cover" style="background-image: url(https://hbuecx.com/images/avatar.png),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span></a>
+                  </div>
+                  <div class="info">
+                    <h4 class="title small author-name gradient-effect no-margin"><a href="">白山</a></h4>
+                    <p class="founder">温故而知新。</p>
+                    <div class="social">
+                      
+                          
+                            <a href="https://github.com/AWhiteMouse/AWhiteMouse.github.io" class="translate-effect" target="_blank"><i class="fa fa-github"></i></a>
+                        
+                      
+                          
+                            <a href="https://blog.csdn.net/i_dont_know_a" class="translate-effect" target="_blank"><i class="fa fa-csdn"></i></a>
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                    </div> 
+                  </div>
+                  <div class="clear"></div>
+                  </section>
+              </div>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="logo">
+          <a href="https://hbuecx.com"><img class="" src="https://hbuecx.com/media/images/logo.png" alt=""></a>
+        </div>
+        <p class="published border-effect">
+          ©2019 共 171 篇文章
+          <br/>
+          Theme <a href="https://gridea.dev/" target="_blank">「breek」</a> Powered by <a href="https://gridea.dev/" target="_blank">「Gridea」</a>
+        </p>
+        
+        <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+          <i class="fa fa-arrow"></i>
+        </a>
+    </footer>
+    <div class="clear"></div>
+    <script src="https://player.lzti.com/api/player/1665675851148" id="myhk" key="1665675851148" m="1"></script>
+
+      <script type="text/javascript">
+       jQuery(document).ready(function($){
+          $("photos img").each(function(){
+              var _a = $("<a></a>").attr("href",this.src);
+              $(this).wrap("<div class='photo'></div>").wrap(_a);
+          })
+          $("figure img").each(function(){
+              var _b = $("<a></a>").attr("href",this.src);
+              $(this).wrap(_b);
+          })
+          isImgLoad(function(){
+            var photos = document.querySelector('photos');
+            if(photos){
+              waterfall(photos);
+            }
+            $(window).resize(function() {
+             if(photos){
+                  waterfall(photos);
+            }
+          });
+        });
+        var t_img;
+        var isLoad = true;
+        function isImgLoad(callback){
+          $('photos img').each(function(){
+            if(this.height === 0){
+              isLoad = false;
+              return false;
+            }
+          });
+          if(isLoad){
+            clearTimeout(t_img);
+            callback();
+          }else{
+            isLoad = true;
+            t_img = setTimeout(function(){
+              isImgLoad(callback);
+            },500);
+          }
+        }
+      });
+      </script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>

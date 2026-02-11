@@ -1,0 +1,960 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>React Hooks学习笔记 | 白山</title>
+<meta name="description" content="温故而知新。" />
+<link rel="shortcut icon" href="https://hbuecx.com/favicon.ico">
+<link rel="stylesheet" href="https://hbuecx.com/styles/main.css">
+
+<script src="https://hbuecx.com/media/js/jquery.min.js"></script>
+<script src="https://hbuecx.com/media/js/masonry.pkgd.min.js"></script>
+<script src="https://hbuecx.com/media/js/aos.js"></script>
+<script src="https://hbuecx.com/media/js/pace.min.js"></script>
+<script src="https://hbuecx.com/media/js/view-image.min.js"></script>
+<script src="https://hbuecx.com/media/js/functions.js"></script>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?3349a47f297f4ca395881d504c2856e6";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+    <script src="https://hbuecx.com/media/js/waterfall.min.js"></script>
+    <script src="https://hbuecx.com/media/js/prism.min.js"></script>
+    
+  </head>
+  <body>
+            <header id="header" class="grid-container">
+        <!-- start: .menu-wrapper -->
+        <div class="menu-mobile"> 
+          <i class="fa fa-reorder"></i>
+        </div>
+        <div class="menu-wrapper">
+          <div class="">
+            <div class="logo">
+              <a href="https://hbuecx.com"><img src="https://hbuecx.com/media/images/logoo.png" alt=""></a>
+            </div>
+            <!-- start: .main-nav -->
+
+            <nav class="main-nav grid-container grid-parent">
+              <ul id="menu-header" class="menu gradient-effect">
+                
+                  <li class=""><a href="https://hbuecx.com" class="menu">首页</a></li>
+                
+                
+                  <li class="" >
+                    <a href="/archives" class="menu">
+                      归档
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/tags" class="menu">
+                      标签
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/post/message" class="menu">
+                      小记
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/collection" class="menu">
+                      工具
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/friends" class="menu">
+                      Space
+                    </a>
+                  </li>
+                
+              </ul>
+            </nav>
+            <!-- end: .main-nav -->
+            <div class="clear"></div>
+            <div class="border hide-on-tablet hide-on-mobile"></div>
+          </div>    
+          <div class="clear"></div>
+        </div>
+        <!-- end: .menu-wrapper -->
+        <div class="clear"></div>
+      </header>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('https://pic2.zhimg.com/v2-3637df1098a590708a1fd467f0768599_1200x500.jpg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2020-02-01 10:11:53"><i class="fa fa-calendar"></i><span class="lately">6 年前</span></time>
+               
+               
+               <span id="/post/react-hooks-xue-xi-bi-ji/" class="leancloud_visitors views-counter meta-info">
+                <i class="fa fa-leancloud"></i><span class="leancloud-visitors-count" style="vertical-align: middle;">0</span>
+               </span>
+               
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://hbuecx.com/tag/6WltqJasa/" class="ctag ctag-0 ctag-6WltqJasa" aria-label="">学习笔记</a>
+                    
+                      <a href="https://hbuecx.com/tag/M9JFSzGuU/" class="ctag ctag-1 ctag-M9JFSzGuU" aria-label="">React</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">React Hooks学习笔记</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <p>react hooks将会是react未来的趋势。</p>
+<!-- more -->
+<h2 id="开发环境搭建与示例编写">开发环境搭建与示例编写</h2>
+<p>准备好，要开始咯！</p>
+<h3 id="开发环境搭建">开发环境搭建</h3>
+<p>React Hooks是React的新特性，不需要安装，只需要React版本在16.8以上，即可使用。</p>
+<h3 id="示例">示例</h3>
+<p>首先编写一个小demo：</p>
+<pre><code class="language-js">import React, { useState } from 'react';
+
+export default function Example() {
+    const [ count, setCount ] = useState(0);  // 数组解构
+
+    return (
+        &lt;div&gt;
+            &lt;div&gt;你已经点击了{count}次&lt;/div&gt;
+            &lt;button onClick={() =&gt; setCount(count + 1)}&gt;点击&lt;/button&gt;
+        &lt;/div&gt;
+    )
+}
+</code></pre>
+<p>注意：</p>
+<blockquote>
+<p><code>useState</code>是一个方法，接收一个初始值。返回结果是一个数组：数组第一项是<code>this.state</code>，第二项是<code>this.setState</code>，在上面的例子里，只是给它们去了一个别名。</p>
+</blockquote>
+<h2 id="多状态声明">多状态声明</h2>
+<p>编写多个useState语句即可。</p>
+<pre><code class="language-js">import React, { useState } from 'react';
+
+export default function Example() {
+    const [name, setName] = useState('白山');
+    const [age, setAge] = useState(18);
+
+    return (
+        &lt;div&gt;
+            &lt;div&gt;{name}&lt;/div&gt;
+            &lt;div&gt;{age}&lt;/div&gt;
+        &lt;/div&gt;
+    )
+}
+</code></pre>
+<p>注意：<code>useState</code>语句不能放在条件语句中。例如：</p>
+<pre><code class="language-js">const isEmpty = true;
+if (isEmpty) {
+    const [name, setName] = useState('白山');
+}
+</code></pre>
+<h2 id="使用useeffect代替生命周期">使用useEffect代替生命周期</h2>
+<p>在react中，有各式各样的生命周期函数来辅助整个程序的运行。这些生命周期函数在Hooks可以使用useEffect进行替代。</p>
+<h2 id="代替componentdidmount和componentdidupdate">代替<code>componentDidMount</code>和<code>componentDidUpdate</code></h2>
+<pre><code class="language-js">import React, { useState, useEffect } from 'react';
+
+export default function Example() {
+    const [ count, setCount ] = useState(0);  // 数组解构
+
+    useEffect(() =&gt; {
+        console.log(`done: ${count}`);
+    });
+
+    return (
+        &lt;div&gt;
+            &lt;div&gt;你已经点击了{count}次&lt;/div&gt;
+            &lt;button onClick={() =&gt; setCount(count + 1)}&gt;点击&lt;/button&gt;
+        &lt;/div&gt;
+    )
+}
+</code></pre>
+<p>注解：</p>
+<blockquote>
+<p><code>useEffect</code>是一个函数，它的<code>第一个参数是一个匿名函数</code>，useEffect触发时将会执行这个函数。<br>
+<code>useEffect</code>的存在相当于<code>componentDidMount</code> + <code>componentDidUpdate</code>，React首次渲染和之后的每次渲染都会调用一遍<code>useEffect</code>函数。<br>
+<code>useEffect</code>不会阻碍视图的更新，因为它是异步的。</p>
+</blockquote>
+<p>因为<code>useEffect</code>是异步`的，所以它无法完成一些实时的操作。</p>
+<p>比如，实时计算屏幕大小，调整页面布局，这个它是无法准确完成的，因为它异步的特性，会存在延时的情况。</p>
+<p>🤗别着急，接着往下看👇👇👇</p>
+<h3 id="实现仅componentdidmount">实现仅<code>componentDidMount</code></h3>
+<p>上面的写法让它同时替代了两个生命周期函数，那如果我需要在首次渲染和重新渲染后执行不同的函数该怎么做呢？</p>
+<p>首先，我们实现仅首次渲染后执行。这里需要介绍一下<code>useEffect</code>的第二个参数，它的<code>第二个参数是一个数组</code>。只有数组中的值发生变化了，才会调用 <code>useEffect()</code> ，而不是每次在渲染的时候调用。</p>
+<blockquote>
+<p>当第二个参数为空数组([])的时候，代表不监听任何参数变化，即只有在组件初始化或销毁的时候才会触发，用来代替 <code>componentDidMount</code> 和 <code>componentWillUnmount</code>。</p>
+</blockquote>
+<p>先来看一下如何实现<code>componentDidMount</code>：</p>
+<pre><code class="language-js">import React, { useState, useEffect } from 'react';
+
+export default function Example() {
+    const [count, setCount] = useState(0);  // 数组解构
+
+    useEffect(() =&gt; {
+        console.log('componentDidMount');
+    }, []);
+
+    return (
+        &lt;div&gt;
+            &lt;div&gt;你已经点击了{count}次&lt;/div&gt;
+            &lt;button onClick={() =&gt; setCount(count + 1)}&gt;点击&lt;/button&gt;
+        &lt;/div&gt;
+    )
+}
+</code></pre>
+<p>对比一下，就会发现仅仅只有一处地方修改了，那就是在<code>useEffect</code>的第二个参数上加了一个空数组。</p>
+<h3 id="实现componentdidupdate">实现<code>componentDidUpdate</code></h3>
+<p>例如我们监听一下变量<code>count</code>的更新：</p>
+<pre><code class="language-js">import React, { useState, useEffect } from 'react';
+
+export default function Example() {
+    const [count, setCount] = useState(0);  // 数组解构
+
+    useEffect(() =&gt; {
+        console.log('componentDidMount');
+    }, []);
+
+    useEffect(() =&gt; {
+        console.log(`componentDidUpdate: you click ${count} times`);
+    }, [count]);
+
+    return (
+        &lt;div&gt;
+            &lt;div&gt;你已经点击了{count}次&lt;/div&gt;
+            &lt;button onClick={() =&gt; setCount(count + 1)}&gt;点击&lt;/button&gt;
+        &lt;/div&gt;
+    )
+}
+</code></pre>
+<p>以上代码在执行的时候，第二个<code>useEffect()</code>函数就相当于<code>conponentDidUpdate</code>，首次渲染和变量<code>count</code>更新时都会执行，因为首次渲染时，变量<code>count</code>也被定义并被赋予初始值。</p>
+<h3 id="实现componentwillunmount">实现<code>componentWillUnmount</code></h3>
+<p>以上介绍了如何使用useEffect实现首次加载的副作用和数据更新的副作用，而在实际的开发中，我们可能还需要在组件卸载时做一些操作。</p>
+<p>这一点React Hooks也帮我们想到了。🤓</p>
+<blockquote>
+<p>我们只需要在 useEffect() 中返回一个函数，就可以模拟 <code>componentWillUnmount</code> 的功能。</p>
+</blockquote>
+<p>为了模拟卸载的状态，这里需要引入React Router用于路由的切换。</p>
+<pre><code class="language-shell">npm install --save react-router-dom
+</code></pre>
+<p>示例如下：</p>
+<pre><code class="language-js">import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Link } from &quot;react-router-dom&quot;
+
+export default function Example() {
+    const [count, setCount] = useState(0);  // 数组解构
+
+    // useEffect(() =&gt; {
+    //     console.log('componentDidMount');
+    // }, []);
+
+    // useEffect(() =&gt; {
+    //     console.log(`componentDidUpdate: you click ${count} times`);
+    // }, [count]);
+
+    function Index() {
+        useEffect(() =&gt; {
+            console.log('老弟你来了 =》 index');
+            return () =&gt; {
+                // componentWillUnmount
+                console.log('老弟你走了 =&gt; index');
+            };
+        }, []);
+        return &lt;h1&gt;index&lt;/h1&gt;;
+    }
+
+    function List() {
+        useEffect(() =&gt; {
+            console.log('老弟你来了 =》 list');
+            return () =&gt; {
+                // componentWillUnmount
+                console.log('老弟你走了 =&gt; list');
+            };
+        }, []);
+        return &lt;h1&gt;list&lt;/h1&gt;;
+    }
+
+    return (
+        &lt;div&gt;
+            &lt;div&gt;你已经点击了{count}次&lt;/div&gt;
+            &lt;button onClick={() =&gt; setCount(count + 1)}&gt;点击&lt;/button&gt;
+
+            &lt;Router&gt;
+                &lt;ul&gt;
+                    &lt;li&gt; &lt;Link to=&quot;/&quot;&gt;首页&lt;/Link&gt; &lt;/li&gt;
+                    &lt;li&gt;&lt;Link to=&quot;/list/&quot;&gt;列表&lt;/Link&gt; &lt;/li&gt;
+                &lt;/ul&gt;
+                &lt;Route path=&quot;/&quot; exact component={Index} /&gt;
+                &lt;Route path=&quot;/list/&quot; component={List} /&gt;
+            &lt;/Router&gt;
+        &lt;/div&gt;
+    )
+}
+</code></pre>
+<p>至此，<code>componentWillUnmount</code>也就实现咯。</p>
+<p>总结：</p>
+<blockquote>
+<p><code>useEffect</code>其实等同于类组件的 <code>componentDidMount</code> 、 <code>componentDidUpdate</code> 和 <code>componentWillUnmount</code> 的结合体 。</p>
+</blockquote>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hbuecx.com/post-images/ant-design-an-xu-jia-zai.png'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></div>
+                 <a href="https://hbuecx.com/post/ant-design-an-xu-jia-zai/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2020-02-02 10:03:32">2020-02-02 10:03:32</time>
+                  <h4 class="title white no-margin">Ant Design Mobile按需加载</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hbuecx.com/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hbuecx.com/post-images/gei-bo-ke-jia-shang-live2d-wang-ye-chong-wu.png'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></div>
+                 <a href="https://hbuecx.com/post/gei-bo-ke-jia-shang-live2d-wang-ye-chong-wu/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2020-01-25 01:50:02">2020-01-25 01:50:02</time>
+                  <h4 class="title white no-margin">给博客加上live2d网页宠物🙆</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hbuecx.com/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+
+              <div id="comments" class="bg-white hosted ">
+
+              
+                
+                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '1c7817279f236848ef3b',
+    clientSecret: 'cc9a052a730aca58df4ac91361957979a7fb5396',
+    repo: 'tanabalu.github.io',
+    owner: 'tanabalu',
+    admin: ['tanabalu'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+                
+                
+              
+                <div class="clear"></div>
+              </div>
+
+              <div class="clear"></div>
+            </div>
+          </div>
+      </main>
+
+          <footer id="footer" class="grid-container">
+        <div class="widgets row gradient-effect">
+            <div class="default-sidebar border-effect">
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+                  <h4 class="widget-title title white bordered">最新文章</h4>
+                  
+                  
+                  <article class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hbuecx.com/post/gridea-shang-shou-jiao-cheng/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display: block;background-image: url('https://hbuecx.com/media/images/logo.jpeg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2026-02-11 10:00:01">2026-02-11 10:00:01</time>
+                      <h4 class="title usmall">
+                        <a href="https://hbuecx.com/post/gridea-shang-shou-jiao-cheng/">Gridea 上手教程</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hbuecx.com/post/zhuang-shi-qi-de-miao-yong/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display: block;background-image: url('https://hbuecx.com/post-images/zhuang-shi-qi-de-miao-yong.png'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2024-03-18 10:38:08">2024-03-18 10:38:08</time>
+                      <h4 class="title usmall">
+                        <a href="https://hbuecx.com/post/zhuang-shi-qi-de-miao-yong/">装饰器的妙用</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hbuecx.com/post/kai-jia-yu-lao-long/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display: block;background-image: url('https://hbuecx.com/post-images/kai-jia-yu-lao-long.jpg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2024-02-25 11:40:58">2024-02-25 11:40:58</time>
+                      <h4 class="title usmall">
+                        <a href="https://hbuecx.com/post/kai-jia-yu-lao-long/">铠甲与牢笼</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+                  <h4 class="widget-title title white bordered">标签云</h4>
+                  <div class="tagcloud">
+                    
+                      <a href="https://hbuecx.com/tag/VlIS0yH5e/" class="ctag ctag-0 ctag-VlIS0yH5e" aria-label="">三省吾身</a>
+                    
+                      <a href="https://hbuecx.com/tag/ufGbQYqvJv/" class="ctag ctag-1 ctag-ufGbQYqvJv" aria-label="">踩坑</a>
+                    
+                      <a href="https://hbuecx.com/tag/9tN60Dg0i/" class="ctag ctag-2 ctag-9tN60Dg0i" aria-label="">随笔</a>
+                    
+                      <a href="https://hbuecx.com/tag/6WltqJasa/" class="ctag ctag-3 ctag-6WltqJasa" aria-label="">学习笔记</a>
+                    
+                      <a href="https://hbuecx.com/tag/8JblbPCl7/" class="ctag ctag-4 ctag-8JblbPCl7" aria-label="">游记</a>
+                    
+                      <a href="https://hbuecx.com/tag/i8tx5BWEe/" class="ctag ctag-5 ctag-i8tx5BWEe" aria-label="">面经</a>
+                    
+                      <a href="https://hbuecx.com/tag/M9JFSzGuU/" class="ctag ctag-6 ctag-M9JFSzGuU" aria-label="">React</a>
+                    
+                      <a href="https://hbuecx.com/tag/upoIx-adY/" class="ctag ctag-7 ctag-upoIx-adY" aria-label="">JS</a>
+                    
+                      <a href="https://hbuecx.com/tag/PyjodOK1i/" class="ctag ctag-8 ctag-PyjodOK1i" aria-label="">CSS</a>
+                    
+                      <a href="https://hbuecx.com/tag/Qd6JthZND/" class="ctag ctag-9 ctag-Qd6JthZND" aria-label="">Webpack</a>
+                    
+                      <a href="https://hbuecx.com/tag/gf_3G38fZ/" class="ctag ctag-10 ctag-gf_3G38fZ" aria-label="">Antd</a>
+                    
+                      <a href="https://hbuecx.com/tag/YePweIBlg/" class="ctag ctag-11 ctag-YePweIBlg" aria-label="">程序人生</a>
+                    
+                      <a href="https://hbuecx.com/tag/QXbkbGufZ/" class="ctag ctag-12 ctag-QXbkbGufZ" aria-label="">Jenkins</a>
+                    
+                      <a href="https://hbuecx.com/tag/7NGOks4Ws/" class="ctag ctag-13 ctag-7NGOks4Ws" aria-label="">产品</a>
+                    
+                      <a href="https://hbuecx.com/tag/_HICEyo5P3/" class="ctag ctag-14 ctag-_HICEyo5P3" aria-label="">微信小程序</a>
+                    
+                      <a href="https://hbuecx.com/tag/HBuRD1neJ/" class="ctag ctag-15 ctag-HBuRD1neJ" aria-label="">总结</a>
+                    
+                      <a href="https://hbuecx.com/tag/vau2C2Y2S/" class="ctag ctag-16 ctag-vau2C2Y2S" aria-label="">Github</a>
+                    
+                      <a href="https://hbuecx.com/tag/38T520puD/" class="ctag ctag-17 ctag-38T520puD" aria-label="">Git</a>
+                    
+                      <a href="https://hbuecx.com/tag/k3pxvspvg/" class="ctag ctag-18 ctag-k3pxvspvg" aria-label="">编码规范</a>
+                    
+                      <a href="https://hbuecx.com/tag/lQxKPGr7h/" class="ctag ctag-19 ctag-lQxKPGr7h" aria-label="">Typescript</a>
+                    
+                      <a href="https://hbuecx.com/tag/1sQlWB8GD/" class="ctag ctag-20 ctag-1sQlWB8GD" aria-label="">工具</a>
+                    
+                      <a href="https://hbuecx.com/tag/I4gSiRMrr/" class="ctag ctag-21 ctag-I4gSiRMrr" aria-label="">源码</a>
+                    
+                      <a href="https://hbuecx.com/tag/MaE4DBsGs/" class="ctag ctag-22 ctag-MaE4DBsGs" aria-label="">微信</a>
+                    
+                      <a href="https://hbuecx.com/tag/vDt64AfE0/" class="ctag ctag-23 ctag-vDt64AfE0" aria-label="">移动端</a>
+                    
+                      <a href="https://hbuecx.com/tag/mwHk1wpwf/" class="ctag ctag-24 ctag-mwHk1wpwf" aria-label="">适配</a>
+                    
+                      <a href="https://hbuecx.com/tag/VH7lmHwnZ/" class="ctag ctag-25 ctag-VH7lmHwnZ" aria-label="">每日一题</a>
+                    
+                      <a href="https://hbuecx.com/tag/RQ3JGtQmI/" class="ctag ctag-26 ctag-RQ3JGtQmI" aria-label="">音视频</a>
+                    
+                      <a href="https://hbuecx.com/tag/Wv66WQAJ8/" class="ctag ctag-27 ctag-Wv66WQAJ8" aria-label="">Redux</a>
+                    
+                      <a href="https://hbuecx.com/tag/nUUykT2A1/" class="ctag ctag-28 ctag-nUUykT2A1" aria-label="">职场</a>
+                    
+                      <a href="https://hbuecx.com/tag/PEMhkj0cS/" class="ctag ctag-29 ctag-PEMhkj0cS" aria-label="">ES6</a>
+                    
+                      <a href="https://hbuecx.com/tag/b0N2FFH8U/" class="ctag ctag-30 ctag-b0N2FFH8U" aria-label="">测试</a>
+                    
+                      <a href="https://hbuecx.com/tag/X9yVzPzJP/" class="ctag ctag-31 ctag-X9yVzPzJP" aria-label="">iOS</a>
+                    
+                  </div>
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+                  <h4 class="widget-title title white bordered">关于我</h4>
+                  <div class="avatar">
+                    <a href="" class="translate-effect thumb"><span class="fullimage cover" style="background-image: url(https://hbuecx.com/images/avatar.png),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span></a>
+                  </div>
+                  <div class="info">
+                    <h4 class="title small author-name gradient-effect no-margin"><a href="">白山</a></h4>
+                    <p class="founder">温故而知新。</p>
+                    <div class="social">
+                      
+                          
+                            <a href="https://github.com/AWhiteMouse/AWhiteMouse.github.io" class="translate-effect" target="_blank"><i class="fa fa-github"></i></a>
+                        
+                      
+                          
+                            <a href="https://blog.csdn.net/i_dont_know_a" class="translate-effect" target="_blank"><i class="fa fa-csdn"></i></a>
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                    </div> 
+                  </div>
+                  <div class="clear"></div>
+                  </section>
+              </div>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="logo">
+          <a href="https://hbuecx.com"><img class="" src="https://hbuecx.com/media/images/logo.png" alt=""></a>
+        </div>
+        <p class="published border-effect">
+          ©2019 共 171 篇文章
+          <br/>
+          Theme <a href="https://gridea.dev/" target="_blank">「breek」</a> Powered by <a href="https://gridea.dev/" target="_blank">「Gridea」</a>
+        </p>
+        
+        <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+          <i class="fa fa-arrow"></i>
+        </a>
+    </footer>
+    <div class="clear"></div>
+    <script src="https://player.lzti.com/api/player/1665675851148" id="myhk" key="1665675851148" m="1"></script>
+
+      <script type="text/javascript">
+       jQuery(document).ready(function($){
+          $("photos img").each(function(){
+              var _a = $("<a></a>").attr("href",this.src);
+              $(this).wrap("<div class='photo'></div>").wrap(_a);
+          })
+          $("figure img").each(function(){
+              var _b = $("<a></a>").attr("href",this.src);
+              $(this).wrap(_b);
+          })
+          isImgLoad(function(){
+            var photos = document.querySelector('photos');
+            if(photos){
+              waterfall(photos);
+            }
+            $(window).resize(function() {
+             if(photos){
+                  waterfall(photos);
+            }
+          });
+        });
+        var t_img;
+        var isLoad = true;
+        function isImgLoad(callback){
+          $('photos img').each(function(){
+            if(this.height === 0){
+              isLoad = false;
+              return false;
+            }
+          });
+          if(isLoad){
+            clearTimeout(t_img);
+            callback();
+          }else{
+            isLoad = true;
+            t_img = setTimeout(function(){
+              isImgLoad(callback);
+            },500);
+          }
+        }
+      });
+      </script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>

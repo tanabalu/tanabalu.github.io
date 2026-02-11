@@ -1,0 +1,785 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://hbuecx.com</id>
+    <title>白山</title>
+    <updated>2026-02-11T14:00:55.539Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://hbuecx.com"/>
+    <link rel="self" href="https://hbuecx.com/atom.xml"/>
+    <subtitle>温故而知新。</subtitle>
+    <logo>https://hbuecx.com/images/avatar.png</logo>
+    <icon>https://hbuecx.com/favicon.ico</icon>
+    <rights>All rights reserved 2026, 白山</rights>
+    <entry>
+        <title type="html"><![CDATA[Gridea 上手教程]]></title>
+        <id>https://hbuecx.com/post/gridea-shang-shou-jiao-cheng/</id>
+        <link href="https://hbuecx.com/post/gridea-shang-shou-jiao-cheng/">
+        </link>
+        <updated>2026-02-11T14:00:01.000Z</updated>
+        <content type="html"><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/71681116">Gridea 上手教程</a></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[装饰器的妙用]]></title>
+        <id>https://hbuecx.com/post/zhuang-shi-qi-de-miao-yong/</id>
+        <link href="https://hbuecx.com/post/zhuang-shi-qi-de-miao-yong/">
+        </link>
+        <updated>2024-03-18T14:38:08.000Z</updated>
+        <summary type="html"><![CDATA[<h2 id="前言">前言</h2>
+<p>最近在做一个新项目，在需求来临之前需要先把技术框架搭建起来，跟我同组的老大哥给我一个代码仓库地址，并让我梳理出来这个仓库的技术框架和实现思路，然后复刻一个。<br>
+不就是抄🐴，这还不简单。</p>
+]]></summary>
+        <content type="html"><![CDATA[<h2 id="前言">前言</h2>
+<p>最近在做一个新项目，在需求来临之前需要先把技术框架搭建起来，跟我同组的老大哥给我一个代码仓库地址，并让我梳理出来这个仓库的技术框架和实现思路，然后复刻一个。<br>
+不就是抄🐴，这还不简单。</p>
+<!-- more -->
+<h2 id="装饰器">装饰器</h2>
+<p>我大概梳理了这个参考仓库的思路，主要是使用了插件化的思路。而在实现插件化过程中的注册插件时，妙用了装饰器来完成：</p>
+<ol>
+<li>首先使用了单例模式，在一个文件中导出了用于存储插件的变量：</li>
+</ol>
+<pre><code class="language-ts">export const registry: Record&lt;string, IPluginConstructor&lt;any&gt;&gt; = {};
+</code></pre>
+<ol start="2">
+<li>定义了一个向这个变量上挂载插件的函数：</li>
+</ol>
+<pre><code class="language-ts">export const regPluginHoc = ({ name }: { name: string }) =&gt;
+  (target: any) =&gt; {
+    if (registry[name] &amp;&amp; registry[name].toString() !== target.toString()) {
+      logger.warn({
+        msg: `插件 ${name} 已存在，请重新命名`,
+      });
+      return;
+    }
+
+    registry[name] = target;
+  };
+</code></pre>
+<p>从这个编写方式，你很容易就可以看出来这是一个装饰器函数。<br>
+3. 然后我们把这个装饰器用到我们的插件上：</p>
+<pre><code class="language-ts">@regPluginHoc({ name: 'init' })
+export class InitPlugin extends Plugin&lt;{}&gt; {
+  // ……
+}
+</code></pre>
+<p>让我们回溯一下，这个装饰器会把这个插件的构造函数挂载到 register 变量中。你必须知道的是，装饰器的运行是在编译时完成的，而不是运行时。因此，理论上在项目启动后，你就可以在项目入口文件中打印 register 变量，并且得到其上挂载的插件构造器对象，然后通过 new 生成一个插件实例。<br>
+但实际上，到这里并没有结束。因为即使装饰器是编译时执行的，但也首先要保证，项目在编译时可以索引到这个插件文件，也就是说我们必须在主入口的直接或者间接依赖文件中导入这个插件文件。<br>
+4. 导入这个插件文件</p>
+<pre><code class="language-ts">import '../plugins/initPlugin';
+</code></pre>
+<p>是的，只需要导入，在编译时可以索引到该文件即可，无需重命名任何实例。<br>
+5. 然后在启动后的项目里，可以直接打印 register 这个变量：</p>
+<pre><code class="language-ts">console.log(register);
+</code></pre>
+<h2 id="备注">备注</h2>
+<p>至今为止，装饰器仍然是一个实验性的能力，要让装饰器真正在我们项目中生效不报错，我们需要配置一下 tsconfig.ts 文件，将 experimentalDecorators 属性设置为 true。</p>
+<pre><code class="language-json">{
+  &quot;compilerOptions&quot;: {
+    &quot;experimentalDecorators&quot;: true,
+  }
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[铠甲与牢笼]]></title>
+        <id>https://hbuecx.com/post/kai-jia-yu-lao-long/</id>
+        <link href="https://hbuecx.com/post/kai-jia-yu-lao-long/">
+        </link>
+        <updated>2024-02-25T15:40:58.000Z</updated>
+        <summary type="html"><![CDATA[<p>某些保护我的东西，可能也在束缚我。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>某些保护我的东西，可能也在束缚我。</p>
+<!-- more -->
+<p>我最大的问题可能是我没有心，不懂得去关注身边的人。现在这个自我封闭的我似乎并不是我理想状态下的最优的我，我觉得最好的我应该是一个开朗，懂得关心别人的人。或许我应该好好休息一段时间，多出去走走，以便能遇到更多人，不带负担的与陌生人搭讪，攀谈和交流，从而学会一些我从未习得的东西。</p>
+<p>眼下的我，把自己关在一个封闭的自我适应的空间里，不敢随意的踏出一步，也就是大家常说的舒适圈。但我却并不这么想，我从心底里并不认为这是个令我舒适的地方，而是一个迫于外界环境和自身能力不匹配的情况下而衍生出的一个让自己感到安全的领域，所以我更愿意把这个范围叫做安全圈，而不是舒适圈，因为还有很多事情我想做却没有付出行动，仅仅从这一点就可以感觉到我没有达到理想中的自由：想做什么就做什么，不想做什么就不做什么。没有自由也就谈不上舒适。</p>
+<p>我的脑子里始终有很多的小人在斗争，做还是不做，做了好的结果是什么，坏的结果是什么？这些在过往经历的磨砺中所形成的缜密的思维框架，像铠甲一样时时刻刻在保护我的安全，但终究不是所有的问题都能用逻辑思维来解决，甚至于我们一生中大多数问题都不能仅凭逻辑思维来解决，那么这种根深蒂固的逻辑框架决定行为的模式从另一种程度上讲这也是一个深深把我囚禁的牢笼，令我的一切行为都无法挣脱它的束缚，我也无法踏足和感受这铠甲以外的领域。</p>
+<p>但在眼下这个充斥着人情世故的工作环境中，我想我很难脱下铠甲，繁多的工作也让我没有精力在不褪下铠甲的情况下，还能运动自如。或许从解决方案上讲，我应该找一段时间，脱离工作的环境，回归到自然社会中，真正的让自己空闲和冷静下来，或许在那时我才有足够精神和毅力破茧而出，去做一些以往我一直想做却从来没做过的事情。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[如何调试旧版本谷歌浏览器]]></title>
+        <id>https://hbuecx.com/post/ru-he-yong-diao-shi-jiu-ban-ben-gu-ge-liu-lan-qi/</id>
+        <link href="https://hbuecx.com/post/ru-he-yong-diao-shi-jiu-ban-ben-gu-ge-liu-lan-qi/">
+        </link>
+        <updated>2023-12-28T15:32:05.000Z</updated>
+        <summary type="html"><![CDATA[<p>今天遇到一个问题，部署出去的网站在客户的电脑上打开之后，很多样式都丢失了，导致页面出现大批量的错位，无法正常使用。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>今天遇到一个问题，部署出去的网站在客户的电脑上打开之后，很多样式都丢失了，导致页面出现大批量的错位，无法正常使用。</p>
+<!-- more -->
+<p>询问了一下，客户的浏览器用的谷歌浏览器，但是版本还是76（这个是2019年发布的版本），初步怀疑是浏览器版本过低的原因。</p>
+<p>于是提醒用户更新浏览器，然后我也想验证一下是不是浏览器版本过低导致的问题，所以我就准备找旧版本的浏览器调试一下。</p>
+<p>先找到了可以现在老版本谷歌浏览器的网址：</p>
+<ol>
+<li><a href="https://www.slimjet.com/chrome/google-chrome-old-version.php">www.slimjet.com</a>.</li>
+<li><a href="https://www.chromedownloads.net/chrome64osx/">www.chromedownloads.net</a></li>
+</ol>
+<p>到这里下载了老版本谷歌浏览器，软件安装也成功了。安装成功后，应用列表里会多一个 <code>Google Chrome 2</code> ，当我想打开这个软件的时候，怎么弄都打不开。</p>
+<p>查了相关资料找到了解决方案，需要在终端中执行如下命令来启动老版本浏览器：</p>
+<pre><code class="language-shell">/Applications/Google\ Chrome\ 2.app/Contents/MacOS/Google\ Chrome --user-data-dir=%HOME/chrome-profile --chrome-version=61.0.3163.79
+</code></pre>
+<ul>
+<li><code>/Applications/Google\ Chrome\ 2.app/Contents/MacOS/Google\ Chrome</code>： 指定要打开的应用程序在系统中的位置，可以把 Google Chrome 2 拖到终端里查看路径</li>
+<li><code>--user-data-dir=%HOME/chrome-profile</code>： 指定用户数据存放的路径</li>
+<li><code>--chrome-version=61.0.3163.79</code>： 指定 Chrome 版本</li>
+</ul>
+<p>一般来说，我们只要修改这个命令中的 版本号 就可以直接运行了。</p>
+<p>这种启动的浏览器存在一个小问题，就是我们在当前浏览器上的各种数据都不会同步到通过命令启动的浏览器上，需要重新登陆一遍。</p>
+<p>回到原始问题，当我用老版本浏览器来访问我们的产品时，确实发生了样式布局错乱的问题，由此确定，确实是浏览器版本导致的样式问题。</p>
+<p>所以我们给出的解决方案是让用户把浏览器升级到最新版本，同时，给出了一个建议最低版本是 v88（该版本建议源自公司内同类产品建议）。</p>
+<p>原文：</p>
+<iframe width="100%" height="600px" src="https://www.baobangdong.cn/running-an-earlier-version-of-chrome-on-a-mac/" />]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[调试页面循环重定向问题]]></title>
+        <id>https://hbuecx.com/post/diao-shi-ye-mian-xun-huan-chong-ding-xiang-wen-ti/</id>
+        <link href="https://hbuecx.com/post/diao-shi-ye-mian-xun-huan-chong-ding-xiang-wen-ti/">
+        </link>
+        <updated>2023-01-12T13:37:09.000Z</updated>
+        <content type="html"><![CDATA[<p>前端页面出现循环重定向问题时，由于页面不断地刷新，所以打开控制台查看接口，根本看不到接口response里的数据，难以调试。</p>
+<p>如何解决呢？</p>
+<h2 id="解决方案">解决方案</h2>
+<ol>
+<li>开一个新窗口，打开控制台</li>
+<li>切换到 <code>Sources</code> 面板，在面板右侧找到 <code>Event Listener Breakpoints</code> ，勾选 <code>load</code> 监听器。</li>
+<li>然后再在当前窗口访问目标网页URL，这样页面在跳转之前会停留在当前页面，不会跳走，就可以尝试调试了。<br>
+<img src="https://hbuecx.com/post-images/1673531064293.jpg" alt="" loading="lazy"></li>
+<li>如果你知道重定向的代码的根源在哪，那么你可以在 <code>Sources</code> 面板的左面板找包含重定向代码的 JS 文件，去文件里搜索重定向代码，然后给它打上断点。然后一步步溯源就可以解决问题。<br>
+<img src="https://hbuecx.com/post-images/1673531350213.jpg" alt="" loading="lazy"></li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[租房的哲学]]></title>
+        <id>https://hbuecx.com/post/zu-fang-de-zhe-xue/</id>
+        <link href="https://hbuecx.com/post/zu-fang-de-zhe-xue/">
+        </link>
+        <updated>2022-12-11T14:20:12.000Z</updated>
+        <summary type="html"><![CDATA[<p>租房三件套：租客、中介、房东。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>租房三件套：租客、中介、房东。</p>
+<!-- more -->
+<h2 id="租客的哲学">租客的哲学</h2>
+<p>租客关注是否合适。</p>
+<h3 id="讲价">讲价</h3>
+<p>作为租客，找到合适的房子后，最重要的事情是讲价。一般来说，租客都可以在出租房的报价上砍下来两百到三百不等的价格，自如这种平台型除外。</p>
+<h2 id="中介的哲学">中介的哲学</h2>
+<p>中介关注能否成交。</p>
+<p>在租房交易中，中介起到了非常重要的意义。而他们也是最乐意看到这单交易成交的人，所以他总是想方设法在租客和房东中间寻找一种平衡。为此，他们有时可能需要使用一些语言艺术。</p>
+<h3 id="18号-or-1号">18号 or 1号</h3>
+<p>我准备签合同那天是 7 号，而我当前房子的到期时间是 18 号，所以我期望可以晚几天签合同或者将合同上的时间延几天。</p>
+<p>为了让我的延期要求看起来更加合理，中介与出租房的在沟通时说我的房子到期时间是下个月 1 号，以一种夸张的方式来说服出租房延长时间。</p>
+<p>最终确实出租房同意了延期 6 天，即从 13 号开始计算起租日。一般来说，起租日不会延期超过5天。</p>
+<h3 id="帮公司干活-or-帮自己干活">帮公司干活 or 帮自己干活</h3>
+<p>在我和中介大哥聊天的时候，我发现他们似乎是脱离平台自己做的业务，通过短暂的交流，我确认了这一点。</p>
+<p>出于好奇，我询问了中介大哥关于收入高低的问题，他坦言自己跑比在公司里赚得多。另外，他在这里已经做了 5 年多，手上一百多个房东的名字，他几乎是滚瓜烂熟，这一点我还是蛮佩服他的。</p>
+<h3 id="一人带看-or-两人带看">一人带看 or 两人带看</h3>
+<p>我跟这个大哥出来看房两次，每次看房他都会带一个同事一起，这让我感觉有些奇怪，因为在我看来，这件事情一个人也能干得了，为什么要出动两个人呢？好像在效率上会稍显逊色一些。</p>
+<p>中介大哥给了两个答案：</p>
+<ol>
+<li>绝大多数情况下都是两个人一起看房，要么是跟朋友一起看，要么是情侣。如果是一个人带看，一辆电瓶车坐不下，不方便；</li>
+<li>既是一起做业务，也是老手带新手，传授经验。</li>
+</ol>
+<p>挺有意思的，如果不发问，我可能也想不到。</p>
+<h2 id="房东的哲学">房东的哲学</h2>
+<p>房东关注是否利益最大化。</p>
+<h3 id="报价">报价</h3>
+<p>这个新房东，她手上应该有上百套房产出租，成立了一个公寓品牌。所有的房源都录入在系统里，而价格也都是在她的目标价位上加价三百左右，既是给租客讲价的空间，也是保障自己的利益。</p>
+<h3 id="12个月与15个月">12个月与15个月</h3>
+<p>这次签约是，房东期望能够签 15 个月，至于原因倒是不难理解，12 月是一年中租房行情比较差的时候，如果我只租一年，到了明年 12 月她这个房子可能还不好租出去。可要是我租了 15 个月，就是第二年的 3 月份，一旦过了年，租房的人多了起来，加价租出去都可以。</p>
+<h3 id="雇人清洁-or-自己清洁">雇人清洁 or 自己清洁</h3>
+<p>晚上来签约的时候，房东自己带了清洁工具来给房间做清洁。对这件事起初我还是有些不理解的，因为手上握有这么多房产，应该不差钱才对，为什么还要自己做保洁，而不是请人来做呢？</p>
+<p>房东的回答是自己做保洁会让租客感觉上会更亲切一些，拉进距离。这倒是合理的，也是比较有趣的人际交往的知识。</p>
+<h2 id="我是尾巴">我是尾巴</h2>
+<p>总之，我的租房合同签了。虽然不是很满意，凑合凑合还行吧。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[window.onstorage 跨标签页通信]]></title>
+        <id>https://hbuecx.com/post/windowonstorage-kua-biao-qian-ye-tong-xin/</id>
+        <link href="https://hbuecx.com/post/windowonstorage-kua-biao-qian-ye-tong-xin/">
+        </link>
+        <updated>2022-12-05T08:08:27.000Z</updated>
+        <summary type="html"><![CDATA[<p>某些场景下需要完成夸标签页通信，比如，从列表页新开一个新增页面，新增完成后，需要更新列表页的数据。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>某些场景下需要完成夸标签页通信，比如，从列表页新开一个新增页面，新增完成后，需要更新列表页的数据。</p>
+<!-- more -->
+<h2 id="util-封装">util 封装</h2>
+<p>代码封装如下：</p>
+<pre><code class="language-ts">import { v4 as uuidV4 } from 'uuid';
+
+// 特定前缀，避免 Storage 覆盖
+const prefix = '@@';
+
+export function trigger(type: string, payload: any) {
+  localStorage.setItem(prefix + type, JSON.stringify({
+    payload,
+    temp: uuidV4()
+  }));
+}
+
+export function on(type: string, handler: (value: any) =&gt; void) {
+  const storageHandler = (e: StorageEvent) =&gt; {
+    const { key, newValue } = e;
+    if (key !== prefix + type) return;
+    try {
+      const payload = JSON.parse(newValue || '');
+      handler(payload.payload);
+    } catch (e) {
+      console.warn('storage error with key of ', key);
+    }
+  };
+  window.addEventListener('storage', storageHandler);
+  return () =&gt; {
+    window.removeEventListener('storage', storageHandler);
+  }
+}
+</code></pre>
+<h2 id="使用">使用</h2>
+<h3 id="监听">监听</h3>
+<pre><code class="language-ts">// 需要注销监听时可以调用 off 函数
+const off = on('a', (value) =&gt; {
+    console.log(value);
+});
+</code></pre>
+<h3 id="触发">触发</h3>
+<pre><code class="language-ts">trigger('a', '急急急');
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[绍兴乔波滑雪🏂🏻小记]]></title>
+        <id>https://hbuecx.com/post/qiao-bo-hua-xue-xiao-ji/</id>
+        <link href="https://hbuecx.com/post/qiao-bo-hua-xue-xiao-ji/">
+        </link>
+        <updated>2022-11-28T16:25:53.000Z</updated>
+        <content type="html"><![CDATA[<p>甜姐载着晋问、晋问女朋友、破凉和我，车上总共  5 个人。早上八点半出发，接近十点到达乔波滑雪场。</p>
+<p>在咸鱼买的票，240元，官方票价266，限时 4 小时，还挺贵的。而且票价只包括雪服、雪鞋和雪板，如果需要头盔或者手套，需要自己提前买或者当场买。另外这里不提供雪仗，买都没不了，有点难受。</p>
+<p>这里没有雪仗提供也是有原因的，我们去的时候，发现这里 90% 的人都在玩单板，而且很多人都是自带雪板的。对于剩下的少部分双板的玩家，可能需要牺牲掉他们的一部分利益来保全商家的利益了。</p>
+<p>上一次滑雪还是两年前在北京的云佛山滑雪场，这是人生的第二次，2022年的第一次。</p>
+<p>刚去的时候，直接去滑中级道，由于隔了两年，很多技巧都忘掉了，平衡感也掌握不好，所以摔了好几次。于是调整策略，在训练区联系了很多次，确定自己在练习区能做到游刃有余的时候，又重新回到了中级道。确认有效，在经过训练区的反复尝试习得的经验下，再上时就没有滑倒过。</p>
+<p>滑雪结束后，由于没有做拉伸，导致第二天胳膊和屁股都酸痛得厉害。这是血与泪的教训，开始滑雪和结束滑雪时都需要做热身和拉伸，不然免不了酸痛。</p>
+<figure data-type="image" tabindex="1"><img src="https://hbuecx.com/post-images/1670232801912.JPG" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[关于Tech快报]]></title>
+        <id>https://hbuecx.com/post/guan-yu-tech-kuai-bao/</id>
+        <link href="https://hbuecx.com/post/guan-yu-tech-kuai-bao/">
+        </link>
+        <updated>2022-11-20T13:48:16.000Z</updated>
+        <content type="html"><![CDATA[<p>我承接了一份“额外的工作”，在工作之余，我每两周必须抽时间完成一份最新前端周刊。开始的一段时间，这份工作令我为之困扰。</p>
+<h2 id="这是一件怎样的工作">这是一件怎样的工作</h2>
+<ul>
+<li>每次讲说，我只有5到10分钟时间，所以讲述的内容不能太多</li>
+<li>内容必须与前端强关联，因为听众都是前端开发者</li>
+<li>内容不能太基础，因为听众大多是骄傲的人，他们不愿意听他人给他们讲基础，因为这会玷污他们的专业性</li>
+<li>内容不能太高端，太过高端的内容曲高和寡，简短的时间根本不能让他们理解一件事情</li>
+<li>选题不能落后，落后的内容他们不想听</li>
+<li>选题不能太前沿，他们没用过的内容他们也并不关心</li>
+</ul>
+<h2 id="最大的问题">最大的问题</h2>
+<p>最大的问题是，除了自己部门的成员以外，其他人的偏好我并不了解，所以哪些内容应当被收录，以及如何编辑他们让我产生了困扰。</p>
+<h2 id="我的预期">我的预期</h2>
+<p>既能帮助自己拓展知识面，也能对周边人产生帮助，最好能获得他们的认可。</p>
+<h2 id="或者是我自己把这件是将塑造得太过困难">或者，是我自己把这件是将塑造得太过困难</h2>
+<p>作为前端开发者，最关心的两件事情：第一是这能否对我现阶段的工作产生帮助；第二是能否对我的职业生涯产生帮助。</p>
+<p>绝大多数人只关心这两件事情，如果按照这个思路，那我需要满足这两条即可。</p>
+<h2 id="他们对哪些事情感兴趣">他们对哪些事情感兴趣</h2>
+<ul>
+<li>
+<p>React 的新提案</p>
+<ul>
+<li>useEvent</li>
+<li>use</li>
+</ul>
+</li>
+<li>
+<p>ES features</p>
+<ul>
+<li>ES12 features</li>
+</ul>
+</li>
+<li>
+<p>TC39提案<br>
++<br>
++</p>
+</li>
+<li>
+<p>拥有更高、更快、更强噱头的新框架诞生 or 重大更新</p>
+<ul>
+<li>solidjs</li>
+<li>vite 3.0</li>
+<li>Turbopack</li>
+</ul>
+</li>
+<li>
+<p>前端技术方案实现 or 原理浅析</p>
+<ul>
+<li>微前端技术方案实现</li>
+<li>eslint原理</li>
+<li>无界微前端方案</li>
+<li>ShadowRealm：沙箱环境</li>
+</ul>
+</li>
+<li>
+<p>内部开源工具实践</p>
+<ul>
+<li>umijs升级</li>
+<li>雨燕3.0发布</li>
+<li>bigfish 4发布</li>
+</ul>
+</li>
+</ul>
+<h2 id="他们对哪些事情不感兴趣">他们对哪些事情不感兴趣</h2>
+<ul>
+<li>前端行业资讯
+<ul>
+<li>字节1024kb小游戏大赛</li>
+</ul>
+</li>
+<li>前端行业报告
+<ul>
+<li>开发者调查报告</li>
+<li>前端生态趋势报告</li>
+</ul>
+</li>
+<li>与实践无关的框架更新
+<ul>
+<li>Flutter 3.0发布</li>
+<li>Astro 1.0</li>
+</ul>
+</li>
+<li>“基础”的前端知识
+<ul>
+<li>你不知道的HTML属性</li>
+<li>git常见问题使用方法</li>
+<li>eslint配置方式</li>
+<li>react csr ssr渲染模式</li>
+</ul>
+</li>
+<li>前端相关开源工具科普
+<ul>
+<li>用于查找内存泄漏的工具：Memlab</li>
+</ul>
+</li>
+</ul>
+<h2 id="中性内容">中性内容</h2>
+<ul>
+<li>网络相关
+<ul>
+<li>HTTP 3.0</li>
+</ul>
+</li>
+<li>实践相关
+<ul>
+<li>新的npm语法</li>
+</ul>
+</li>
+</ul>
+<h2 id="感兴趣与不感兴趣的原因">感兴趣与不感兴趣的原因</h2>
+<p>令他们感兴趣的是可以马上实践、将会实践或者身边人也会感兴趣并能与之交流的内容。<br>
+令他们不感兴趣的他们不会去使用也不会与人交流的内容。</p>
+<h2 id="像是抖音的推荐算法">像是抖音的推荐算法</h2>
+<p>做完分析之后，我发现这有点像抖音的智能推荐算法，区别仅仅在于使用工具的不同，一个比另一个更灵活，一个另一个更高效。</p>
+<h2 id="快报的初心与意义">快报的初心与意义</h2>
+<p>真正的根据喜好去投喂是对的吗，我想是不对的。就像许多偏食的人由于营养不均衡导致身体素质差一样，太过偏科也不是一个好习惯。</p>
+<p>《人类简史》中曾谈到智人（现代人类的祖先）往往拥有多种生存技能，即使单独一个人也能完成生活中所需的一切。而现在的社会中，现在人类太过于原子化，每天做着同一份工作，技能逐渐专业化，也逐渐单调化，一旦社会体系崩溃，大多数人都将随之灭亡。就像疫情期间，很多被困在家的人不会做饭只能煮泡面一样，差不多是一个道理。</p>
+<h2 id="自我解放">自我解放</h2>
+<p>当我把这些内容进行分类整理之后，我的精神压力减轻了不少，因为经过统计、分析和筛选，我的目标更清晰了。</p>
+<p>我大致理清了听众的喜好，但我不应该让听众的偏好干扰我自己的学习计划。区分开两者，但又不是完全的隔离，要用两条腿走路。</p>
+<h2 id="自我反思">自我反思</h2>
+<p>似乎也只有在筛选文章这件事情上，能让我长时间的去翻看新文章，但是这中带着任务的紧迫感，会让我的心稍稍浮躁，为了追求结果而浅尝辄止。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[良渚遗址公园一游]]></title>
+        <id>https://hbuecx.com/post/liang-zhu-yi-zhi-gong-yuan-yi-you/</id>
+        <link href="https://hbuecx.com/post/liang-zhu-yi-zhi-gong-yuan-yi-you/">
+        </link>
+        <updated>2022-11-18T15:08:51.000Z</updated>
+        <summary type="html"><![CDATA[<p>第一次一个人外出游玩，以前一直都不敢，也没有兴趣一个人出门，但是这次的体验告诉我，一个人游玩也可以很开心。<br>
+This is first time I traveling alone.</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>第一次一个人外出游玩，以前一直都不敢，也没有兴趣一个人出门，但是这次的体验告诉我，一个人游玩也可以很开心。<br>
+This is first time I traveling alone.</p>
+<!-- more -->
+<p>不同于与伙伴同游的交流分享之乐，独行的快乐来自于自由的灵魂。<br>
+Unlink the pleasure of the talking and sharing with a partner, the plessure of being alone coming form a free soul while traveling.</p>
+<p>这里很开阔，这里有花，有树，有白鸽，有梅花鹿，广袤的草原和绵长的溪流。我喜欢这里，如果时间允许，并且但我有兴致的话，我会再来这里一次。</p>
+<p>我在这里帮一群学生拍了照片，有一男一女两名学生走到我面前，问我能不能帮他们拍张照，男生先开口说：“叔叔，能帮我们拍张照吗？” 女生立马纠正了他，笑着对他说到：“说什么呢！叫哥哥！” 说罢又转过头看了看我。</p>
+<p>对于这样的误会我不是第一次遇见了，看来我看起来确实显老，哈哈哈哈。</p>
+<p>巧合的是，在同一个地方，我正好拍了三张照片，我认为非常棒，可惜我无法形容它。</p>
+<p><img src="https://hbuecx.com/post-images/1669477062122.jpeg" alt="" loading="lazy"><br>
+<img src="https://hbuecx.com/post-images/1669477078350.jpeg" alt="" loading="lazy"><br>
+<img src="https://hbuecx.com/post-images/1669477088860.jpeg" alt="" loading="lazy"></p>
+<p>当然，我还拍了很多照片，我想记录下来这里美好的一切。</p>
+<p><img src="https://hbuecx.com/post-images/1669477679295.jpeg" alt="" loading="lazy"><br>
+<img src="https://hbuecx.com/post-images/1669477703363.jpeg" alt="" loading="lazy"><br>
+<img src="https://hbuecx.com/post-images/1669477713850.jpeg" alt="" loading="lazy"><br>
+<img src="https://hbuecx.com/post-images/1669477726108.jpeg" alt="" loading="lazy"><br>
+<img src="https://hbuecx.com/post-images/1669477739240.jpeg" alt="" loading="lazy"><br>
+<img src="https://hbuecx.com/post-images/1669477747555.jpeg" alt="" loading="lazy"><br>
+<img src="https://hbuecx.com/post-images/1669477752767.jpeg" alt="" loading="lazy"><br>
+<img src="https://hbuecx.com/post-images/1669477758825.jpeg" alt="" loading="lazy"><br>
+<img src="https://hbuecx.com/post-images/1669477763645.jpeg" alt="" loading="lazy"><br>
+<img src="https://hbuecx.com/post-images/1669477770503.jpeg" alt="" loading="lazy"></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[徽杭古道徒步之旅]]></title>
+        <id>https://hbuecx.com/post/hui-hang-gu-dao-tu-bu-zhi-lu/</id>
+        <link href="https://hbuecx.com/post/hui-hang-gu-dao-tu-bu-zhi-lu/">
+        </link>
+        <updated>2022-11-13T08:15:32.000Z</updated>
+        <summary type="html"><![CDATA[<p>周六，第一次参加徒步，全程 15 公里，虽然风景没有特别吸引人，但是不可否认，这是一段有趣的旅程。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>周六，第一次参加徒步，全程 15 公里，虽然风景没有特别吸引人，但是不可否认，这是一段有趣的旅程。</p>
+<!-- more -->
+<ul>
+<li>徒步之旅</li>
+<li>在忘我中寻找真我</li>
+<li>雷团长的智慧</li>
+</ul>
+<h2 id="一-徒步之旅">一、徒步之旅</h2>
+<p>早上七点半从蚂蚁A空间发车，大概九点半到达徽杭古道临安的入口。而回程要比去程更久一些，要从安徽境内绕路高速，整体的路程会不少。所以我们四点半就从安徽上了车，快九点钟才回到A空间。</p>
+<p>团费215（原价225，发了朋友圈减了10块钱😂）</p>
+<h3 id="老太太卖拐杖">老太太卖拐杖</h3>
+<p>快到终点时，我们本次徒步的领队雷团长提醒我们待会儿下车之后，会有很多老太太围上来卖给我们登山杖，到了终点会有另外一拨老太请求游客把登山杖送给她们，这样就等于游客花钱买了登山杖的使用权。如果用得上登山杖的游客，倒是没什么。而我根本不需要登山杖这种东西，不仅毫无作用，反倒是个累赘。</p>
+<p>我粗略观察了一下，我所在的这个小团队应该没有人持有老太太们卖的登山杖。Everyone is strong as me.<br>
+<img src="https://hbuecx.com/post-images/1668350019696.JPG" alt="" loading="lazy"></p>
+<h3 id="老家的后山">老家的后山</h3>
+<p>徒步刚开始时，我不得不说，这与我老家的后山没什么区别。<br>
+<img src="https://hbuecx.com/post-images/1668353141273.jpg" alt="" loading="lazy"></p>
+<h3 id="庆华面馆">庆华面馆</h3>
+<p>在徒步的旅途中，有一家农家面馆，叫“庆华面馆”。他们家的生意非常红火，绝大部分经过这里的游客都会在这里点一碗面。<br>
+<img src="https://hbuecx.com/post-images/1668353452248.jpg" alt="" loading="lazy"><br>
+<img src="https://hbuecx.com/post-images/1668355509511.jpg" alt="" loading="lazy"></p>
+<p>一碗素面的 12 元，加了鸡蛋和大排之后是 20 元。幸运的是，我有足够的钱支付后者。<br>
+<img src="https://hbuecx.com/post-images/1668354324591.jpg" alt="" loading="lazy"></p>
+<p>严格的说，它并不是真正意义上的面馆，做饭还是在跟我们老家一样的土灶上，烧的还是柴火。其实这就是一处农家，只不过恰好住在这个地方，又恰好这条路被开发成了旅游景点。或许，他们在建这间房子的时候，恐怕怎么也想不到有一天自己家会开上一家面馆。</p>
+<p>尝过这里的面后，我得中肯的说一句，还不错。但我也不知道，是因为面好吃，还是我太饿了。</p>
+<h3 id="孤独的盛开">孤独的盛开</h3>
+<p>整个旅途里面，让我倾心的美景有三个，这是其中之一：孤独盛开的花。虽是最微小的景，但是最微小的往往最能打动人心。越是渺小，越是有韧性，越是坚韧越有生命力的东西就越能打动人。这两簇花如果能配上光影效果，拍摄的效果也许会更美妙。<br>
+<img src="https://hbuecx.com/post-images/1668354387131.jpg" alt="" loading="lazy"><br>
+<img src="https://hbuecx.com/post-images/1668355336020.jpeg" alt="" loading="lazy"></p>
+<h3 id="越过山丘">越过山丘</h3>
+<p>第二个是长满狗尾巴草的山丘，微风从这里经过，吹得它们摇曳生姿，像是大地母亲的发丝随风飘摇。有人说男人就应该多看看山川大河，那样能开阔心胸。我想这里也不错，有山有水，还有这样一座长满狗尾巴草的山丘。<br>
+<img src="https://hbuecx.com/post-images/1668348979593.JPG" alt="" loading="lazy"><br>
+<img src="https://hbuecx.com/post-images/1668349027972.JPG" alt="" loading="lazy"><br>
+<img src="https://hbuecx.com/post-images/1668349039531.JPG" alt="" loading="lazy"></p>
+<h3 id="江南第一关">江南第一关</h3>
+<p>第三个是江南第一关，这里的石碑记录着，这是一个邵姓人为了躲避战乱，率亲族逃离到这里的，随后建桥修路，以保证可以与外界沟通。<br>
+孤独的花代表着生命力，山丘代表着宽阔的胸怀，而这里所代表的是深邃。<br>
+<img src="https://hbuecx.com/post-images/1668350076597.JPG" alt="" loading="lazy"><br>
+<img src="https://hbuecx.com/post-images/1668355741921.jpg" alt="" loading="lazy"></p>
+<h3 id="悠闲地人">悠闲地人</h3>
+<p>出来景点之后，我听到一位悠闲地大哥在那里唱歌。<br>
+<img src="https://hbuecx.com/post-images/1668354415342.jpg" alt="" loading="lazy"></p>
+<h3 id="值得庆幸">值得庆幸</h3>
+<p>在整个旅程中，最令人庆幸的是：这条路上人并不是太多。毕竟有不少的路在山地上穿梭，尘土飞扬，很多城市里生活惯了的人是接受不了的，即使这在农村很平常。<br>
+<img src="https://hbuecx.com/post-images/1668355809713.JPG" alt="" loading="lazy"></p>
+<h3 id="晚餐">晚餐</h3>
+<figure data-type="image" tabindex="1"><img src="https://hbuecx.com/post-images/1668354425692.jpg" alt="" loading="lazy"></figure>
+<h2 id="二-在忘我中寻找真我">二、在忘我中寻找真我</h2>
+<p>这次旅程，我最大的一点收获是我发现在这次旅程中，我并没有显得很内向。一部分原因是我在运动中，我能从运动中获得力量，忘记疲劳，忘记工作，运动就是我的充电站；另外一部分则是，有人与我一起出行，与同伴同行更是一件美妙的事情，因为要找到能与你有相同兴趣的人太难了，不是因为少，而是找到同伴对有些不擅长打交道的人来说太难。</p>
+<p>也正是在这样的旅程中，忘记所有的事情，忘记所有的烦恼，我只有一个目标：往前走，一直到终点。</p>
+<p>在抛却所有烦恼后，你会发现你真正的兴趣所在。</p>
+<h2 id="三-雷团长的智慧">三、雷团长的智慧</h2>
+<p>在这次旅程开始之前，我从我们的领队雷团长那里学到一样很重要的技能：利益无关的事情，只说事实，不说建议。<br>
+<img src="https://hbuecx.com/post-images/1668351373345.PNG" alt="" loading="lazy"></p>
+<p>我在看到群里有人问的时候，我在想雷团长会给出怎样的答案：能 or 不能？</p>
+<p>他的答案令我惊讶，他的回答仅仅是如图所言，没有更多的回复。我突然意识到，这件事情，不论如何给出反馈和建议，都有可能出错。唯一能保证不出错的方法就是只讲事实，不提建议。</p>
+<p>这在我上次组织团队Outing时也有类似的事情发生，但是我由于太过重视自己的建议导致有些时候会失去重心，但很明显这么做是不对的。只有自己才能给出最合适的建议，因为只有自己最了解自己，只要陈述事实即可，至于作何决定由个人独自决定。</p>
+<h2 id="四-some-image">四、some image</h2>
+<p><img src="https://hbuecx.com/post-images/1668350397218.JPG" alt="" loading="lazy"><br>
+<img src="https://hbuecx.com/post-images/1668350407204.JPG" alt="" loading="lazy"><br>
+<img src="https://hbuecx.com/post-images/1668350415758.JPG" alt="" loading="lazy"><br>
+<img src="https://hbuecx.com/post-images/1668350424531.JPG" alt="" loading="lazy"><br>
+<img src="https://hbuecx.com/post-images/1668350469039.JPG" alt="" loading="lazy"><br>
+<img src="https://hbuecx.com/post-images/1668350482976.JPG" alt="" loading="lazy"><br>
+<img src="https://hbuecx.com/post-images/1668350433848.JPG" alt="" loading="lazy"><br>
+<img src="https://hbuecx.com/post-images/1668355760304.jpg" alt="" loading="lazy"><br>
+<img src="https://hbuecx.com/post-images/1668354440549.jpg" alt="" loading="lazy"></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Z-Library所有域名全线被封，如何才能继续访问呢]]></title>
+        <id>https://hbuecx.com/post/z-library-suo-you-yu-ming-quan-xian-bei-feng-ru-he-cai-neng-ji-xu-fang-wen-ni/</id>
+        <link href="https://hbuecx.com/post/z-library-suo-you-yu-ming-quan-xian-bei-feng-ru-he-cai-neng-ji-xu-fang-wen-ni/">
+        </link>
+        <updated>2022-11-05T03:19:01.000Z</updated>
+        <summary type="html"><![CDATA[<p>昨晚在访问 zlibrary 时，发现网站打不开了，切换了多个镜像域名都无法访问网站，本以为是科学上网出了问题，看到资讯才知道是被美国邮政检查局封了网站。资讯见：<a href="https://pangniao.net/z-library-zui-xin-di-zhi.html">Z-Library目前无法正常使用</a>.</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>昨晚在访问 zlibrary 时，发现网站打不开了，切换了多个镜像域名都无法访问网站，本以为是科学上网出了问题，看到资讯才知道是被美国邮政检查局封了网站。资讯见：<a href="https://pangniao.net/z-library-zui-xin-di-zhi.html">Z-Library目前无法正常使用</a>.</p>
+<!-- more -->
+<p>首先访问 <a href="https://zh.singlelogin.me/">https://zh.singlelogin.me/</a> 登录 zlibrary，然后根据指引下载 Tor 浏览器，访问其指定的 Tor 网址。。Tor 网址 ：<a href="http://zh.bookszlibb74ugqojhzhg2a63w5i2atv5bqarulgczawnbmsb6s6qead.onion">http://zh.bookszlibb74ugqojhzhg2a63w5i2atv5bqarulgczawnbmsb6s6qead.onion</a>。</p>
+<p>虽然通过 Tor 访问是没有问题的，但是依旧不能完成下载操作。静待其服务恢复吧。</p>
+<figure data-type="image" tabindex="1"><img src="https://hbuecx.com/post-images/1667619092879.jpg" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[做有价值的工作]]></title>
+        <id>https://hbuecx.com/post/bi-qi-jie-zhi-tou-zi-wo-geng-xiang-tan-jie-zhi-gong-zuo/</id>
+        <link href="https://hbuecx.com/post/bi-qi-jie-zhi-tou-zi-wo-geng-xiang-tan-jie-zhi-gong-zuo/">
+        </link>
+        <updated>2022-10-29T05:39:04.000Z</updated>
+        <summary type="html"><![CDATA[<p>只有当人们明确的知道他们的工作所能产生的价值时，他们的工作激情才会被唤醒。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>只有当人们明确的知道他们的工作所能产生的价值时，他们的工作激情才会被唤醒。</p>
+<!-- more -->
+<p>换言之，一个对自己工作价值不明确或者不认同时，他很难对眼下的工作充满激情，他一般都能完成工作，但是这绝不是他最好的状态和表现。</p>
+<p>《重来3：跳出疯狂的忙碌》的作者在书中讲了一个故事，这与我的想法不谋而合。他在书中大概是这么说的：他的公司定义会给一些贫困救济的基金会捐钱，然后他会安排自己的员工与一些接受救济的儿童见面，这样的方式可以让员工在工作时产生价值链接，他会更加认可自己所做的事情，他的情绪和效率将会被拉到一个更高的层面上。</p>
+<p>最近一段时间的工作中，我发现我对当下做的一些事情是不认可的，我认可目标本身，令我感到不适的是任务执行者所设计的执行计划，在好的计划和坏的计划当中，他总是选择了不好的那一种，这令我很费解，因为很明显坏的计划明显漏洞百出，但是他好像完全没有发现一样。我大胆的预测，继续这样做下去，错误的工作方向意味着这件事情很快就会要返工，甚至是要推倒重来的。</p>
+<p>但是我无法反抗，因为他的职能更像是配合，当然也可以提出一些意见，但是却不能左右主导者的意志。面对这样一个明知结局却无能为力的场面，我有些失望。</p>
+<p>这让我回想起来，在上家公司里，虽然比现在要更忙碌，但我的心是充实的，因为我非常清楚的意识到我的用户是谁，我的目标是什么以及我该怎么做。我不认同的事情，我提出反驳意见后，可以与他人进行有理有据的辩论，每个人都尊重对方的思考与反馈。我们的目的是一致的：把事情做到极致。</p>
+<p>但是我现在所做的事情，我所感受到的是求快，不求好。虽然在设计上也是尽心尽力，但是太过浮躁，急于求成，所以产出的内容也是差强人意。</p>
+<p>有一个词叫“降本增效”。绝大多数人对“效”的理解是效率，但是我不太认同，我认为他应该是成效。如果耗费大量人力物力所产出的内容差强人意的话，这是一件令人十分沮丧的事情。</p>
+<p>我是对价值非常敏感的人，如果我从我所做的事情中感受不到价值，那么这将是乏味的，痛苦的。</p>
+<p>找到自己所做的事情的价值，发现、探索，去找到属于我的价值。去做那些我认为正确的事情，拒绝无效工作。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[远离屏幕！]]></title>
+        <id>https://hbuecx.com/post/gan-yu-wu-liao-gan-yu-wu-liao/</id>
+        <link href="https://hbuecx.com/post/gan-yu-wu-liao-gan-yu-wu-liao/">
+        </link>
+        <updated>2022-10-18T00:41:27.000Z</updated>
+        <content type="html"><![CDATA[<p>今早，朦朦胧胧中，我突然意识到我的右手正要向手机的方向摸索而去，这令我大惊。忙不迭的向大脑发送了一条紧急指令：停止你此刻的行动。</p>
+<p>我深刻的意识到这样的习惯性行为是有问题，但是问题出在哪呢？为什么我会有如此的习惯呢？而且不仅是我，如今社会此类起床第一眼就看手机的人越来越多了。我不禁反思起来：为什么这种不好的现象会如此普遍？</p>
+<p>这种问题问别人是问不到答案的，只能先问自己：为什么我会有这种起床第一眼就要看手机的习惯？</p>
+<p>问自己这个问题时，我好像也不能给自己答案。于是我转换了一种问法：起床时什么情况下是正常的？从转变思路问这个问题开始，我好像有了点头绪，逐渐的要打开了一扇大门。</p>
+<p>正常情况应该是这样的：什么肢体语言都不做，静躺，呼吸，直到自己身上的疲惫感逐渐散去，又活成了一个拥有力量的人。清醒之后就该开始洗漱工作了，而这中间，根本就不需要手机这项电子设备的介入。</p>
+<p>ok，现在对照来看，这两种现象的区别在哪呢？我思索片刻，脑海里冒出来一个词：无聊。</p>
+<p>是的，我突然意识到这就是问题的关键。我去摸索手机是想要马上从手机上获取信息，而静躺着是做不到获取信息的。秉持着打破砂锅问到底的精神，下一个问题是：为什么我急迫的要去获取信息？这当然是因为收到“时间宝贵”思想的影响，我想要把我生命的每一刻都用于接收信息，把自己打造成一个在这些信息的支持下逐渐成长的形象。但其实，当我反思这些信息带给我的改变时，我不可否认是有的，但是绝大多数信息对我来说是无效的，甚至是会影响到我的情绪，从而降低我的幸福指数的。</p>
+<p>而造成我如此急迫去获取信息的另一个原因是，作为一名打工人，我的大部分时间都用于了工作，我的个人时间被压缩的太少了。对于如此紧迫的时间，我会更加迫切的想要在获取到足够的成长后再重新开始新的一天，所以我熬夜也要去接收外界的信息，即使大多数是无效或负面的。我好像是在完成一项潜意识给我布置的任务，这令我匪夷所思：我为什么会接收这样一项命令？</p>
+<p>或许是受“珍惜时间”的副作用影响太深了，我才会如此急迫的想要获取信息，我不甘于无聊。</p>
+<p>我的神经已经习惯了它被大量信息包裹和填满的状态，也正因如此，它令我更加疲惫。这绝对不是一项正确的指令，也不是我正确的选择。</p>
+<p>所以我必须给自己树立两个信念，以对抗如此顽强而又错误的意识：</p>
+<ol>
+<li>允许无聊：甘于无聊，敢于无聊。只要自己能接受它，它就是休养生息的一种极好的方法。</li>
+<li>告诫自己被信息包裹是错误的选择。因为我的经验证明，大多数的信息会带给我负面的影响。通过这些娱乐设备来获取我想要的信息错误的选择。</li>
+<li>找一件事来做。给自己找一件事情做，当你有了做某一件事情的目标，可以抵消一部分你想玩手机的欲望。</li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[上线一个小玩具：小画板]]></title>
+        <id>https://hbuecx.com/post/shang-xian-yi-ge-xiao-wan-ju-xiao-hua-ban/</id>
+        <link href="https://hbuecx.com/post/shang-xian-yi-ge-xiao-wan-ju-xiao-hua-ban/">
+        </link>
+        <updated>2022-10-16T16:34:51.000Z</updated>
+        <summary type="html"><![CDATA[<p>上线一个小玩具：<a href="https://hbuecx.com/qdraw/">小画板</a></p>
+]]></summary>
+        <content type="html"><![CDATA[<p>上线一个小玩具：<a href="https://hbuecx.com/qdraw/">小画板</a></p>
+<!-- more -->
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[我正逐渐丧失激情。]]></title>
+        <id>https://hbuecx.com/post/wo-zheng-zhu-jian-sang-shi-ji-qing/</id>
+        <link href="https://hbuecx.com/post/wo-zheng-zhu-jian-sang-shi-ji-qing/">
+        </link>
+        <updated>2022-10-13T16:18:31.000Z</updated>
+        <summary type="html"><![CDATA[<p>近一段时间，我越来越深刻的意识到自己的迷茫和不知所措。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>近一段时间，我越来越深刻的意识到自己的迷茫和不知所措。</p>
+<!-- more -->
+<p>刚刚我在翻看我4年前在CSDN写的一些文章时，我发现那时的我还是有一些思考、总结和沉淀的，我每隔一段总能写出一些带有我思考的文章，反观现在，我已经很有没有写文章了，甚至是连反思也都少了。</p>
+<p>没没想到这件事，我都莫名感觉到一些委屈，想深叹一口气。</p>
+<p>我还记得初入职场时，我有非常强烈的激情，但是随着时间的流走，工作时间不断增加，我的热情好像越来越弱了，到现在为止，甚至已经有些麻木。尤其是到了蚂蚁之后，我已经入职一年了，但是我到今天为止都没有看到我所做的事情产生的价值，这让我更加迷茫，脱离了价值刺激的心灵，它沉寂了。我始终在想办法来拯救它，但是很多事情我都只是想想，没有真正的进入实践，这导致我更加焦虑了。我的精力本身就是非常有限的，当有太多的事情分散我的精力时，我会对我真正想做的事情提不起兴趣来。</p>
+<p>我还记得当时的我半夜工作到十二点已经是充满热情，我并不觉得苦难，反而是精神异常，因为我清晰的知道我所的事情，它有着怎样的价值，它能帮助到多少人。对于这种可以发挥价值的事情，我始终是怀有热忱的。</p>
+<p>我希望有人对我所做的事情产生质疑，然后我们之间可以相互辩驳，在这个过程中，我能听到很多不同方面的思考与见解，领悟到很多不同的看法的原因或者设计思想。我的意思是与有思想的人，与真正能做事情的进行沟通和探讨，而不是与提出不切实际违背人文逻辑的任务的人争论。无意义的争论会让我很痛苦，尤其是我不得不做一些我不能认同的事情的时候，即使我已经会耐着性子把这件事情执行下去，但是这样没有价值认同的事情对我情绪的影响是非常巨大的：我会变得苦恼和麻木。</p>
+<p>我一直都认为，好的东西不应该被浪费。我们的时间，我们的精力都不应被用到做一些愚蠢的事情上。我期望我能看到我做的事情的价值，这个价值应该是真实存在的，而不是被认为创造出来的。</p>
+<p>整段文字中，以“我”字打头的句子非常多，这其实也是我非常想要表达、倾诉自己的表现，但是由于很长时间没有过深刻的反思，也没有坚持写文章记录的习惯，这导致我想说的事情有很多，但是到了跟前好像又消解于无，不知道要从何说起。我想要表达的欲望像是一股洪流一样猛烈，但是它又像一堵墙，我很难找到突破口，让这股洪流得以“决堤”。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[MacOS 安装与使用 MongoDB]]></title>
+        <id>https://hbuecx.com/post/macos-an-zhuang-yu-shi-yong-mongodb/</id>
+        <link href="https://hbuecx.com/post/macos-an-zhuang-yu-shi-yong-mongodb/">
+        </link>
+        <updated>2022-09-13T15:25:26.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="前言">前言</h2>
+<p>执行本方案前，需确认：</p>
+<ol>
+<li>你的电脑可以科学上网</li>
+<li>已安装 <code>Homebrew</code></li>
+</ol>
+<h2 id="安装">安装</h2>
+<ol>
+<li>切换官网镜像源：</li>
+</ol>
+<pre><code class="language-bash">brew tap mongodb/brew
+</code></pre>
+<ol start="2">
+<li>安装社区版mongodb</li>
+</ol>
+<pre><code class="language-bash">brew install mongodb-community
+</code></pre>
+<ol start="3">
+<li>查看是否安装成功</li>
+</ol>
+<pre><code class="language-bash">mongod -version
+</code></pre>
+<p>如果看到了如下内容，说明安装完成：<br>
+<img src="https://hbuecx.com/post-images/1663083207353.jpg" alt="" loading="lazy"></p>
+<h2 id="使用">使用</h2>
+<ol>
+<li>作为 MacOS 服务</li>
+</ol>
+<pre><code class="language-bash">brew services start mongodb-community
+</code></pre>
+<ol start="2">
+<li>检查是否运行</li>
+</ol>
+<pre><code class="language-bash">ps aux | grep -v grep | grep mongod
+</code></pre>
+<ol start="3">
+<li>关闭mongod服务器</li>
+</ol>
+<pre><code class="language-bash">brew services stop mongodb-community
+</code></pre>
+<ol start="4">
+<li>链接数据库</li>
+</ol>
+<pre><code class="language-bash">mongosh
+</code></pre>
+<h2 id="问题">问题</h2>
+<p>如果在安装过程中遇到此类报错：<code>Error: No such file or directory @ rb_sysopen - /Users/chenxin/Library/Caches/Homebrew/downloads/1ef619d74a84d1ea2c56ece8124f60f241b3630896a533e8399dfa8d65f997ad--libnghttp2-1.47.0.arm64_monterey.bottle.tar.gz</code>，这是某个包安装失败导致的，直接安装指定的包即可。<br>
+<img src="https://hbuecx.com/post-images/1663084100567.jpg" alt="" loading="lazy"></p>
+<p>上述报错中，安装失败的包是<code>libnghttp2</code>，所以执行如下命令：</p>
+<pre><code class="language-bash">brew install libnghttp2
+</code></pre>
+<p><strong>如果在安装过程中，还是出现了同类错误，则继续独立安装对应的包即可</strong>。我这次安装一共独立安装了 8 个包，坚持就是胜利✌🏻！</p>
+<h2 id="参考">参考</h2>
+<ol>
+<li><a href="https://blog.csdn.net/weixin_40509040/article/details/121221676">一种解决方法 Error: No such file or directory @ rb_sysopen</a>.</li>
+<li><a href="https://blog.csdn.net/CC_leather/article/details/105051719">2020年了，让mac下的mongoDB的安装简单点</a>.</li>
+<li><a href="https://juejin.cn/post/6985093901329629192">2021 Mac OS 安装 mongoDB</a>.</li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[MAC APP安装提示：已损坏，无法打开，您应该将它移到废纸篓 解决方案]]></title>
+        <id>https://hbuecx.com/post/mac-app-an-zhuang-ti-shi-yi-sun-pi-wu-fa-da-kai-nin-ying-gai-jiang-ta-yi-dao-fei-zhi-lou-jie-jue-fang-an/</id>
+        <link href="https://hbuecx.com/post/mac-app-an-zhuang-ti-shi-yi-sun-pi-wu-fa-da-kai-nin-ying-gai-jiang-ta-yi-dao-fei-zhi-lou-jie-jue-fang-an/">
+        </link>
+        <updated>2022-08-27T11:05:39.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="解决方案">解决方案</h2>
+<p>在终端中输入命令 <code>sudo xattr -d com.apple.quarantine /Applications/xxx.app</code> 解决，其中xxx.app是出问题的APP名称，<strong>如名称中有空格，可用“\”加空格代替</strong>。</p>
+<pre><code class="language-sh">sudo xattr -d com.apple.quarantine /Applications/xxx.app
+
+eg.
+sudo xattr -d com.apple.quarantine /Applications/Fishing\Funds.app
+</code></pre>
+<h2 id="参考链接">参考链接</h2>
+<ol>
+<li><a href="https://blog.csdn.net/weixin_43469680/article/details/106989549">解决：已损坏，无法打开，您应该将它移到废纸篓</a></li>
+<li><a href="https://macwk.com/article/macos-file-damage">xxx.app 已损坏，无法打开，你应该将它移到废纸篓/打不开 xxx，因为它来自身份不明的开发者解决方法</a></li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[M1芯片NVM安装v14以下版本Node失败解决方案]]></title>
+        <id>https://hbuecx.com/post/m1-xin-pian-nvm-an-zhuang-v14-yi-xia-ban-ben-node-shi-bai-jie-jue-fang-an/</id>
+        <link href="https://hbuecx.com/post/m1-xin-pian-nvm-an-zhuang-v14-yi-xia-ban-ben-node-shi-bai-jie-jue-fang-an/">
+        </link>
+        <updated>2021-11-13T08:19:54.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="前言">前言</h1>
+<p>最近接手了一个老项目，这个项目使用的打包工具是 fis3，一个非常老旧的打包工具。</p>
+<p>当我拷贝代码并安装完依赖后发现项目无法启动，询问过同事才知道，要让Node版本保持在 v12 及以下才能够启动项目。</p>
+<p>于是我执行如下命令来安装Node v12：</p>
+<pre><code class="language-shell">nvm install v12
+</code></pre>
+<p>但是该命令并没有正常运行，产生了如下的报错：</p>
+<figure data-type="image" tabindex="1"><img src="https://hbuecx.com/post-images/1636791700022.png" alt="" loading="lazy"></figure>
+<p><s><em>中间一串乱码打印我就不粘贴了……</em></s></p>
+<figure data-type="image" tabindex="2"><img src="https://hbuecx.com/post-images/1636791707406.png" alt="" loading="lazy"></figure>
+<p>在查阅相关问题经验时，发现M1芯片安装低版本 Node是有问题的，而我当前使用的电脑正是 M1 芯片。</p>
+<h1 id="问题原因">问题原因</h1>
+<p>低版本的 Node 并不是基于 arm64 架构的，所以不适配 M1 芯片。</p>
+<h1 id="解决方案">解决方案</h1>
+<p>在命令行终端工具（如：item2等）中执行如下命令：</p>
+<pre><code class="language-shell"># 让 shell 运行在 Rosetta2 下
+$ arch -x86_64 zsh
+</code></pre>
+<p>执行如上的命令后，就可以顺利安装低版本 Node 了</p>
+<pre><code class="language-shell"># 安装 v12 版本 Node
+$ nvm install v12
+</code></pre>
+<p>需要注意的是，如果电脑发生了重启操作，那么 <code>arch -x86_64 zsh</code> 命令所创建的环境将消失。如果此时需要安装低版本 Node，需要再次执行该命令。</p>
+<h1 id="参考">参考</h1>
+<ol>
+<li><a href="https://segmentfault.com/a/1190000039005726">M1芯片Mac搭建前端开发环境</a></li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[端口被占用，服务器启动失败了怎么办]]></title>
+        <id>https://hbuecx.com/post/duan-kou-bei-zhan-yong-fu-wu-qi-qi-dong-shi-bai-liao-zen-me-ban/</id>
+        <link href="https://hbuecx.com/post/duan-kou-bei-zhan-yong-fu-wu-qi-qi-dong-shi-bai-liao-zen-me-ban/">
+        </link>
+        <updated>2021-11-07T03:15:11.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="背景">背景</h2>
+<p>在启动服务器的时候，偶尔会遇到端口占用的问题，导致服务器启动失败。大致的报错是这样的：</p>
+<aside>
+⚠️ Address already in use:8080
+</aside>
+<figure data-type="image" tabindex="1"><img src="https://hbuecx.com/post-images/1636255181720.png" alt="" loading="lazy"></figure>
+<h2 id="解决方案">解决方案</h2>
+<p>通常解决方案有三种：</p>
+<ol>
+<li>手动更换服务端口</li>
+<li>查找当前占用端口的进程，将这些进程kill掉</li>
+<li>自动更换服务端口方案</li>
+</ol>
+<h3 id="1-手动更换服务端口">1. 手动更换服务端口</h3>
+<p>这个比较好理解，就是手动更改一下服务配置里使用的端口。</p>
+<p>优势</p>
+<ul>
+<li>可以自己配置指定的端口。<s>常规用法，没啥优势</s></li>
+</ul>
+<p>劣势</p>
+<ul>
+<li>更换的端口可能也被占用了，你还得再换</li>
+<li>如果端口配置是在源码里有git记录的，那么你在提交代码的时候可能还要改回去，不然会影响到其他人</li>
+</ul>
+<h3 id="2-查找当前占用端口的进程将这些进程kill掉">2. 查找当前占用端口的进程，将这些进程kill掉</h3>
+<p>首先查找到占用端口的进程</p>
+<pre><code class="language-bash"># lsof -i:8080
+lsof -i:端口号
+</code></pre>
+<p>kill占用端口的进程</p>
+<pre><code class="language-bash"># kill -9 3880
+kill -9 PID
+</code></pre>
+<p>大致流程是这样的：</p>
+<figure data-type="image" tabindex="2"><img src="https://hbuecx.com/post-images/1636255197426.png" alt="" loading="lazy"></figure>
+<p>优势</p>
+<ul>
+<li>无需更换端口</li>
+</ul>
+<p>劣势</p>
+<ul>
+<li>有误杀重要进程的风险</li>
+</ul>
+<blockquote>
+<p>使用这个方案时一定要慎重！！！你一定要先搞清楚你要kill掉的进程发挥了什么样的作用，避免误杀。</p>
+</blockquote>
+<h3 id="3-自动更换服务端口方案">3. 自动更换服务端口方案</h3>
+<p>目前有部分工具内部已经实现了自动更换端口的效果，但是如果你项目目前的状态还没有支持自动切换服务端口，而你又有希望自动更换服务端口的强烈愿望，可以看一下这位老哥的示例：</p>
+<p><a href="https://github.com/KuangPF/mpvue-weui/commit/2081cba8d9e77ea1a40f67db92e8e4e605a87a90">端口占用后自动更换端口 fixed [issues13](https://github.com/KuangPF/mpvue-weui/is... · KuangPF/mpvue-weui@2081cba</a></p>
+<p>优势</p>
+<ul>
+<li>一次编码，多次受益</li>
+</ul>
+<p>劣势</p>
+<ul>
+<li>最终使用的端口不完全可控</li>
+</ul>
+<h2 id="总结">总结</h2>
+<p>综合以上三种方案，我更推荐方案三。但是方案三也是有一定成本和前提的，不是所有的项目当前都能用方案三。我日常都是用方案二，因为不想改源码，但是用方案二的时候一定要慎重啊！！</p>
+]]></content>
+    </entry>
+</feed>

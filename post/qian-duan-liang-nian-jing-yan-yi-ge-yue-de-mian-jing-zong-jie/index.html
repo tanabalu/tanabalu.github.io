@@ -1,0 +1,1314 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>前端两年经验，历时一个月的面经和总结 | 白山</title>
+<meta name="description" content="温故而知新。" />
+<link rel="shortcut icon" href="https://hbuecx.com/favicon.ico">
+<link rel="stylesheet" href="https://hbuecx.com/styles/main.css">
+
+<script src="https://hbuecx.com/media/js/jquery.min.js"></script>
+<script src="https://hbuecx.com/media/js/masonry.pkgd.min.js"></script>
+<script src="https://hbuecx.com/media/js/aos.js"></script>
+<script src="https://hbuecx.com/media/js/pace.min.js"></script>
+<script src="https://hbuecx.com/media/js/view-image.min.js"></script>
+<script src="https://hbuecx.com/media/js/functions.js"></script>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?3349a47f297f4ca395881d504c2856e6";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+    <script src="https://hbuecx.com/media/js/waterfall.min.js"></script>
+    <script src="https://hbuecx.com/media/js/prism.min.js"></script>
+    
+  </head>
+  <body>
+            <header id="header" class="grid-container">
+        <!-- start: .menu-wrapper -->
+        <div class="menu-mobile"> 
+          <i class="fa fa-reorder"></i>
+        </div>
+        <div class="menu-wrapper">
+          <div class="">
+            <div class="logo">
+              <a href="https://hbuecx.com"><img src="https://hbuecx.com/media/images/logoo.png" alt=""></a>
+            </div>
+            <!-- start: .main-nav -->
+
+            <nav class="main-nav grid-container grid-parent">
+              <ul id="menu-header" class="menu gradient-effect">
+                
+                  <li class=""><a href="https://hbuecx.com" class="menu">首页</a></li>
+                
+                
+                  <li class="" >
+                    <a href="/archives" class="menu">
+                      归档
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/tags" class="menu">
+                      标签
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/post/message" class="menu">
+                      小记
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/collection" class="menu">
+                      工具
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/friends" class="menu">
+                      Space
+                    </a>
+                  </li>
+                
+              </ul>
+            </nav>
+            <!-- end: .main-nav -->
+            <div class="clear"></div>
+            <div class="border hide-on-tablet hide-on-mobile"></div>
+          </div>    
+          <div class="clear"></div>
+        </div>
+        <!-- end: .menu-wrapper -->
+        <div class="clear"></div>
+      </header>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('https://hbuecx.com/post-images/qian-duan-liang-nian-jing-yan-yi-ge-yue-de-mian-jing-zong-jie.png'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2021-09-23 12:22:32"><i class="fa fa-calendar"></i><span class="lately">4 年前</span></time>
+               
+               
+               <span id="/post/qian-duan-liang-nian-jing-yan-yi-ge-yue-de-mian-jing-zong-jie/" class="leancloud_visitors views-counter meta-info">
+                <i class="fa fa-leancloud"></i><span class="leancloud-visitors-count" style="vertical-align: middle;">0</span>
+               </span>
+               
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://hbuecx.com/tag/i8tx5BWEe/" class="ctag ctag-0 ctag-i8tx5BWEe" aria-label="">面经</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">前端两年经验，历时一个月的面经和总结</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <h2 id="前言">前言</h2>
+<p>先介绍下个人情况：本人本科2年前端开发经验，由于政策原因公司裁员，我从上一家公司离职。休息了一段时间之后，我开始投简历找工作。从8月22号到9月22号累计一个月的时间，最终通过面试的岗位有8个。</p>
+<p>从这一个月的面试内容来看，大部分面试官都会根据你的简历内容来提问。我简历里写到了 <code>React</code> 、<code>Vue</code> 、<code>Typescript</code> 和 <code>小程序</code> ，所以关于这几个部分的内容面试官都会问到。另外我简历里没写 <code>Webpack</code> 和 <code>Node</code> ，所以面试官没怎么问 <code>Webpack</code>  和 <code>Node</code> 相关的内容</p>
+<h2 id="面经分类">面经分类</h2>
+<p>从我的面试记录来看，可以把面试题分成这些类型：</p>
+<ul>
+<li>JavaScript</li>
+<li>CSS</li>
+<li>框架通识</li>
+<li>Vue</li>
+<li>React</li>
+<li>Webpack</li>
+<li>Typescript</li>
+<li>浏览器 &amp; 网络</li>
+<li>小程序</li>
+<li>看代码说结果</li>
+<li>手撕代码 &amp; 算法</li>
+<li>开放题</li>
+</ul>
+<p>以下是我面试过程中遇到的所有的问题，供大家参考。下面的这些题目能搞定百分之七八十，搞定面试绝对没问题。</p>
+<h3 id="javascript">JavaScript</h3>
+<ul>
+<li>Map和Set的区别，Map和Object的区别</li>
+<li>数组的filter、every、flat的作用是什么</li>
+<li>es6有哪些新特性
+<ul>
+<li><a href="http://www.alloyteam.com/2016/03/es6-front-end-developers-will-have-to-know-the-top-ten-properties/">前端开发者不得不知的 ES6 十大特性</a></li>
+</ul>
+</li>
+<li>说一下对Promise的了解
+<ul>
+<li><a href="https://segmentfault.com/a/1190000013396601">Promise实现原理</a></li>
+</ul>
+</li>
+<li>Promise的all和race有什么区别</li>
+<li>箭头函数和普通函数的区别
+<ul>
+<li><a href="https://segmentfault.com/a/1190000021380336">箭头函数和普通函数的区别</a></li>
+</ul>
+</li>
+<li>let、var和const的区别？如果希望const定义的对象的属性也不能被修改该怎么做？</li>
+<li>堆和栈的区别</li>
+<li>闭包的原理
+<ul>
+<li><a href="https://segmentfault.com/a/1190000039042550">我将【闭包】讲给你听！</a></li>
+</ul>
+</li>
+<li>instanceof的实现原理</li>
+<li>new的实现原理</li>
+<li>数据类型有哪些？如何判断一个数据是否是数组</li>
+<li>JQuery实现链式调用的原理是什么</li>
+<li>分别介绍一下原型、原型链、作用域和作用域链的含义和使用场景</li>
+</ul>
+<h3 id="css">CSS</h3>
+<ul>
+<li>css和js两种方式实现div右移1000px动画</li>
+<li>visibility、display、opacity的区别</li>
+<li>单行截断css</li>
+<li>flex布局</li>
+<li>flex：1</li>
+<li>transition、transform、translate的区别</li>
+<li>如何画一条 0.5px 的边框
+<ul>
+<li><a href="https://juejin.cn/post/6844903582370643975">怎么画一条0.5px的边（更新）</a></li>
+</ul>
+</li>
+<li>说一下BFC
+<ul>
+<li><a href="https://blog.csdn.net/DFF1993/article/details/80394150">浅析BFC原理及作用</a></li>
+</ul>
+</li>
+<li>parent元素宽高不定，实现scale固定宽高比始终为4：3</li>
+<li>CSS垂直居中的方案
+<ul>
+<li><a href="https://juejin.cn/post/6844903550909153287">CSS垂直居中的12种实现方式</a></li>
+</ul>
+</li>
+<li>伪元素和伪类的区别
+<ul>
+<li><a href="http://www.alloyteam.com/2016/05/summary-of-pseudo-classes-and-pseudo-elements/">总结伪类与伪元素 | AlloyTeam</a></li>
+</ul>
+</li>
+<li>position的几个属性和含义
+<ul>
+<li><a href="https://www.runoob.com/cssref/pr-class-position.html">CSS position 属性</a></li>
+</ul>
+</li>
+<li>说一下盒模型</li>
+<li>响应式布局方案
+<ul>
+<li><a href="https://juejin.cn/post/6844903814332432397">前端响应式布局原理与方案（详细版）</a></li>
+</ul>
+</li>
+<li>三栏式布局方案</li>
+<li>如何提高动画的渲染性能
+<ul>
+<li><a href="https://www.w3cplus.com/animation/gpu-animation-doing-it-right.html">这样使用GPU动画</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="框架通识">框架通识</h3>
+<ul>
+<li>React-router、vue-router原理</li>
+<li>vue和 react 的区别
+<ul>
+<li><a href="https://juejin.cn/post/6844903974437388295">前端框架用vue还是react？清晰对比两者差异</a></li>
+</ul>
+</li>
+<li>vue和 react 如何做技术选型</li>
+<li>css module原理</li>
+<li>说一下虚拟DOM？为什么要使用虚拟DOM？
+<ul>
+<li>追问：虚拟DOM是如何合并patch的</li>
+</ul>
+</li>
+<li>map 和 v-for 中 key 的作用</li>
+<li>react diff算法和vue diff算法的区别
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/281031340">【前端面试】面试官常问的虚拟dom，dom算法，key，别再答不出来了。</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/20346379">React 源码剖析系列 － 不可思议的 react diff</a></li>
+</ul>
+</li>
+<li>组件通信的方式有哪些</li>
+</ul>
+<h3 id="vue">Vue</h3>
+<ul>
+<li>computed和watch的区别</li>
+<li>watch能监听computed的属性吗</li>
+<li>vue的响应式原理</li>
+<li>vue的生命周期</li>
+<li>mounted拿到数据可以后可以直接获取dom吗</li>
+<li>nextTick原理</li>
+<li>vue模板（template）里为什么不能使用多个头结点？</li>
+<li>vuex为什么同时设计mutation和action？只设计一个行不行？</li>
+<li>vue2和 vue3 在数据绑定这一块有什么区别？</li>
+<li>vue挂载和卸载父子组件生命周期钩子执行顺序</li>
+<li>vue的优化方案（等同于如何编写可读性高、易维护且高性能的vue代码）
+<ul>
+<li><a href="https://juejin.cn/post/6844903913410314247">Vue 项目性能优化 — 实践指南（网上最全 / 详细）</a></li>
+</ul>
+</li>
+<li>keep-alive的原理，使用有什么问题？如何解决？</li>
+</ul>
+<h3 id="react">React</h3>
+<ul>
+<li>setState是同步还是异步的</li>
+<li>fiber的实现原理
+<ul>
+<li><a href="https://segmentfault.com/a/1190000018250127">React Fiber 原理介绍</a></li>
+</ul>
+</li>
+<li>fiber的时间调度通过哪两个原生api实现的（requestAnimationFrame和requestIdleCallback？？？）</li>
+<li>React合成事件是如何实现的</li>
+<li>使用Redux时需要注意的点</li>
+<li>如果Redux没返回新的数据会怎样</li>
+<li>Redux是如何派发数据的？ connect原理？</li>
+<li>什么场景会触发重新渲染</li>
+<li>setState返回一样的引用，render会执行吗</li>
+<li>useEffect的使用方法？useEffect的return会在什么时候执行？useEffect原理是什么？
+<ul>
+<li><a href="https://cloud.tencent.com/developer/article/1558962">React Hooks 源码解析（4）：useEffect</a></li>
+</ul>
+</li>
+<li>useMemo和useCallback的区别，它们的实现原理是什么？</li>
+<li>useEffect、useMemo、useCallback是如何做依赖收集的</li>
+<li>React Hooks有什么优势和劣势</li>
+<li>context的实现原理是什么？如何做依赖收集？</li>
+<li>React的生命周期</li>
+<li>PureComponent和Component的区别</li>
+<li>如果在map循环中没有设置key值，那么从 A B C D 四个节点变成 B C D三个节点，它会以什么样的方式变化</li>
+<li>React dom绑定事件和原生事件有什么区别</li>
+<li>Hooks的实现原理</li>
+</ul>
+<h3 id="webpack">Webpack</h3>
+<ul>
+<li>为什么webpack打包慢？为什么vite会比webpack快？如果想提高webpack速度，应该怎么做？
+<ul>
+<li><a href="https://juejin.cn/post/6844903924806189070">Webpack优化——将你的构建效率提速翻倍</a></li>
+</ul>
+</li>
+<li>说说webpack编译打包的流程</li>
+<li>说一下对tree-shaking的了解，对CommonJS和ESM都可以用tree-shaking吗</li>
+<li>webpack中plugin和laoder的区别，它们的执行时机，以及常用的plugin和loader</li>
+<li>css-loader的作用是什么？不使用css-loader行不行</li>
+</ul>
+<h3 id="typescript">Typescript</h3>
+<ul>
+<li>Typescript相较于JavaScript有什么优势和劣势？</li>
+<li><code>const func = (a, b) =&gt; a + b;</code> 要求编写Typescript，要求<code>a</code>，<code>b</code>参数类型一致，都为<code>number</code>或者都为<code>string</code></li>
+<li>实现<code>ReturnType</code></li>
+<li>实现<code>DeepReadOnly</code></li>
+<li>基于已有类型生成新类型：剔除类型中的<code>width</code>属性</li>
+</ul>
+<pre><code class="language-ts">interface A {
+    content: string;
+    width: number;
+    height: number;
+}
+</code></pre>
+<h3 id="浏览器-网络">浏览器 &amp; 网络</h3>
+<ul>
+<li>介绍一下EventLoop
+<ul>
+<li><a href="https://juejin.cn/post/6868849475008331783">【前端体系】从一道面试题谈谈对EventLoop的理解</a></li>
+</ul>
+</li>
+<li>EventLoop中为什么要同时存在宏任务和微任务两个队列？设计一个行不行？一段代码在执行时，程序是如何去区分宏任务和微任务的？</li>
+<li>内存泄露
+<ul>
+<li><a href="https://juejin.cn/post/6947841638118998029">一文带你了解如何排查内存泄漏导致的页面卡顿现象</a></li>
+<li>项目中内存泄漏的场景</li>
+<li>setTimeout为什么会造成内存泄露？如何防止setTimeout内存泄露？清除定时器为什么就不会有内存泄露？</li>
+</ul>
+</li>
+<li>介绍一下http缓存
+<ul>
+<li>追问：哪些字段用做强缓存？哪些字段用做协商缓存？</li>
+<li>追问：cache-control、expires、etag等字段的属性值是什么样的？</li>
+<li>追问：这些字段都被存放在请求的哪个部分？</li>
+<li>追问：last-modify和expires这些字段的时间有什么区别？</li>
+<li>追问：last-modify和expires能共存吗？</li>
+<li>追问：如果不想让某个资源使用缓存，那么应该如何设计http缓存？</li>
+<li>追问：cache-control中的no-cache和no-store的区别</li>
+</ul>
+</li>
+<li>介绍一下宏任务和微任务
+<ul>
+<li><a href="https://juejin.cn/post/6880787856353132552">【study】宏任务和微任务的区别是什么</a></li>
+<li>追问：哪些是宏任务？哪些是微任务？</li>
+<li>追问：宏任务和微任务的区别是什么？为什么要设计宏任务和微任务两个队列？使用一个任务队列行不行？为什么？</li>
+<li>追问：你刚刚所说的都是根据api来识别微任务和宏任务的，那么一段完整的程序浏览器是如何区分宏任务和微任务的呢？</li>
+</ul>
+</li>
+<li>微任务的优先级</li>
+<li>如何理解script标签是个宏任务</li>
+<li>http1.1和http2的区别</li>
+<li>onload 和 DOMContentLoaded的区别</li>
+<li>requestAnimationFrame</li>
+<li>浏览器加载页面的过程</li>
+<li>script标签为什么要放在底部</li>
+<li>defer和async的区别，以及它们的加载和执行时机</li>
+<li>DOM事件模型。事件捕获和事件冒泡的使用场景
+<ul>
+<li><a href="https://juejin.cn/post/6995531009173225485">【前端 · 面试 】JavaScript 之你不一定会的基础题（一）</a></li>
+</ul>
+</li>
+<li>从输入url到页面展示的过程
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/133906695">从输入 URL 到页面展示到底发生了什么？看完吊打面试官！</a></li>
+</ul>
+</li>
+<li>如何设计css、js等文件的缓存</li>
+<li>204、304、404、504</li>
+<li>描述一下同源策略、跨域及其解决方案
+<ul>
+<li><a href="https://segmentfault.com/a/1190000011145364">前端常见跨域解决方案（全）</a></li>
+<li>描述Jsonp具体的实现方案</li>
+</ul>
+</li>
+<li>xss和csrf的概念和防御方式
+<ul>
+<li><a href="https://tech.meituan.com/2018/09/27/fe-security.html">前端安全系列（一）：如何防止XSS攻击？</a></li>
+<li><a href="https://tech.meituan.com/2018/10/11/fe-security-csrf.html">前端安全系列（二）：如何防止CSRF攻击？</a></li>
+</ul>
+</li>
+<li>sessionSorage、localstorage、cookie的区别？同一个系统开两个网页，两个网页的sessionStorage共享吗？</li>
+<li>http和https的区别？为什么https是相对安全的？https加密原理？
+<ul>
+<li><a href="https://cloud.tencent.com/developer/article/1704749">为什么HTTPS是安全的，一张图告诉你</a></li>
+</ul>
+</li>
+<li>tcp三次握手和四次挥手的步骤</li>
+</ul>
+<h3 id="小程序">小程序</h3>
+<ul>
+<li>说说小程序的三层架构
+<ul>
+<li><a href="https://juejin.cn/post/6923912179544489991">微信小程序的架构以及为什么要用到双线程</a></li>
+<li>拆分逻辑层和渲染层有什么优势和劣势</li>
+</ul>
+</li>
+<li>小程序框架和普通H5框架的区别（比如Taro和RN）</li>
+<li>小程序在安卓和iOS上的区别</li>
+<li>为什么要用Taro？Taro是如何实现跨端的？</li>
+<li>Taro是如何兼容React和Vue的</li>
+<li>Taro3和Taro2的区别</li>
+<li>Taro的优化方案</li>
+<li>小程序体积压缩的方案
+<ul>
+<li><a href="https://jelly.jd.com/article/5fbfa6e9cff6b301458392c3">京喜小程序首页瘦身实践——给小程序再减重30%的秘密</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="看代码说结果">看代码说结果</h3>
+<ul>
+<li>EventLoop</li>
+</ul>
+<pre><code class="language-js">setTimeout(function() {
+    console.log(1);
+}, 0);
+new Promise(function executor(resolve) {
+    console.log(2);
+    for (var i = 0; i &lt; 10000; i++) {
+            resolve();
+    }
+    console.log(3);
+}).then(function() {
+    console.log(4);
+});
+console.log(5);
+</code></pre>
+<ul>
+<li>闭包。说结果，然后分别使用Promise和async改写成每隔1s打印1个数字的形式</li>
+</ul>
+<pre><code class="language-js">function print(n){
+    for(var i = 0;i &lt;n;i++){
+        setTimeout(console.log, 1000, i);
+    }
+}
+print(10);
+</code></pre>
+<ul>
+<li>作用域</li>
+</ul>
+<pre><code class="language-js">var a = 20;
+
+function bar() {
+    console.log(a);
+}
+
+function foo(fn) {
+    var a = 10;
+    fn();
+}
+
+foo(bar);
+</code></pre>
+<ul>
+<li>作用域</li>
+</ul>
+<pre><code class="language-js">function bar() {
+    var a = 20;
+    return function() {
+    console.log(a);
+    }
+}
+
+var foo = bar();
+var a = 10;
+foo();  // 20
+</code></pre>
+<ul>
+<li>作用域</li>
+</ul>
+<pre><code class="language-js">var a = 20;
+
+function bar() {
+    console.log(a)
+    var a = 10;
+    console.log(n)
+}
+bar()
+</code></pre>
+<ul>
+<li>EventLoop</li>
+</ul>
+<pre><code class="language-js">const promise = new Promise((resolve, reject) =&gt; {
+    console.log(1);
+    resolve(5);
+    console.log(2);
+}).then((res) =&gt; {
+    console.log(res);
+})
+
+promise.then(() =&gt; {
+    console.log(3);
+})
+
+console.log(4)
+
+setTimeout(() =&gt; {
+    console.log(6)
+})
+</code></pre>
+<ul>
+<li>EventLoop</li>
+</ul>
+<pre><code class="language-js">async function async1() {
+    console.log('async1 start');
+    await async2();
+    console.log('async1 end');
+}
+
+async function async2() {
+    console.log('async2 start');
+}
+
+console.log('script start');
+
+setTimeout(function() {
+    console.log('setTimeout');
+}, 0);
+
+async1();
+
+new Promise(function(resolve) {
+    console.log('promise1');
+    resolve();
+}).then(function() {
+    console.log('promise2');
+}).then(function() {
+    console.log('promise3');
+});
+
+console.log('script end');
+</code></pre>
+<ul>
+<li>原型链</li>
+</ul>
+<pre><code class="language-js">function foo() {
+
+}
+
+const bar = new foo()
+
+console.log(bar.__proto__)
+console.log(bar.__proto__.__proto__)
+console.log(bar.__proto__.__proto__.__proto__)
+console.log(bar.__proto__.__proto__.__proto__.__proto__)
+console.log(foo.prototype)
+console.log(foo.prototype.prototype)
+console.log(foo.prototype.prototype.prototype)
+</code></pre>
+<h3 id="手撕代码-算法">手撕代码 &amp; 算法</h3>
+<ul>
+<li>手写快排</li>
+<li>手写深拷贝</li>
+<li>手写节流和防抖</li>
+<li>手写call / apply</li>
+<li>手写Promise.all / Promise.race / Promise.allSettled</li>
+<li>手写限制并发数量</li>
+<li>手写括号匹配</li>
+<li>手写红包算法（注意均衡分配和浮点数计算精度问题）</li>
+<li>数组去重</li>
+<li>将奇数排在前面，偶数排在后面。要求时间复杂度O(n)。空间复杂度O(1)（不能用splice）</li>
+<li>数组转树结构</li>
+<li>解析出URL中所有的部分</li>
+<li>实现一个compare函数，比较两个对象是否相同</li>
+<li>螺旋矩阵</li>
+<li>大数相加</li>
+<li>找出出现次数最多的英语单词</li>
+<li>节点倒序（将ul.id=list，将ul节点下的10000个li节点倒序。考虑性能。）</li>
+<li>实现一个函数计算 &quot;1+12-31+100-93&quot;</li>
+<li>判断链表是否有环</li>
+<li>手写useReducer</li>
+<li>手写useDidMount</li>
+<li>手写useDidUpdate，模拟componentDidUpdate</li>
+<li>手写usePrevious</li>
+<li>爬楼梯</li>
+<li>删除单向链表中的某个节点</li>
+<li>柯里化</li>
+<li>中划线转大写</li>
+<li>千位分割</li>
+<li>使用es5实现es6的let关键字</li>
+</ul>
+<h3 id="开放题">开放题</h3>
+<ul>
+<li>Antd栅格布局的实现</li>
+<li>劫持所有的a标签，点击时不发生跳转，而是弹出提示框提示即将跳转到某个网址，点击确认则跳转，点击取消则无操作</li>
+<li>两个promise，分别实现串行和并行形式，只有两个promise都返回结果时打印success，否则打印fail</li>
+<li>长列表的优化方案有哪些？如何设计一个虚拟列表</li>
+<li>埋点是如何拦截和上报的</li>
+<li>如何实现一个无埋点数据上报</li>
+<li>使用<strong>hash</strong>路由时，怎么能再刷新后时候自动滚动到页面上次的锚点位置？</li>
+<li>做过哪些性能优化方面的工作
+<ul>
+<li><a href="https://segmentfault.com/a/1190000022205291">前端性能优化24条建议（2020）</a></li>
+</ul>
+</li>
+<li>实现一个多级菜单，菜单层级不定</li>
+<li>如何监控和排查内存泄漏问题
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/Z4uHAomyp0d1o-gAJCb3rQ">白屏度量 阿里是怎么监控前端白屏的？</a></li>
+</ul>
+</li>
+<li>模拟实现Java中的sleep函数</li>
+<li>实现一个数组的splice方法（说思路）</li>
+<li>A页面跳转到B页面，在B页面做的操作传输给A页面的方法</li>
+<li>Sentry是如何实现错误监控的
+<ul>
+<li><a href="https://juejin.cn/post/6918408073774104584">解析Sentry源码(二)｜ Sentry如何处理错误数据</a></li>
+<li><a href="https://juejin.cn/post/6987681953424080926">一篇讲透自研的前端错误监控</a></li>
+</ul>
+</li>
+<li>将一个GIF绘制到canvas上是否可行？如果可行，说说你的实现方法。</li>
+<li>如果让你搭建一个项目，你会使用哪些技术方案进行组合？</li>
+<li>如何做技术选型？
+<ul>
+<li><a href="https://github.com/ascoders/weekly/blob/master/%E5%89%8D%E6%B2%BF%E6%8A%80%E6%9C%AF/74.%E7%B2%BE%E8%AF%BB%E3%80%8A12%20%E4%B8%AA%E8%AF%84%E4%BC%B0%20JS%20%E5%BA%93%E4%BD%A0%E9%9C%80%E8%A6%81%E5%85%B3%E5%BF%83%E7%9A%84%E4%BA%8B%E3%80%8B.md">精读《12 个评估 JS 库你需要关心的事》</a></li>
+</ul>
+</li>
+<li>手写实现一个图片懒加载
+<ol>
+<li>到指定高度加载图片</li>
+<li>考虑重排和重绘</li>
+<li>考虑性能</li>
+<li>先加载缩略图，再加载完整的图</li>
+<li>注意图片加载容错情况</li>
+</ol>
+</li>
+<li>编写一个函数，传入一个promise和数字n，n(s)内promise没有返回结果，直接reject</li>
+<li>了解SSR吗
+<ul>
+<li><a href="https://juejin.cn/post/6890810591968477191">谈谈我对服务端渲染(SSR)的理解</a></li>
+</ul>
+</li>
+<li>说一下深拷贝要注意的点</li>
+<li>前端发展方向设想</li>
+<li>如何设计一个类似于elementui这样的可以单包发布，也可以多包发布的框架</li>
+<li>如果让你设计一个单测框架，你怎么设计？</li>
+<li>如何实现模块懒加载？import语法是如何做的</li>
+<li>如何设计一个单点登录方案？</li>
+<li>用过哪些设计模式？分别说说它们的使用场景和应用案例？你觉得使用设计模式给你带来了什么好处？</li>
+<li>从A页面跳转到B页面，再返回A页面时，如何让A页面保持上一次的状态</li>
+<li>了解Vue3和React18吗</li>
+<li>Nginx和node中间件代理的区别</li>
+<li>Node中间件主要是解决什么问题</li>
+<li>说一下你做过的最有收获的项目。描述一下系统所承载的功能、目标以及这个系统能解决什么问题？</li>
+<li>你怎么看待Typescript中大量存在any的现象？面对这样的场景你将有什么样的想法和行动？</li>
+</ul>
+<h2 id="总结">总结</h2>
+<p>在我开始投简历之前，我做了两周的面试准备，那么我准备什么呢？</p>
+<p>首先是准备简历和自我介绍。将自己所做过的所有项目都列出来，从里面找到自己收获比较大的或者是存在着技术难点的项目放到简历上。有一点非常重要：千万不要为了显得自己很厉害，把自己不了解或者不熟悉的技术写到简历里！这是非常不明智的，面试官往往会根据你简历的所写到的技术点和项目进行提问，如果问到了你不会的技术点，你又不能很好的表达出来，那可能就吃了一个暗亏。在梳理项目的同时，最好对你的项目做一个抽象的归纳总结，比如项目的使用者有哪些人，这个项目对他们产生了什么样的帮助，这个项目所承担的职责是什么样的。</p>
+<p>第二步是遍历。需要大批量的去看网上的面经，面经的时间越近越是有可借鉴的地方。多关注简历里面写到和项目里用到的技术，多关注原生JS、技术框架、构建打包以及性能优化方向的知识，而对于css和html这些面试官能问到的范围比较小，所有可能被问到的css题目其实我都遇到过了，也都记录在了文章里。</p>
+<p>第三步是列提纲。我根据网上的面经，我将面试官可能会问到的问题汇集起来统一记录在文档里，然后按照题目的标签和关注点进行分类，最后得到的分类结果和最后实际的面试经过所碰到的问题分类差不多。</p>
+<p>第四步是各个击破。对于梳理出来的知识点，我建议将每一条的答案都用笔写出来或者用电脑编辑记录下来。很多时候，知道和能不能很好地表达出来没有必然的关系。不仅要知道是什么，最好也要能保证在面试官提问的时候能用清晰的语言将你所知道的表达出来。</p>
+<p>除了以上四点，还需要注意的是算法。算法这件事情很难在短时间内训练得很熟练，更多的是需要日常的的锻炼，培养了灵活的思维意识，才能在最短的时间内从题目中分析出需要使用的算法思想。当然，如果只是为了应付面试的话，那就没有这么复杂了，前端面试中可能涉及到的算法题不是很多，你只需要会做这些常见的题目就行了，甚至不需要举一反三。</p>
+<p>除了做准备之外，还有一件事情必须要做：复盘和总结。对于我们面试的时候所遇到的问题，一定要及时的回忆和记录下来，尤其是自己没有回答上来的问题，及时的查漏补缺，找到一个能让面试官满意的答案并记录下来，这样的记忆往往会更加深刻。</p>
+<h2 id="尾巴如何选择offer">【尾巴】如何选择Offer</h2>
+<p>在经历了三周的面试之后，已经出现了各方面都让我比较满意的公司，所以我决定停止投简历，剩下的一周结束掉所有在流程中的面试。</p>
+<p>在这期间，我的心情是复杂的，因为不止一家开出了令我兴奋的薪资，而最后我需要从这些Offer里面选择一家最值得我加入的公司。薪资可能是一方面，但不是全部。</p>
+<p>这个问题困扰了我几天，吃睡都不是很好。直到我看到了一篇关于如何选择Offer的文章，它缓解了我的焦虑，让我更能聚焦的去思考哪家公司更适合我。文章链接：<a href="https://www.jianliben.com/article/detail/43443">当我们面对几个offer时，应该怎么选择？</a>。</p>
+<p>看完这篇文章之后，我摘抄了文章中的三个关键点：</p>
+<ul>
+<li>主要参考指标：行业、企业、岗位、时薪</li>
+<li>作为以赚钱为主要目的的普通人，我建议大家哪怕找不到和自己兴趣完全匹配的工作，也要找一个自己不讨厌的工作。</li>
+<li>我曾经遇到过不少童鞋，刚毕业的时候一味地从薪资出发去选择offer，当工作节奏过快，工作压力过大后，她们就会陷入自我怀疑自我否定，然后对自己进行这样的灵魂拷问：难道我活着就是为了赚钱吗？</li>
+</ul>
+<p>也希望这篇文章能帮你更好的梳理思路，顺利找到适合的公司和岗位。</p>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://www.xinruiyun.cn/ms-mcms/upload/1/editor/1575353723916.jpg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></div>
+                 <a href="https://hbuecx.com/post/duan-kou-bei-zhan-yong-fu-wu-qi-qi-dong-shi-bai-liao-zen-me-ban/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2021-11-07 11:15:11">2021-11-07 11:15:11</time>
+                  <h4 class="title white no-margin">端口被占用，服务器启动失败了怎么办</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hbuecx.com/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hbuecx.com/post-images/ji-yi-ci-you-yu-pwa-huan-cun-yin-fa-de-wen-ti.jpeg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></div>
+                 <a href="https://hbuecx.com/post/ji-yi-ci-you-yu-pwa-huan-cun-yin-fa-de-wen-ti/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2021-07-23 11:18:38">2021-07-23 11:18:38</time>
+                  <h4 class="title white no-margin">记一次PWA缓存引发的问题</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hbuecx.com/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+
+              <div id="comments" class="bg-white hosted ">
+
+              
+                
+                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '1c7817279f236848ef3b',
+    clientSecret: 'cc9a052a730aca58df4ac91361957979a7fb5396',
+    repo: 'tanabalu.github.io',
+    owner: 'tanabalu',
+    admin: ['tanabalu'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+                
+                
+              
+                <div class="clear"></div>
+              </div>
+
+              <div class="clear"></div>
+            </div>
+          </div>
+      </main>
+
+          <footer id="footer" class="grid-container">
+        <div class="widgets row gradient-effect">
+            <div class="default-sidebar border-effect">
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+                  <h4 class="widget-title title white bordered">最新文章</h4>
+                  
+                  
+                  <article class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hbuecx.com/post/gridea-shang-shou-jiao-cheng/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display: block;background-image: url('https://hbuecx.com/media/images/logo.jpeg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2026-02-11 10:00:01">2026-02-11 10:00:01</time>
+                      <h4 class="title usmall">
+                        <a href="https://hbuecx.com/post/gridea-shang-shou-jiao-cheng/">Gridea 上手教程</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hbuecx.com/post/zhuang-shi-qi-de-miao-yong/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display: block;background-image: url('https://hbuecx.com/post-images/zhuang-shi-qi-de-miao-yong.png'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2024-03-18 10:38:08">2024-03-18 10:38:08</time>
+                      <h4 class="title usmall">
+                        <a href="https://hbuecx.com/post/zhuang-shi-qi-de-miao-yong/">装饰器的妙用</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hbuecx.com/post/kai-jia-yu-lao-long/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display: block;background-image: url('https://hbuecx.com/post-images/kai-jia-yu-lao-long.jpg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2024-02-25 11:40:58">2024-02-25 11:40:58</time>
+                      <h4 class="title usmall">
+                        <a href="https://hbuecx.com/post/kai-jia-yu-lao-long/">铠甲与牢笼</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+                  <h4 class="widget-title title white bordered">标签云</h4>
+                  <div class="tagcloud">
+                    
+                      <a href="https://hbuecx.com/tag/VlIS0yH5e/" class="ctag ctag-0 ctag-VlIS0yH5e" aria-label="">三省吾身</a>
+                    
+                      <a href="https://hbuecx.com/tag/ufGbQYqvJv/" class="ctag ctag-1 ctag-ufGbQYqvJv" aria-label="">踩坑</a>
+                    
+                      <a href="https://hbuecx.com/tag/9tN60Dg0i/" class="ctag ctag-2 ctag-9tN60Dg0i" aria-label="">随笔</a>
+                    
+                      <a href="https://hbuecx.com/tag/6WltqJasa/" class="ctag ctag-3 ctag-6WltqJasa" aria-label="">学习笔记</a>
+                    
+                      <a href="https://hbuecx.com/tag/8JblbPCl7/" class="ctag ctag-4 ctag-8JblbPCl7" aria-label="">游记</a>
+                    
+                      <a href="https://hbuecx.com/tag/i8tx5BWEe/" class="ctag ctag-5 ctag-i8tx5BWEe" aria-label="">面经</a>
+                    
+                      <a href="https://hbuecx.com/tag/M9JFSzGuU/" class="ctag ctag-6 ctag-M9JFSzGuU" aria-label="">React</a>
+                    
+                      <a href="https://hbuecx.com/tag/upoIx-adY/" class="ctag ctag-7 ctag-upoIx-adY" aria-label="">JS</a>
+                    
+                      <a href="https://hbuecx.com/tag/PyjodOK1i/" class="ctag ctag-8 ctag-PyjodOK1i" aria-label="">CSS</a>
+                    
+                      <a href="https://hbuecx.com/tag/Qd6JthZND/" class="ctag ctag-9 ctag-Qd6JthZND" aria-label="">Webpack</a>
+                    
+                      <a href="https://hbuecx.com/tag/gf_3G38fZ/" class="ctag ctag-10 ctag-gf_3G38fZ" aria-label="">Antd</a>
+                    
+                      <a href="https://hbuecx.com/tag/YePweIBlg/" class="ctag ctag-11 ctag-YePweIBlg" aria-label="">程序人生</a>
+                    
+                      <a href="https://hbuecx.com/tag/QXbkbGufZ/" class="ctag ctag-12 ctag-QXbkbGufZ" aria-label="">Jenkins</a>
+                    
+                      <a href="https://hbuecx.com/tag/7NGOks4Ws/" class="ctag ctag-13 ctag-7NGOks4Ws" aria-label="">产品</a>
+                    
+                      <a href="https://hbuecx.com/tag/_HICEyo5P3/" class="ctag ctag-14 ctag-_HICEyo5P3" aria-label="">微信小程序</a>
+                    
+                      <a href="https://hbuecx.com/tag/HBuRD1neJ/" class="ctag ctag-15 ctag-HBuRD1neJ" aria-label="">总结</a>
+                    
+                      <a href="https://hbuecx.com/tag/vau2C2Y2S/" class="ctag ctag-16 ctag-vau2C2Y2S" aria-label="">Github</a>
+                    
+                      <a href="https://hbuecx.com/tag/38T520puD/" class="ctag ctag-17 ctag-38T520puD" aria-label="">Git</a>
+                    
+                      <a href="https://hbuecx.com/tag/k3pxvspvg/" class="ctag ctag-18 ctag-k3pxvspvg" aria-label="">编码规范</a>
+                    
+                      <a href="https://hbuecx.com/tag/lQxKPGr7h/" class="ctag ctag-19 ctag-lQxKPGr7h" aria-label="">Typescript</a>
+                    
+                      <a href="https://hbuecx.com/tag/1sQlWB8GD/" class="ctag ctag-20 ctag-1sQlWB8GD" aria-label="">工具</a>
+                    
+                      <a href="https://hbuecx.com/tag/I4gSiRMrr/" class="ctag ctag-21 ctag-I4gSiRMrr" aria-label="">源码</a>
+                    
+                      <a href="https://hbuecx.com/tag/MaE4DBsGs/" class="ctag ctag-22 ctag-MaE4DBsGs" aria-label="">微信</a>
+                    
+                      <a href="https://hbuecx.com/tag/vDt64AfE0/" class="ctag ctag-23 ctag-vDt64AfE0" aria-label="">移动端</a>
+                    
+                      <a href="https://hbuecx.com/tag/mwHk1wpwf/" class="ctag ctag-24 ctag-mwHk1wpwf" aria-label="">适配</a>
+                    
+                      <a href="https://hbuecx.com/tag/VH7lmHwnZ/" class="ctag ctag-25 ctag-VH7lmHwnZ" aria-label="">每日一题</a>
+                    
+                      <a href="https://hbuecx.com/tag/RQ3JGtQmI/" class="ctag ctag-26 ctag-RQ3JGtQmI" aria-label="">音视频</a>
+                    
+                      <a href="https://hbuecx.com/tag/Wv66WQAJ8/" class="ctag ctag-27 ctag-Wv66WQAJ8" aria-label="">Redux</a>
+                    
+                      <a href="https://hbuecx.com/tag/nUUykT2A1/" class="ctag ctag-28 ctag-nUUykT2A1" aria-label="">职场</a>
+                    
+                      <a href="https://hbuecx.com/tag/PEMhkj0cS/" class="ctag ctag-29 ctag-PEMhkj0cS" aria-label="">ES6</a>
+                    
+                      <a href="https://hbuecx.com/tag/b0N2FFH8U/" class="ctag ctag-30 ctag-b0N2FFH8U" aria-label="">测试</a>
+                    
+                      <a href="https://hbuecx.com/tag/X9yVzPzJP/" class="ctag ctag-31 ctag-X9yVzPzJP" aria-label="">iOS</a>
+                    
+                  </div>
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+                  <h4 class="widget-title title white bordered">关于我</h4>
+                  <div class="avatar">
+                    <a href="" class="translate-effect thumb"><span class="fullimage cover" style="background-image: url(https://hbuecx.com/images/avatar.png),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span></a>
+                  </div>
+                  <div class="info">
+                    <h4 class="title small author-name gradient-effect no-margin"><a href="">白山</a></h4>
+                    <p class="founder">温故而知新。</p>
+                    <div class="social">
+                      
+                          
+                            <a href="https://github.com/AWhiteMouse/AWhiteMouse.github.io" class="translate-effect" target="_blank"><i class="fa fa-github"></i></a>
+                        
+                      
+                          
+                            <a href="https://blog.csdn.net/i_dont_know_a" class="translate-effect" target="_blank"><i class="fa fa-csdn"></i></a>
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                    </div> 
+                  </div>
+                  <div class="clear"></div>
+                  </section>
+              </div>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="logo">
+          <a href="https://hbuecx.com"><img class="" src="https://hbuecx.com/media/images/logo.png" alt=""></a>
+        </div>
+        <p class="published border-effect">
+          ©2019 共 171 篇文章
+          <br/>
+          Theme <a href="https://gridea.dev/" target="_blank">「breek」</a> Powered by <a href="https://gridea.dev/" target="_blank">「Gridea」</a>
+        </p>
+        
+        <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+          <i class="fa fa-arrow"></i>
+        </a>
+    </footer>
+    <div class="clear"></div>
+    <script src="https://player.lzti.com/api/player/1665675851148" id="myhk" key="1665675851148" m="1"></script>
+
+      <script type="text/javascript">
+       jQuery(document).ready(function($){
+          $("photos img").each(function(){
+              var _a = $("<a></a>").attr("href",this.src);
+              $(this).wrap("<div class='photo'></div>").wrap(_a);
+          })
+          $("figure img").each(function(){
+              var _b = $("<a></a>").attr("href",this.src);
+              $(this).wrap(_b);
+          })
+          isImgLoad(function(){
+            var photos = document.querySelector('photos');
+            if(photos){
+              waterfall(photos);
+            }
+            $(window).resize(function() {
+             if(photos){
+                  waterfall(photos);
+            }
+          });
+        });
+        var t_img;
+        var isLoad = true;
+        function isImgLoad(callback){
+          $('photos img').each(function(){
+            if(this.height === 0){
+              isLoad = false;
+              return false;
+            }
+          });
+          if(isLoad){
+            clearTimeout(t_img);
+            callback();
+          }else{
+            isLoad = true;
+            t_img = setTimeout(function(){
+              isImgLoad(callback);
+            },500);
+          }
+        }
+      });
+      </script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>

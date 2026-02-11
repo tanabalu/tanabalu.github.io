@@ -1,0 +1,848 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>【转载】作为程序员的思考与反省 | 白山</title>
+<meta name="description" content="温故而知新。" />
+<link rel="shortcut icon" href="https://hbuecx.com/favicon.ico">
+<link rel="stylesheet" href="https://hbuecx.com/styles/main.css">
+
+<script src="https://hbuecx.com/media/js/jquery.min.js"></script>
+<script src="https://hbuecx.com/media/js/masonry.pkgd.min.js"></script>
+<script src="https://hbuecx.com/media/js/aos.js"></script>
+<script src="https://hbuecx.com/media/js/pace.min.js"></script>
+<script src="https://hbuecx.com/media/js/view-image.min.js"></script>
+<script src="https://hbuecx.com/media/js/functions.js"></script>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?3349a47f297f4ca395881d504c2856e6";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+    <script src="https://hbuecx.com/media/js/waterfall.min.js"></script>
+    <script src="https://hbuecx.com/media/js/prism.min.js"></script>
+    
+  </head>
+  <body>
+            <header id="header" class="grid-container">
+        <!-- start: .menu-wrapper -->
+        <div class="menu-mobile"> 
+          <i class="fa fa-reorder"></i>
+        </div>
+        <div class="menu-wrapper">
+          <div class="">
+            <div class="logo">
+              <a href="https://hbuecx.com"><img src="https://hbuecx.com/media/images/logoo.png" alt=""></a>
+            </div>
+            <!-- start: .main-nav -->
+
+            <nav class="main-nav grid-container grid-parent">
+              <ul id="menu-header" class="menu gradient-effect">
+                
+                  <li class=""><a href="https://hbuecx.com" class="menu">首页</a></li>
+                
+                
+                  <li class="" >
+                    <a href="/archives" class="menu">
+                      归档
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/tags" class="menu">
+                      标签
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/post/message" class="menu">
+                      小记
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/collection" class="menu">
+                      工具
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/friends" class="menu">
+                      Space
+                    </a>
+                  </li>
+                
+              </ul>
+            </nav>
+            <!-- end: .main-nav -->
+            <div class="clear"></div>
+            <div class="border hide-on-tablet hide-on-mobile"></div>
+          </div>    
+          <div class="clear"></div>
+        </div>
+        <!-- end: .menu-wrapper -->
+        <div class="clear"></div>
+      </header>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('data:image/jpeg;base64,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'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2019-10-12 07:35:47"><i class="fa fa-calendar"></i><span class="lately">6 年前</span></time>
+               
+               
+               <span id="/post/zhuan-zai-zuo-wei-cheng-xu-yuan-de-si-kao-yu-fan-sheng/" class="leancloud_visitors views-counter meta-info">
+                <i class="fa fa-leancloud"></i><span class="leancloud-visitors-count" style="vertical-align: middle;">0</span>
+               </span>
+               
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+              </div>
+              <h1 class="title ularge white bold">【转载】作为程序员的思考与反省</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <p>原文：<a href="https://www.cnblogs.com/youcong/p/9862712.html">作为程序员的思考与反省</a></p>
+<!-- more -->
+<p>子曰:吾十有五而志于学，三十而立，四十而不惑，五十而知天命，六十而耳顺，七十而从心所欲，不逾矩。人生又有几个十年？</p>
+<p>距离三十还有7年。7年看似很长但也很短。或许有人说我过早的杞人忧天。</p>
+<p>三十岁对于一个程序员来说，是一个警钟。虽然不少博文或者某些国外周刊说，有七八十岁的程序员，也有四五十岁的程序员，做一辈子的程序员没有什么不行。</p>
+<p>但是那是国外。国内与国外的情形是不一样的。IT的技术更迭是很快的，你想要不断成</p>
+<p>长和强大，就需要不断的学习。作为年轻的我来说，特别是双休的时候，每天可以抽取八个小时的时间来学习。但是呢，</p>
+<p>当我结婚生子后呢？我还能有那么多时间专注于学习吗？更多是陪伴自己的家人，教育孩子。</p>
+<p>今天我主要说的话题是作为程序员有比写代码更重要的事情、不能仅仅只关注于自己的领域、要有忧患意识、要有理想等。</p>
+<p>一、作为程序员有比写代码更重要的事情</p>
+<p>那么到底什么是比写代码更重要的事情？</p>
+<p>记住，这句话不仅仅对我自己说，也是对同在IT一线奋战的同志们说的:不要把自己看做码农。</p>
+<p>记得我在之前的文章说过，写代码是思维运动，而不是体力运动。不要将脑力劳动变成体力劳动。</p>
+<p>为什么这么说呢？</p>
+<p>现在很多有三年甚至五年及其以上的工作经验的开发人员，但是有这么一个群体，仅仅只是将两年的工作经验或者是一年的工作经验重复到五年或者三年以上再或者更久。</p>
+<p>我想这也是为什么有的企业在招聘网站招人有这么一条，拥有和工作年限相称的广度和深度。</p>
+<p>如下图美团的Java高级工程师招聘:</p>
+<figure data-type="image" tabindex="1"><img src="https://raw.githubusercontent.com/AWhiteMouse/files/master/imgs/20191012193841.png" alt="美团招聘" loading="lazy"></figure>
+<p>或许有人说，这与你说的“作为程序员有比写代码更重要的事情”没有关系吧。</p>
+<p>嗯，确实没有关系。但是我只是想强调一点。编码是一项脑力与体力相结合的工作，脑力为主，体力为辅。而不是体力为主，脑力为辅。</p>
+<p>下面说说，作为程序员有比写代码更重要的事情。</p>
+<p>首先我说说我的想法:</p>
+<p>(1)作为程序员不能仅仅只关注于功能实现，还要深刻理解业务，明确一条，技术是实现业务的工具，技术固然重要，业务也一样重要，不要仅仅只关注于技术，而忽略业务;</p>
+<p>(2)定期写文档总结，回顾自己在工作中对业务的理解和解决的问题，并将其写成文档或者博文的形式，内部分享或者是在不有损公司的利益情况下，分享给广大的IT朋友们;</p>
+<p>(3)沟通，沟通很重要，特别是技术团队内部，不要埋头苦干，各自为战;</p>
+<p>(4)锻炼身体，身体是革命的本钱，前段时间的新闻，让我心有余悸,特别作为在一线奋战的IT朋友们，一定要定期锻炼，就算不是跑步的形式，也应该去户外走走，徒步也是一种锻炼的方式,当然了，如果能跑步，或时常上下蹲、俯卧撑、仰卧起坐等等，也是不错的，锻炼身体能让你的大脑更灵活;</p>
+<p>(5)要有一颗恒心，回顾我的IT学习生涯，如果不是一颗坚持的恒心，恐怕我和班上一部分同学一样，最后只能转行去做做搬运工、流水线、普通工人或者餐饮的服务员等等，这里我要强调一点，我这么说，并不是歧视这些人，而是要强调一点，想要在一个领域有所成就，必须要有一颗恒心，当然了，机遇也很重要;</p>
+<p>(6)要有热情，你可以理解为兴趣，兴趣是最好的老师，要想在一个行业长久的发展下去，兴趣(热情)是很必要的，虽然有一万小时这样的理论，但是你要想有兴趣的长期坚持一件事情超过或者等于一万小时，或者是被动的坚持一件事情一万小时是完全不一样的，曾经选择IT，仅仅只是因为看上工资高，到后来慢慢喜欢上它，因为它就如生活一样，带给我酸、甜、苦、辣、咸;</p>
+<p>这里我要反省的是，上面的想法我目前而言并没有完全做到,</p>
+<p>谈到(1),当初开发软件时，我仅仅只是抱着功能实现就好，其他一切不管，最后的恶性循环是，不断的出现问题，不断的解决问题，同时呢？也不断的加班。最终的结果，就是因为自己的不负责任、不理解业务造成的。</p>
+<p>谈到(2),定期写文档总结，的确，这个非常有必要，之前我说过，人的大脑容量是有限的，当然了，也不能忽略一些大脑容量超常的人，不过毕竟那些是少数人，所以，作为大多数的人来说，无论是工作中还是学习中，定期总结和回顾是很有必要的，比如，我们Java团队在与安卓团队对接时，有些接口相关的请求url、请求参数、响应参数，时常因为彼此不记得翻代码找半天，这一点双方都有自己的责任，作为Java研发团队中的一员，我们的责任是没有及时记录，以至于找的时候花费很多不必要的时间。虽然说，接口写文档是一件麻烦的事情，但是用一个叫Swagger的工具是可以完全实现自动化的，这个工作是我的，还是因为我的不负责任，没有管它放任自如,我还是要反省自己。</p>
+<p>谈到(3),沟通很重要，我发现在实际开发中，bug出现的概率高的原因，除了我们没有深刻的理解业务之外，还有就是沟通，我们沟通太少了，以至于时常因为这个那个浪费很多不必要的时间。曾经的我，之所以选择了IT，是因为我不喜欢和人打交道，仅仅只想着，“鸡犬相闻，老死不相往来”,,最好是大家各自干各的，都不管彼此。事实证明我是错的，每个人对每一块的业务模块，理解是不一样的，有的理解深，有的理解浅，通过沟通可以彼此互补，技术也是如此。在软件开发整个流程，无论是曾经的瀑布模型，现在的逆向瀑布模型，还是现在的敏捷模型，软件的成功因素，不仅仅取决于业务的前景和好的商业模型，更取决于整个团队的良好协作，本质上可以理解为沟通二字。</p>
+<p>谈到(4)，还有一点我遗漏了，那就是少熬夜和不熬夜，现在我很年轻才23岁，记得在上家公司工作的时候，经常是2点到3点才睡，那段时间也是没有办法的事情，因为我所面临的，不仅仅是生存上的危机，还有来自很多外部的压力，包括我什么都不会，一切从头来过和一些其他因素等。当我解决了生存危机后，感觉身体其实也没有什么，有段时间，我确实有点堕落了，享乐主义的思想逐渐占据了我的大脑，熬夜看一些没有营养的电子书(什么修仙、霸道总裁等等)或者是看看娱乐电影等等。但是后来被一个人无情的打击下，我逐渐醒悟。</p>
+<p>前面说的，或许与少熬夜和锻炼身体没有关系，但是我觉得享乐主义的思想是造成熬夜及其很少或者不锻炼身体的原因之一。</p>
+<p>谈到(5),要有一颗恒心，我同广大的朋友们，都一样，没有深厚的背景关系，也没有富裕的家庭。有人说，这个世界上充满着不公平。在我看来，借用《深度思维》中的某句话所说的那样，这个世界有两个东西是公平的，一个是大脑思想和时间。虽说现在少年得志的人不少，比如前段时间受邀参加某个酒会，遇到不少年轻有为的CEO等。但是那只是少数人。更多的平凡人，其实也可以成功。只不过需要沉得下心，并不断坚持的去做一件事情，可以是兴趣爱好，也可以是职业。这个时代既是物价飞涨的时代，也是充满机遇的时代。有人通过自己的兴趣爱好而获得成功，也有的通过专注与职业而获得机遇取得了成功。成功并不是偶然的，也有其必然的因素。</p>
+<p>谈到(6),热情或者是兴趣,热情对我来说也可以等同于兴趣。对一件事情十分有兴趣，就会不断有动力去做。作为IT界中的一员，IT的技术不断更迭，你想不落后，不仅仅只是靠挤时间去学，而且也要有兴趣，有热情去做。不然毫无兴趣的去做一件事情，效率不高，也浪费时间。很多人总说，没有时间去学习，包括我自己也说过很多次，其实那都是借口，因为自己不想去做，也不愿意去做，更没有兴趣去做，何谈热情去做呢？</p>
+<p>二、不要仅仅只关注自己的领域</p>
+<p>不要仅仅只关注自己的领域，为什么要这样的说呢？</p>
+<p>原因有如下几个方面?</p>
+<p>(1)容易陷入偏狭，一叶而障目;</p>
+<p>(2)我们需要了解业务领域的知识(比如做金融相关的开发，需要了解和熟悉金融的，做区块链的，需要了解区块链相关的知识等等),同时也不能仅仅为了业务而去学，平常也要有意识的去拓展自己的知识领域,就我而言，我对理财、文学、产品、物联网等感兴趣，我就会去看看相关的书籍和资料;</p>
+<p>(3)借用吴军先生的《见识》所说的那样，你能走多远，取决于你的见识;</p>
+<p>其实这三个原因归纳下来，可以用一句话表示，那就是眼界的深度与广度，不仅仅决定你的职业发展，同时也决定了你的未来。</p>
+<p>我给自己的建议，也给他人的建议如下:</p>
+<p>(1)多多阅读,特别是对工作时间长，休息时间短的朋友们来说，阅读是获取知识的最佳途径之一,阅读不同的书籍，你可以领略不同人的思想或者是不同的行业，也可以是你自己的不同感受,说句惭愧的，我也有很久没有看书了，只是最近觉得，我不能仅仅只关注代码和学习新的框架或是深度研究现有的框架原理等等，还得去了解这个世界不一样的东西或者是这个世界不一样的地方;</p>
+<p>(2)沟通，不能仅仅只阅读而不沟通,沟通能提高你的表达能力，同时通过沟通，也能学习对方的看待问题的方式及其获取对方领域的知识(当然了，沟通也没有坏处),特别是广大的IT同胞们，如果表达能力不行的话，找女朋友不好找啊，每次朋友圈看着秀恩爱的那群家伙们，心中总是有种莫名的愤怒,哈哈，稍微幽默下；</p>
+<p>再贴个图:</p>
+<figure data-type="image" tabindex="2"><img src="https://raw.githubusercontent.com/AWhiteMouse/files/master/imgs/20191012193950.png" alt="拉勾网" loading="lazy"></figure>
+<p>阅读和沟通，不仅仅使你能扩大自己的知识领域的广度，还能给你遇到问题时，会有很多的解决问题的思路和方式。这里也要提到积累也很重要。</p>
+<p>上图中有四个红色标记处，前两个，你觉得你没有想过的积累，你觉得你能够胜任吗？或许可以试一试。这个世界上，没有你想做而做不到的。关键是前面说到过的恒心。长久的阅读积累和沟通和技术的沉淀，总会给你带来意向不到的惊喜和机会。</p>
+<p>三、要有忧患意识</p>
+<p>居安而思危。不要仅仅只满足与安逸的环境下，有一点我要反省我自己，有段时间我确实有点放任自如了，觉得自己身处现在的岗位，就有些得意忘形。</p>
+<p>人工智能的发展是非常的迅速，编码以后也会被机器人取代的。这个可能是未来的趋势之一。先不说这个，再说近的，现在的培训机构层出不穷。培养了大批的软件开发工程师，同时现在的大学生，专科的、本科的、研究生或者博士越来越多，你还觉得你所处环境很好吗？这句话是对我自己的说的。“我们不要仅仅只满足于现在，还有着眼于未来“，这句话人人都知道。但没有几个人做到？我想这也是贫富差距的原因之一。</p>
+<p>下面我要说出我自己的想法，同时也是给我自己的建议，广大的朋友可以参考:</p>
+<p>(1)要有职业规划;</p>
+<p>(2)要培养自己的核心竞争力;</p>
+<p>(3)既不要妄自菲薄，也不要骄傲自满;</p>
+<p>(4)实事求是;</p>
+<p>谈到(1),Java开发工程师的职业规范一般为如下:</p>
+<p>初级开发工程师-&gt;中级开发工程师-&gt;高级开发工程师-&gt;架构师/项目经理-&gt;技术总监-&gt;CTO</p>
+<p>同时也可以变成这样</p>
+<p>初级开发工程师-&gt;中级开发工程师-&gt;高级开发工程师-&gt;产品经理-&gt;产品总监</p>
+<p>还可以变成这样</p>
+<p>初级开发工程师-&gt;中级开发工程师-&gt;高级开发工程师-&gt;技术合伙人(参与创业)</p>
+<p>职业规划，意味着你知道自己的下一步想做什么,有个目标总比没目标强。很多人说自己迷茫，包括我自己也一样。其实一点都比迷茫，只不过是为了逃避自己的责任罢了。</p>
+<p>比如我，记得有段时间，经理想让我做TeamLeader，但是我当时畏惧了，因为我怕同事们不配合我，同时也怕自己万一搞砸了失去这份工作怎么办，还怕自己因为对于别人代码不熟和业务不理解被嘲笑等担忧。这些担心固然有一定的道理，但是换个角度来看，同事们不一定会不配合你，只要你做事负责任，搞砸了也不可怕，最重要的是你努力去做，不熟悉和不理解，可以通过熟悉和理解(尝试通过与同事及其领导沟通来达到理解业务的目的等等)。在这里我想强调一点，缺乏勇气去尝试，意味着你一辈子只能默默无闻，其实归根到底就是因为不想担责任，缺乏责任感。</p>
+<p>在工作中，我想每个人都会遇到这样的场景或者是这样的人，比如某某人和某某人一起工作，突然某某人被领导提拔，而那个人觉得自己工作能力不错，为什么提拔的不是他(她),而是他(她)呢？很多人，包括我自己遇到一些问题和事情，最先想的不是如何解决，而是如何推卸责任。这一点，我真的要很反思。再比如恋爱中的情侣们，当在一起的一段时间里，男方总会以自己的想法为由，大男子主义，往往忽略的女方，最后分手了，总是说，为什么会这样，不是我的错。往往总是从自己的角度上看，而不换位思考。无论是工作中，领导总会给员工们升职的机会，或者你在追求某某人时，某某人总会给你的机会，只不过每次你都错过了，任何事情看似偶然，实则必然。</p>
+<p>接下来，我希望自己不仅仅要有明确的行动去实现职业规划中的目标，还希望自己在人际交往中，无论是团队，还是追求某人或者和某人在一起，都要尽可能的换位思考。</p>
+<p>谈到(2),要有自己的核心竞争力？</p>
+<p>记得看过一篇文章中说过，随着IT的门槛相对而言，越来越低，开发人员越来越多，伴随着质量普遍不是特别高，我知道我说这句话，会有不少人喷我。但是事实就是这样，开发人员流动性很强，跳槽更是普遍，写代码不规范(除了一些大中公司有一定的代码规范约束,其他中小公司一般没有什么规范，全靠自觉,包括我自己代码也写的是乱七八糟，不过意识到这一点后，我尝试着让自己的代码可读性变好，改进自己的代码,业界中Java开发的代码规范，我觉得阿里巴巴的Java开发守则值得参考)，仅仅只是关注用技术实现业务，很少深入理解业务，觉得理不理解业务不关自己的事情。</p>
+<p>看下图，我列举的几个招聘网站上的例子:</p>
+<p>图一:https://raw.githubusercontent.com/AWhiteMouse/files/master/imgs/20191012194103.png</p>
+<figure data-type="image" tabindex="3"><img src="https://raw.githubusercontent.com/AWhiteMouse/files/master/imgs/20191012194230.png" alt="招聘" loading="lazy"></figure>
+<p>图二:</p>
+<figure data-type="image" tabindex="4"><img src="https://raw.githubusercontent.com/AWhiteMouse/files/master/imgs/20191012194256.png" alt="招聘" loading="lazy"></figure>
+<p>通过图一和图二，我只想表明两个观点:</p>
+<p>第一、程序员的核心竞争力，不仅仅来自技术上的积累，还来自业务,技术是实现业务的工具，业务是用来赚钱，没有业务，技术也毫无用场;</p>
+<p>第二、随着现在程序员越来越多，你要想不被淘汰，你要有意识的培养自己在某个领域的深度，可以是技术，比如分布式的研究，存储等，也可以是业务，尽管你的技术不是非常牛逼，但是你对业务的深度理解，有助于进入业务对口公司;</p>
+<p>记得看过阿里的某位技术人的文章，提到过，你对业务架构的价值领会的深度与广度决定你身处的位置。在这里还是要强调一点，程序员不能仅仅只关注技术，而忽略业务。如果你还想更进一步，业务是必须的。</p>
+<p>总而言之，程序员的出路可以有很多，你可以选择到30岁以后或者不到30岁去培训机构当老师，还可以自主创业(当然了创业有风险),还可以一直专注某项技术成为领域专家，也可以进阶到管理层面。</p>
+<p>出路有很多，关键是出路是否长远。这个需要自己深度思考。</p>
+<p>谈到(3),既不要妄自菲薄，也不要骄傲自满。很多人，也包括我自己看到比自己强的人，会有点自卑，同时也伴随着嫉妒。如果要说怎么解决？答案是有很多解决方案。你可以选择去向比自己厉害的人学习，也可以选择给自己定一个小小目标，然后慢慢实现一个有一个，当然了，还可以选择无视(不过你觉得你能无视吗，我是不能，嫉妒也不能解决问题，解决问题的最佳方式是面对问题,这就好像人与人之间交际的过程中遇到问题时，问题并不是拖着解决的，而是通过面对解决的。骄傲自满更是要不得，不要觉得老子天下第一，世界上比你强的人多的是，我曾经也因为自己写过某段程序，而别人没有写出来而沾沾自喜。到最后发现那些都是屁，没什么好沾沾自喜的或是狂妄。我觉得还需要学习很多。未来还有很长，但是也不是那么很长，我希望自己能够虚心而不自大，乐于助人,乐于助人在于彼此提高。</p>
+<p>谈到(4)，实事求是很重要，不要给自己定一个难以实现的目标，那样既不现实，也会挫伤自信心。就像《深度思维》的作者说过，既然不能少年得志，那么大器晚成也是很不错的。</p>
+<p>我还想强调一点，成长比金钱更重要，特别是对于工作年限不长的朋友们，当眼前的工资足以解决自己的温饱时。有不少IT朋友们，是因为发现无法在这家公司获得更多的成长时离职，也有是工资给的不到位，还有的是觉得太累的。不过我最想给自己的一句话是，在一家公司觉得自己有很大的成长空间时，可以暂时忽略来自外部的巨大诱惑，好好专注自己的领域，提高自己。</p>
+<p>这篇文章我一直想写，但是每次落笔时，无法进行下去，因为难以静心。其实这次写也是难以静心，但是写的过程中逐渐使我的心慢慢静下来，同时思绪也打开了很多，即给自己看，又给广大的IT朋友们或者是即将进入IT界的大学生们看。</p>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://cw1.tw/CW/images/article/201706/article-5940ad3fa8f0a.jpg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></div>
+                 <a href="https://hbuecx.com/post/ru-he-zuo-yi-ge-hui-liao-tian-de-ren/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2019-10-23 10:06:50">2019-10-23 10:06:50</time>
+                  <h4 class="title white no-margin">如何做一个会聊天的人？</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hbuecx.com/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('data:image/jpeg;base64,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'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></div>
+                 <a href="https://hbuecx.com/post/gu-piao-mai-mai-bi-ji/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2019-10-09 01:37:04">2019-10-09 01:37:04</time>
+                  <h4 class="title white no-margin">基金、股票买卖笔记</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hbuecx.com/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+
+              <div id="comments" class="bg-white hosted ">
+
+              
+                
+                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '1c7817279f236848ef3b',
+    clientSecret: 'cc9a052a730aca58df4ac91361957979a7fb5396',
+    repo: 'tanabalu.github.io',
+    owner: 'tanabalu',
+    admin: ['tanabalu'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+                
+                
+              
+                <div class="clear"></div>
+              </div>
+
+              <div class="clear"></div>
+            </div>
+          </div>
+      </main>
+
+          <footer id="footer" class="grid-container">
+        <div class="widgets row gradient-effect">
+            <div class="default-sidebar border-effect">
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+                  <h4 class="widget-title title white bordered">最新文章</h4>
+                  
+                  
+                  <article class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hbuecx.com/post/gridea-shang-shou-jiao-cheng/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display: block;background-image: url('https://hbuecx.com/media/images/logo.jpeg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2026-02-11 10:00:01">2026-02-11 10:00:01</time>
+                      <h4 class="title usmall">
+                        <a href="https://hbuecx.com/post/gridea-shang-shou-jiao-cheng/">Gridea 上手教程</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hbuecx.com/post/zhuang-shi-qi-de-miao-yong/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display: block;background-image: url('https://hbuecx.com/post-images/zhuang-shi-qi-de-miao-yong.png'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2024-03-18 10:38:08">2024-03-18 10:38:08</time>
+                      <h4 class="title usmall">
+                        <a href="https://hbuecx.com/post/zhuang-shi-qi-de-miao-yong/">装饰器的妙用</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hbuecx.com/post/kai-jia-yu-lao-long/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display: block;background-image: url('https://hbuecx.com/post-images/kai-jia-yu-lao-long.jpg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2024-02-25 11:40:58">2024-02-25 11:40:58</time>
+                      <h4 class="title usmall">
+                        <a href="https://hbuecx.com/post/kai-jia-yu-lao-long/">铠甲与牢笼</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+                  <h4 class="widget-title title white bordered">标签云</h4>
+                  <div class="tagcloud">
+                    
+                      <a href="https://hbuecx.com/tag/VlIS0yH5e/" class="ctag ctag-0 ctag-VlIS0yH5e" aria-label="">三省吾身</a>
+                    
+                      <a href="https://hbuecx.com/tag/ufGbQYqvJv/" class="ctag ctag-1 ctag-ufGbQYqvJv" aria-label="">踩坑</a>
+                    
+                      <a href="https://hbuecx.com/tag/9tN60Dg0i/" class="ctag ctag-2 ctag-9tN60Dg0i" aria-label="">随笔</a>
+                    
+                      <a href="https://hbuecx.com/tag/6WltqJasa/" class="ctag ctag-3 ctag-6WltqJasa" aria-label="">学习笔记</a>
+                    
+                      <a href="https://hbuecx.com/tag/8JblbPCl7/" class="ctag ctag-4 ctag-8JblbPCl7" aria-label="">游记</a>
+                    
+                      <a href="https://hbuecx.com/tag/i8tx5BWEe/" class="ctag ctag-5 ctag-i8tx5BWEe" aria-label="">面经</a>
+                    
+                      <a href="https://hbuecx.com/tag/M9JFSzGuU/" class="ctag ctag-6 ctag-M9JFSzGuU" aria-label="">React</a>
+                    
+                      <a href="https://hbuecx.com/tag/upoIx-adY/" class="ctag ctag-7 ctag-upoIx-adY" aria-label="">JS</a>
+                    
+                      <a href="https://hbuecx.com/tag/PyjodOK1i/" class="ctag ctag-8 ctag-PyjodOK1i" aria-label="">CSS</a>
+                    
+                      <a href="https://hbuecx.com/tag/Qd6JthZND/" class="ctag ctag-9 ctag-Qd6JthZND" aria-label="">Webpack</a>
+                    
+                      <a href="https://hbuecx.com/tag/gf_3G38fZ/" class="ctag ctag-10 ctag-gf_3G38fZ" aria-label="">Antd</a>
+                    
+                      <a href="https://hbuecx.com/tag/YePweIBlg/" class="ctag ctag-11 ctag-YePweIBlg" aria-label="">程序人生</a>
+                    
+                      <a href="https://hbuecx.com/tag/QXbkbGufZ/" class="ctag ctag-12 ctag-QXbkbGufZ" aria-label="">Jenkins</a>
+                    
+                      <a href="https://hbuecx.com/tag/7NGOks4Ws/" class="ctag ctag-13 ctag-7NGOks4Ws" aria-label="">产品</a>
+                    
+                      <a href="https://hbuecx.com/tag/_HICEyo5P3/" class="ctag ctag-14 ctag-_HICEyo5P3" aria-label="">微信小程序</a>
+                    
+                      <a href="https://hbuecx.com/tag/HBuRD1neJ/" class="ctag ctag-15 ctag-HBuRD1neJ" aria-label="">总结</a>
+                    
+                      <a href="https://hbuecx.com/tag/vau2C2Y2S/" class="ctag ctag-16 ctag-vau2C2Y2S" aria-label="">Github</a>
+                    
+                      <a href="https://hbuecx.com/tag/38T520puD/" class="ctag ctag-17 ctag-38T520puD" aria-label="">Git</a>
+                    
+                      <a href="https://hbuecx.com/tag/k3pxvspvg/" class="ctag ctag-18 ctag-k3pxvspvg" aria-label="">编码规范</a>
+                    
+                      <a href="https://hbuecx.com/tag/lQxKPGr7h/" class="ctag ctag-19 ctag-lQxKPGr7h" aria-label="">Typescript</a>
+                    
+                      <a href="https://hbuecx.com/tag/1sQlWB8GD/" class="ctag ctag-20 ctag-1sQlWB8GD" aria-label="">工具</a>
+                    
+                      <a href="https://hbuecx.com/tag/I4gSiRMrr/" class="ctag ctag-21 ctag-I4gSiRMrr" aria-label="">源码</a>
+                    
+                      <a href="https://hbuecx.com/tag/MaE4DBsGs/" class="ctag ctag-22 ctag-MaE4DBsGs" aria-label="">微信</a>
+                    
+                      <a href="https://hbuecx.com/tag/vDt64AfE0/" class="ctag ctag-23 ctag-vDt64AfE0" aria-label="">移动端</a>
+                    
+                      <a href="https://hbuecx.com/tag/mwHk1wpwf/" class="ctag ctag-24 ctag-mwHk1wpwf" aria-label="">适配</a>
+                    
+                      <a href="https://hbuecx.com/tag/VH7lmHwnZ/" class="ctag ctag-25 ctag-VH7lmHwnZ" aria-label="">每日一题</a>
+                    
+                      <a href="https://hbuecx.com/tag/RQ3JGtQmI/" class="ctag ctag-26 ctag-RQ3JGtQmI" aria-label="">音视频</a>
+                    
+                      <a href="https://hbuecx.com/tag/Wv66WQAJ8/" class="ctag ctag-27 ctag-Wv66WQAJ8" aria-label="">Redux</a>
+                    
+                      <a href="https://hbuecx.com/tag/nUUykT2A1/" class="ctag ctag-28 ctag-nUUykT2A1" aria-label="">职场</a>
+                    
+                      <a href="https://hbuecx.com/tag/PEMhkj0cS/" class="ctag ctag-29 ctag-PEMhkj0cS" aria-label="">ES6</a>
+                    
+                      <a href="https://hbuecx.com/tag/b0N2FFH8U/" class="ctag ctag-30 ctag-b0N2FFH8U" aria-label="">测试</a>
+                    
+                      <a href="https://hbuecx.com/tag/X9yVzPzJP/" class="ctag ctag-31 ctag-X9yVzPzJP" aria-label="">iOS</a>
+                    
+                  </div>
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+                  <h4 class="widget-title title white bordered">关于我</h4>
+                  <div class="avatar">
+                    <a href="" class="translate-effect thumb"><span class="fullimage cover" style="background-image: url(https://hbuecx.com/images/avatar.png),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span></a>
+                  </div>
+                  <div class="info">
+                    <h4 class="title small author-name gradient-effect no-margin"><a href="">白山</a></h4>
+                    <p class="founder">温故而知新。</p>
+                    <div class="social">
+                      
+                          
+                            <a href="https://github.com/AWhiteMouse/AWhiteMouse.github.io" class="translate-effect" target="_blank"><i class="fa fa-github"></i></a>
+                        
+                      
+                          
+                            <a href="https://blog.csdn.net/i_dont_know_a" class="translate-effect" target="_blank"><i class="fa fa-csdn"></i></a>
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                    </div> 
+                  </div>
+                  <div class="clear"></div>
+                  </section>
+              </div>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="logo">
+          <a href="https://hbuecx.com"><img class="" src="https://hbuecx.com/media/images/logo.png" alt=""></a>
+        </div>
+        <p class="published border-effect">
+          ©2019 共 171 篇文章
+          <br/>
+          Theme <a href="https://gridea.dev/" target="_blank">「breek」</a> Powered by <a href="https://gridea.dev/" target="_blank">「Gridea」</a>
+        </p>
+        
+        <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+          <i class="fa fa-arrow"></i>
+        </a>
+    </footer>
+    <div class="clear"></div>
+    <script src="https://player.lzti.com/api/player/1665675851148" id="myhk" key="1665675851148" m="1"></script>
+
+      <script type="text/javascript">
+       jQuery(document).ready(function($){
+          $("photos img").each(function(){
+              var _a = $("<a></a>").attr("href",this.src);
+              $(this).wrap("<div class='photo'></div>").wrap(_a);
+          })
+          $("figure img").each(function(){
+              var _b = $("<a></a>").attr("href",this.src);
+              $(this).wrap(_b);
+          })
+          isImgLoad(function(){
+            var photos = document.querySelector('photos');
+            if(photos){
+              waterfall(photos);
+            }
+            $(window).resize(function() {
+             if(photos){
+                  waterfall(photos);
+            }
+          });
+        });
+        var t_img;
+        var isLoad = true;
+        function isImgLoad(callback){
+          $('photos img').each(function(){
+            if(this.height === 0){
+              isLoad = false;
+              return false;
+            }
+          });
+          if(isLoad){
+            clearTimeout(t_img);
+            callback();
+          }else{
+            isLoad = true;
+            t_img = setTimeout(function(){
+              isImgLoad(callback);
+            },500);
+          }
+        }
+      });
+      </script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>

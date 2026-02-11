@@ -1,0 +1,1171 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>《重构：改善既有代码的设计》（第1版）读书笔记 | 白山</title>
+<meta name="description" content="温故而知新。" />
+<link rel="shortcut icon" href="https://hbuecx.com/favicon.ico">
+<link rel="stylesheet" href="https://hbuecx.com/styles/main.css">
+
+<script src="https://hbuecx.com/media/js/jquery.min.js"></script>
+<script src="https://hbuecx.com/media/js/masonry.pkgd.min.js"></script>
+<script src="https://hbuecx.com/media/js/aos.js"></script>
+<script src="https://hbuecx.com/media/js/pace.min.js"></script>
+<script src="https://hbuecx.com/media/js/view-image.min.js"></script>
+<script src="https://hbuecx.com/media/js/functions.js"></script>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?3349a47f297f4ca395881d504c2856e6";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+    <script src="https://hbuecx.com/media/js/waterfall.min.js"></script>
+    <script src="https://hbuecx.com/media/js/prism.min.js"></script>
+    
+  </head>
+  <body>
+            <header id="header" class="grid-container">
+        <!-- start: .menu-wrapper -->
+        <div class="menu-mobile"> 
+          <i class="fa fa-reorder"></i>
+        </div>
+        <div class="menu-wrapper">
+          <div class="">
+            <div class="logo">
+              <a href="https://hbuecx.com"><img src="https://hbuecx.com/media/images/logoo.png" alt=""></a>
+            </div>
+            <!-- start: .main-nav -->
+
+            <nav class="main-nav grid-container grid-parent">
+              <ul id="menu-header" class="menu gradient-effect">
+                
+                  <li class=""><a href="https://hbuecx.com" class="menu">首页</a></li>
+                
+                
+                  <li class="" >
+                    <a href="/archives" class="menu">
+                      归档
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/tags" class="menu">
+                      标签
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/post/message" class="menu">
+                      小记
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/collection" class="menu">
+                      工具
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/friends" class="menu">
+                      Space
+                    </a>
+                  </li>
+                
+              </ul>
+            </nav>
+            <!-- end: .main-nav -->
+            <div class="clear"></div>
+            <div class="border hide-on-tablet hide-on-mobile"></div>
+          </div>    
+          <div class="clear"></div>
+        </div>
+        <!-- end: .menu-wrapper -->
+        <div class="clear"></div>
+      </header>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('https://hbuecx.com/media/images/6WltqJasa.jpg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2020-03-04 04:29:49"><i class="fa fa-calendar"></i><span class="lately">6 年前</span></time>
+               
+               
+               <span id="/post/lesslesschong-gou-greatergreater/" class="leancloud_visitors views-counter meta-info">
+                <i class="fa fa-leancloud"></i><span class="leancloud-visitors-count" style="vertical-align: middle;">0</span>
+               </span>
+               
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://hbuecx.com/tag/6WltqJasa/" class="ctag ctag-0 ctag-6WltqJasa" aria-label="">学习笔记</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">《重构：改善既有代码的设计》（第1版）读书笔记</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <p>你会遵循那句古老的工程谚语吗：“如果它还可以运行，就不要动它。”</p>
+<!-- more -->
+<h1 id="前言">前言</h1>
+<p>这本书的示例都是使用Java语言写的，所以对于前端开发者来说，有些章节是不容易理解的，而《重构：改善既有代码的设计》第2版的示例是使用JavaScript写的，所以建议前端开发人员阅读《重构：改善既有代码的设计》（第2版）。</p>
+<p>重构：在代码写好之后改进它的设计。</p>
+<h1 id="一-重构第一个案例">一、重构，第一个案例</h1>
+<h2 id="11-起点">1.1 起点</h2>
+<p>“如果你发现自己需要为程序添加一个特性，而代码结构使你无法很方便地达成目的，那就先重构那个程序，使特性的添加比较容易进行，然后再添加新特性”</p>
+<h2 id="12-重构第一步">1.2 重构第一步</h2>
+<p>好的测试是重构的根本，花时间建立一个优良的测试机制是完全值得的。</p>
+<p>重构之前，首先检查自己是否有一套可靠的测试机制。这些测试必须有自我检验能力。</p>
+<h2 id="13-分解并重组statement">1.3 分解并重组statement()</h2>
+<p>代码块越小，代码的功能就越容易管理，代码的处理和移动也就越轻松。</p>
+<p>重构技术就是以微小的步伐修改程序。如果你犯下错误，很容易便可发现它。</p>
+<p>好的代码应该清楚表达自己的功能，变量名称是代码清晰的关键。</p>
+<p>任何一个傻瓜都能写出计算机可以理解的代码，唯有写出人类容易理解的代码，才是优秀的程序员。</p>
+<p>临时变量往往引发问题，他们会导致大量的参数被传来传去，很容易跟丢它们，特别是在长长的函数里面。当然，如果去掉了这种临时变量，可能会付出性能上的代价。但即使如此，我们也可以通过合理的优化和管理来削弱或消除这种影响（TODO）</p>
+<p>重构时最好小步前进，如此一来犯错的几率最小。</p>
+<p>重构的节奏：测试、小修改、测试、小修改、测试、小修改……这样看起来进度太慢，但正是这种节奏让重构得以快速而安全地前进。（这个想法正确吗？？）</p>
+<h1 id="二-重构原则">二、重构原则</h1>
+<h2 id="21-何谓重构">2.1 何谓重构</h2>
+<p>重构：对软件内部结构的一种调整，目的是在不改变软件可观察行为的前提下，提高其可理解性，降低其修改成本。</p>
+<p>重构的目的是使软件更容易被理解和修改。</p>
+<p>重构不会改变软件的可观察行为——重构之后软件功能一如以往。</p>
+<p>使用重构技术开发软件时，你可以把自己的时间分配给两种截然不同的行为：添加新功能，以及重构。添加新功能时，你不应该修改既有代码，只管添加新功能。重构时你就不能再添加新功能。（这两种行为应该是是实际情况而定先后顺序的：如果你已经确定你新增的代码将会被重构，那么建议先重构然后添加新功能；如果重构不会改变新增功能的代码，那么建议先开发新功能。不建议两种行为交叉进行。）</p>
+<h2 id="22-为何重构">2.2 为何重构</h2>
+<h3 id="221-重构改进软件设计">2.2.1 重构改进软件设计</h3>
+<p>改进设计的一个重要方向就是消除重复代码。</p>
+<h3 id="222-重构使软件更容易理解">2.2.2 重构使软件更容易理解</h3>
+<p>重构可以帮助我们让代码更易读。可以利用重构来协助我理解我不熟悉的代码。</p>
+<p>随着代码的渐趋简洁，我发现自己可以看到一些以前看不到的设计层面的东西。（有体会，很赞！！【如果不是让代码变得简洁，我可能都不知道某个函数前一部分有一大段代码，可以因为后一部分的一个if语句不通过而不用执行】）</p>
+<h3 id="223-重构帮助找到bug">2.2.3 重构帮助找到bug</h3>
+<p>如果对代码进行重构，我就可以深入理解代码的作为，并恰到好处的把新的理解反馈回去。重构能够帮助我更有效的写出强健的代码。</p>
+<h3 id="224-重构提高编程速度">2.2.4 重构提高编程速度</h3>
+<p>良好的设计是快速开发的根本。</p>
+<h2 id="23-何时重构">2.3 何时重构</h2>
+<p>重构应该随时随地进行，不应该为重构而重构。（？？）</p>
+<p>重构三大法则</p>
+<p>添加功能时重构：代码的原有设计无法帮助我轻松添加我所需要的特性。<br>
+修补错误时重构：如果收到一份错误报告，这就是需要重构的信号，因为显然代码还不够清晰——没有清晰到让你能一眼看出bug。（！！！）<br>
+复审代码时重构：代码复审也让更多人有机会提出有用的建议。</p>
+<h2 id="24-如何对产品经理说">2.4 如何对产品经理说</h2>
+<p>在产品经理不能理解的情况下就不要告诉产品经理。（？？）</p>
+<h2 id="25-重构的难题">2.5 重构的难题</h2>
+<p>何时不该重构</p>
+<p>现有代码根本不能正常运行。这个时候需要的是重写，而不是重构。<br>
+项目已近最后期限，也应该避免重构。</p>
+<h2 id="26-重构与设计">2.6 重构与设计</h2>
+<p>可以再开发之前做合理的设计，不需要追求最好的设计，这一部分可以在重构中得以完善。（？？）</p>
+<h2 id="27-重构与性能">2.7 重构与性能</h2>
+<p>在性能优化阶段，你首先应该用一个度量工具来监控程序的运行，让它告诉你程序中哪些地方大量消耗时间和空间。</p>
+<p>短期看来，重构的确可能使软件变慢，但它使优化阶段的软件性能调整更容易，最终还是会得到好的效果。</p>
+<h1 id="三-代码的坏味道">三、代码的坏味道</h1>
+<h2 id="31-重复代码">3.1 重复代码</h2>
+<p>你必须决定这个函数放在哪儿最合适，并确保它被安置后就不会再在其他任何地方出现。</p>
+<h2 id="32-过长函数">3.2 过长函数</h2>
+<p>程序愈长愈难理解。</p>
+<p>让小函数容易理解的真正关键在于一个好名字。如果给函数起了一个好名字，读者就可以通过名字了解函数的作用，根本不必去看其中写了什么。</p>
+<p>每当感觉需要以注释来说明点什么的时候，我们就把需要说明的东西写进一个独立函数中，并一起用途（而非实现手法）命名。</p>
+<h2 id="33-过大的类">3.3 过大的类</h2>
+<h2 id="34-过长参数列">3.4 过长参数列</h2>
+<p>太长的参数列难以理解，太多参数会造成前后不一致、不易使用。</p>
+<h2 id="35-发散式变化">3.5 发散式变化</h2>
+<p>针对某一外界变化的所有相应修改，都只应该发生在单一类中，而这个新类的所有内容都应该反应此变化。</p>
+<h2 id="36-霰弹式修改">3.6 霰弹式修改</h2>
+<h2 id="37-依恋情节">3.7 依恋情节</h2>
+<p>将数据和对数据的操作行为包装在一起。</p>
+<h2 id="38-数据泥团">3.8 数据泥团</h2>
+<p>找到经常同时出现的几项数据，把它们帮在一起放到属于它们自己的对象中。</p>
+<h2 id="39-基本类型偏执">3.9 基本类型偏执</h2>
+<p>如果你在参数列中看到基本数据类型，不妨试试引入参数对象。如果你发现自己正在从数组中挑选数据，可运用对象代替数组。（！！超赞👍！把数组改造成对象的形式，对于数据的组删改查将会方便很多。）</p>
+<pre><code>productList: [
+  {
+    id: 1,
+    name: '手机'
+  },
+  {
+    id: 2,
+    name: '电脑'
+  }
+]
+
+// 不妨改成
+
+scheme: 'id',  // 主键是id
+idList: [1, 2],  // 保存了这两个id的数据
+producetObj: {  // 数组改造
+  1: {
+    id: 1,
+    name: '手机'
+  },
+  2: {
+    id: 2,
+    name: '电脑'
+  }
+}
+
+// 这样看起来变得复杂了很多，但其实运用这种结构操作数据会更加便捷。
+</code></pre>
+<h2 id="310-switch惊悚现身">3.10 switch惊悚现身</h2>
+<p>少用switch语句。</p>
+<p>3.11 平行继承体系</p>
+<p>3.12 冗赘类</p>
+<h2 id="313-夸夸其谈未来性">3.13 夸夸其谈未来性</h2>
+<p>不要写未来可能用到的代码。</p>
+<p>3.14 令人迷惑的临时字段</p>
+<p>3.15 过度耦合的消息链</p>
+<p>3.16 中间人</p>
+<p>3.17 狎昵关系</p>
+<p>3.18 异曲同工的类</p>
+<p>3.19 不完美的类</p>
+<p>3.20 纯稚的数据类</p>
+<p>3.21 被拒绝的遗赠</p>
+<h2 id="322-过多的注释">3.22 过多的注释</h2>
+<p>当你感觉需要撰写注释时，请先尝试重构，试着让所有的注释变得多余。</p>
+<p>如果你不知道该做什么，这才是注释的良好运用时机。</p>
+<h1 id="四-构筑测试体系">四、构筑测试体系</h1>
+<p>如果你想进行重构，首要前提是拥有一个可靠的测试环境。</p>
+<p>编写优良的测试程序，可以极大提高我的编程速度。</p>
+<h2 id="41-自测试代码的价值">4.1 自测试代码的价值</h2>
+<p>编写代码常常只占很小一部分的时间，最多的时间则是用来调试。修复错误通常是比较快的，但找出错误确实噩梦一场。</p>
+<p>确保所有测试都完全自动化，让它们自己检查自己的测试结果。</p>
+<p>一套测试就是一个强大的bug侦测器，能够大大缩减查找bug所需要的时间。</p>
+<p>当你需要添加特性的时候，先写相应的测试代码。（？？）</p>
+<p>4.2 JUnit测试框架</p>
+<h2 id="43-添加更多测试">4.3 添加更多测试</h2>
+<p>测试的目的是希望找出现在或未来可能出现的错误。</p>
+<p>测试的要诀是：测试你最担心出错的部分。（！！！）</p>
+<p>编写未臻完善的测试并实际运行，好过对完美测试的无尽等待。</p>
+<p>测试的一项重要技巧就是“寻找边界条件”。考虑可能出错的边界条件，把测试火力集中在那。</p>
+<p>当事情被大家认为应该会出错时，别忘了检查是否抛出了预期的异常。</p>
+<p>如果试图编写太多测试，你也可能因为工作量太大而气馁，最后什么都写不成。你应该把测试集中在可能出错的地方。（！！！）</p>
+<p>不要因为测试无法捕捉到所有bug就不写测试，因为测试的确可以捕捉到大多数bug。</p>
+<h1 id="五-重构列表">五、重构列表</h1>
+<h2 id="51-重构的记录格式">5.1 重构的记录格式</h2>
+<p>每个重构手法都有如下五个部分：名称、简短概要、动机、做法、范例。</p>
+<p>5.2 寻找引用点</p>
+<h2 id="53-这些重构手法有多成熟">5.3 这些重构手法有多成熟</h2>
+<p>重构的基本技巧——小步前进、频繁测试。</p>
+<h1 id="六-重新组织函数需要详细查看做法与示例">六、重新组织函数（需要详细查看做法与示例）</h1>
+<h2 id="61-提炼函数">6.1 提炼函数</h2>
+<p>如果提炼可以强化代码的清晰度，那就去做，就算函数名称比提炼出来的代码还长也无所谓。</p>
+<h2 id="62-内联函数">6.2 内联函数</h2>
+<p>如果某个函数内部代码简单易读，你就应该去掉这个函数，直接使用其中的代码。</p>
+<p>如果别人使用了太多间接层，使得系统中所有的函数都似乎只是对另一个函数的简单委托，造成这些委托动作之间晕头转向，通常使用内联函数。</p>
+<p>（什么叫内联？参考下方内联临时变量。）</p>
+<h2 id="63-内联临时变量">6.3 内联临时变量</h2>
+<p>如果这个临时变量只被简单表达式赋值一次，就将它写成内联临时变量。（要检查是否真的只被赋值一次！！）</p>
+<pre><code class="language-js">var price = getPrice();
+return price &gt; 100;
+改成
+return getPrice() &gt; 100;
+</code></pre>
+<h2 id="64-以查询取代临时变量">6.4 以查询取代临时变量</h2>
+<p>这个变量只能被赋值一次。（！！！）</p>
+<p>将对这个变量的赋值写到一个函数中。（？？？如果这个变量被使用了多次，改成函数之后，这个函数将被多次调用，损耗性能）</p>
+<pre><code class="language-js">var money = price * count;
+return money;
+// 改成
+return getMoney();
+
+function getMoney() {
+  return price * count;
+}
+</code></pre>
+<h2 id="65-引入解释性变量">6.5 引入解释性变量</h2>
+<p>将复杂表达式（或其中一部分）的结果放进一个临时变量，以此变量名称来解释表达式用途。</p>
+<p>表达式可能非常复杂而难以理解。</p>
+<pre><code class="language-js">function judgeEquipment() {
+  if (platform.toUpperCase().indexOf('MAC') &gt; -1 &amp;&amp;
+    browser.toUpperCase().indexOf('IE') &gt; -1) {
+    // do something
+  }
+}
+// 改成
+const isMacOs = platform.toUpperCase().indexOf('MAC') &gt; -1;
+const isIEBrowser = browser.toUpperCase().indexOf('IE') &gt; -1;
+
+function judgeEquipment() {
+  if (isMacOs &amp;&amp; isIEBrowser) {
+    // do something
+  }
+}
+</code></pre>
+<h2 id="66-分解临时变量">6.6 分解临时变量</h2>
+<p>针对每次赋值，创造一个独立、对应的临时变量。</p>
+<p>（不要让同一变量多次多被赋予不同含义的值。比如，先将temp变量来表示周长，然后又用temp变量来存储面积。尽管用一个变量来存储可以节省内存开支，但是代码会不易被理解）</p>
+<p>每个变量只承担一个责任。同一个临时变量承担两件不同的事情，会令代码阅读者糊涂。</p>
+<h2 id="67-移除对参数的赋值">6.7 移除对参数的赋值</h2>
+<p>（JS的方法参数是按值传递的。）</p>
+<p>（不要改变传进来的参数值，如果一定要修改，在修改之前，先将参数赋值给一个临时变量，然后修改这个临时变量。）</p>
+<p>如果你只以参数表示“被传递进来的东西”，那么代码会清晰很多，因为这种用法在所有语言中都变现出相同语义。</p>
+<p>6.8 以函数对象取代函数</p>
+<p>6.9 替换算法</p>
+<h1 id="七-在对象之间搬移特性后端相关前端相关性比较小">七、在对象之间搬移特性（后端相关，前端相关性比较小）</h1>
+<h2 id="71-搬移函数">7.1 搬移函数</h2>
+<p>“搬移函数”是重构理论的支柱。如果有一个类有太多行为，或如果一个类与另一个类有太多合作而形成高度耦合，我就会搬移函数。通过这种手段，可以使系统中的类更简单，这些类最终也将更干净利落地实现系统交付的任务。（？？）</p>
+<h2 id="72-搬移字段">7.2 搬移字段</h2>
+<p>你的程序中，某个字段被其所驻类之外的另一个类更多地用到。</p>
+<p>在目标类新建一个字段，修改源字段的所有用户，令它们改用新字段。（？？）</p>
+<h2 id="73-提炼类">7.3 提炼类</h2>
+<p>某个类做了应该由两个类做的事。</p>
+<p>新建一个类，将相关的字段和函数从旧类搬移到新类。</p>
+<h2 id="74-将类内联化">7.4 将类内联化</h2>
+<p>某个类没有做太多事情。</p>
+<p>将这个类的所有特性搬移到另一个类中，然后移除原类。</p>
+<h2 id="75-隐藏委托关系">7.5 隐藏“委托关系”</h2>
+<p>客户通过一个委托类来调用另一个对象。</p>
+<p>在服务类上建立客户所需的所有函数，用以隐藏委托关系。</p>
+<h2 id="76-移除中间人">7.6 移除中间人</h2>
+<p>某个类做了过多的简单委托动作。</p>
+<p>让客户直接调用委托类。</p>
+<h2 id="77-引入外加函数">7.7 引入外加函数</h2>
+<p>你需要为提供服务的类增加一个函数，但你无法修改这个类。</p>
+<p>在客户类中建立一个函数，并以第一参数形式传入一个服务类实例。</p>
+<h2 id="78-引入本地扩展">7.8 引入本地扩展</h2>
+<p>你需要为服务类提供一些额外函数，但你无法修改这个类。</p>
+<p>建立一个新类，使它包含这些额外函数。让这个扩展品成为源类的子类或包装类。</p>
+<p>（在源代码的基础上做进一步的封装，满足自定义需求。）</p>
+<h1 id="八-重新组织数据">八、重新组织数据</h1>
+<h2 id="81-自封装字段">8.1 自封装字段</h2>
+<p>为这个字段建立取值/设值函数，并且以这些函数来访问字段。</p>
+<p>间接访问变量的好处是，子类可以通过覆写一个函数而改变获取数据的途径；它还支持更灵活的数据管理方式，例如延迟初始化。</p>
+<p>直接访问变量好处是：代码比较容易阅读。</p>
+<p>（一般在Java类中，都是通过取值/设值函数的方式来访问字段。在js中也可以类似使用，但是如果使用情况只会很简单，还是建议直接调用，不要借助函数。）</p>
+<p>8.2 以对象取代数据值</p>
+<p>8.3 将值对象改为引用对象</p>
+<p>8.4 将引用对象改为值对象</p>
+<h2 id="85-以对象取代数组">8.5 以对象取代数组</h2>
+<p>以对象代替数组。对于数组中的每个元素，以一个字段来表示。</p>
+<p>（如果数组中的每一项都有着不同的意义，那么我觉得这简直是个烂数组。）</p>
+<h2 id="86-复制被监视数据">8.6 复制“被监视数据”</h2>
+<p>一个分层良好的系统，应该将处理用户界面和处理业务逻辑的代码分开。</p>
+<p>8.7 将单项关联改为双向关联</p>
+<p>8.8 将双向关联改为单向关联</p>
+<h2 id="89-以字面常量取代魔法数">8.9 以字面常量取代魔法数（！！！）</h2>
+<p>8.10 封装字段</p>
+<p>8.11 封装集合</p>
+<p>8.12 以数据类取代记录</p>
+<p>8.13 以类取代类型码</p>
+<p>8.14 以子类取代类型码</p>
+<p>……</p>
+<h1 id="九-简化条件表达式">九、简化条件表达式</h1>
+<h2 id="91-分解条件表达式">9.1 分解条件表达式</h2>
+<p>你有一个复杂的条件（if-then-else）语句。从if、then、else三个段落中分别提炼出独立函数。</p>
+<h2 id="92-合并条件表达式">9.2 合并条件表达式</h2>
+<p>你有一系列条件测试，都得到相同结果。将这些测试合并为一个条件表达式，并将这个条件表达式提炼成为一个独立函数。</p>
+<p>如果条件表达式有副作用，你就不能使用本项重构。</p>
+<h2 id="93-合并重复的条件片段">9.3 合并重复的条件片段</h2>
+<p>在条件表达式的每个分支上有着相同的一段代码。将这段重复代码搬移到条件表达式之外。</p>
+<h2 id="94-移除控制标记">9.4 移除控制标记</h2>
+<p>以break语句或return语句取代控制标记。</p>
+<pre><code class="language-js">let str = '';
+for (let i = 0; i &lt; user.length; i++) {
+  if (str === '') {
+    if (user[i].name === 'Jone') {
+      str = 'Jone';
+    }
+    if (user[i].name === 'Bob') {
+      str = 'Bob';
+    }
+  }
+}
+
+// to
+
+for (let i = 0; i &lt; user.length; i++) {
+  if (user[i].name === 'Jone') {
+    return 'Jone';
+  }
+  if (user[i].name === 'Bob') {
+    return 'Bob';
+  }
+}
+</code></pre>
+<h2 id="95-以卫语句取代嵌套条件表达式">9.5 以卫语句取代嵌套条件表达式</h2>
+<p>（卫语句(guard clauses)就是把复杂的条件表达式拆分成多个条件表达式，比如一个很复杂的表达式，嵌套了好几层的if-then-else语句，转换为多个if语句，实现它的逻辑，这多条的if语句就是卫语句。）</p>
+<p>9.6 以多态取代条件表达式</p>
+<p>9.7 引入null对象</p>
+<p>9.8 引入断言</p>
+<h1 id="十-简化函数调用">十、简化函数调用</h1>
+<h2 id="101-函数改名">10.1 函数改名</h2>
+<p>函数的名称应该准确表达它的用途。给函数命名有一个好办法：首先考虑给这个函数写上一句怎样的注释，然后想办法将注释变成函数名称。（！！）</p>
+<h2 id="102-添加参数">10.2 添加参数</h2>
+<p>某个函数需要从调用端得到更多信息。为此函数添加一个对象参数，让该对象带进函数所需信息。</p>
+<h2 id="103-移除参数">10.3 移除参数</h2>
+<p>函数本体不再需要某个参数，将该参数去除。</p>
+<h2 id="104-将查询函数和修改函数分离">10.4 将查询函数和修改函数分离</h2>
+<p>某个函数既返回对象状态值，又修改对象状态。建立两个不同的函数，其中一个负责查询，另一个负责修改。</p>
+<h2 id="105-令函数携带参数">10.5 令函数携带参数</h2>
+<p>若干函数做了类似的工作，但在函数本体中却包含了不同的值。建立单一函数，以参数表达那些不同的值。</p>
+<pre><code class="language-js">function getComputerPrice() {}
+function getPhonePrice() {}
+
+// to
+
+function getPrice('computer') {}
+function getPrice('phone') {}
+</code></pre>
+<h2 id="106-以明确函数取代参数">10.6 以明确函数取代参数</h2>
+<p>你有一个函数，其中完全取决于参数值而采取不同的行为。针对该参数的每一个可能值，建立一个独立函数。</p>
+<h2 id="107-保持对象完整">10.7 保持对象完整</h2>
+<p>你从某个对象中取出若干值，将它们作为某一次函数调用时的参数。改为传递整个对象。</p>
+<h2 id="108-以函数取代参数">10.8 以函数取代参数</h2>
+<p>对象调用某个函数，并将所得结果作为参数，传递给另一个函数。而接受该参数的函数本身也能够调用前一个函数。让参数接受者去除该项参数，并直接调用前一个参数。</p>
+<pre><code class="language-js">const price = getPrice();
+const money = caculateMoney(price, mount);
+
+// to
+
+const money = caculateMoney(mount);
+</code></pre>
+<h2 id="109-引入参数对象">10.9 引入参数对象</h2>
+<p>某些参数总是很自然的同时出现，以一个对象取代这些参数。</p>
+<pre><code class="language-js">function func1(age, name) {}
+function func2(age, name) {}
+
+// to 
+
+function func1(user) {}
+function func2(user) {}
+</code></pre>
+<p>10.10 移除设值函数（Java）（不写某个字段的设值函数，用于表示该值不能被改变的意图）</p>
+<p>10.11 隐藏函数（Java）（对于没有被其他任何类用到的函数，设置private属性）</p>
+<p>10.12 以工厂函数取代构造函数</p>
+<p>你希望在创建对象时，不仅仅是做简单的建构动作。将构造函数替换为工厂函数。</p>
+<p>10.13 封装向下转型（Java）</p>
+<p>10.14 以异常取代错误码（Java）（使用throw error代替return 0、return -1）</p>
+<p>10.15 以测试取代异常</p>
+<h1 id="十一-处理概括关系略">十一、处理概括关系（略）</h1>
+<h1 id="十二-大型重构">十二、大型重构</h1>
+<p>只有持续而无处不在的重构才有可能竟其功。</p>
+<p>（略）</p>
+<h1 id="十三-重构复用与现实">十三、重构，复用与现实</h1>
+<p>为什么还不肯重构你的程序呢？有以下几个可能的原因。</p>
+<p>1、你不知道如何重构。<br>
+2、如果重构利益是长远的，何必现在付出这些努力呢？长远看来，说不定当项目收获这些利益时，你已经不在职位上了。<br>
+3、代码重构是一项额外工作，老板付钱给你，主要是让你编写新功能。<br>
+4、重构可能破坏现有程序。</p>
+<p>（这本书说的解决方案都是：利用重构工具帮你搞，又快又简单。。。）</p>
+<h1 id="十四-重构工具略">十四、重构工具（略）</h1>
+<h1 id="十五-总结">十五、总结</h1>
+<p>在重构者的整场表演中，“停止”正是压轴大戏。</p>
+<p>只要有光，你就可以前进，虽然谨慎却仍然自信。但是，一旦太阳下山，你就应该停止前进；夜晚你应该睡觉，并且相信明天早晨太阳仍旧升起。</p>
+<p>（重构的过程应该是小步前进的，当你的重构有了成果，就把它发布出去。当你觉得迷失方向的时候，就放弃这些无用的工作，重新开始）</p>
+<p>应该如何学习重构？</p>
+<p>1、随时挑一个目标：某个地方代码开始发臭了，你就应该将问题解决掉。<br>
+2、没把握就停下来：你无法证明自己所做的一切能够保持程序原本的语义，此时你就应该停下来。<br>
+3、学习原路返回。</p>
+<h1 id="要点列表">要点列表</h1>
+<blockquote>
+<p>1、如果你发现自己需要为程序添加一个特性，而代码结构使你无法很方便地达成目的，那就先重构那个程序，使特性的添加比较容易进行，然后再添加新特性。</p>
+</blockquote>
+<blockquote>
+<p>2、重构前，先检查自己是否有一套可靠的机制。这些测试必须有自我检验能力。</p>
+</blockquote>
+<blockquote>
+<p>3、重构技术就是以微小的步伐修改程序。如果你犯下错误，很容易便可发现它。</p>
+</blockquote>
+<blockquote>
+<p>4、任何一个傻瓜都能写出计算机可以理解的代码，唯有写出人类容易理解的代码，才是优秀的程序员。</p>
+</blockquote>
+<blockquote>
+<p>5、重构：对软件内部结构的一种调整，目的是在不改变软件可观察行为的前提下，提高其可理解性，降低其修改成本。</p>
+</blockquote>
+<blockquote>
+<p>6、重构：使用一系列重构手法，在不改变可观察行为的前提下，调整其结构。</p>
+</blockquote>
+<blockquote>
+<p>7、事不过三，三则重构。</p>
+</blockquote>
+<blockquote>
+<p>8、不要过早发布接口。请修改你的代码所有权政策，使重构更顺畅。</p>
+</blockquote>
+<blockquote>
+<p>9、当你感觉需要撰写注释时，请先尝试重构，试着让所有的注释变得多余。</p>
+</blockquote>
+<blockquote>
+<p>10、确保所有测试都完全自动化，让它们自己检查自己的测试结果。</p>
+</blockquote>
+<blockquote>
+<p>11、一套测试就是一个强大的bug侦测器，能够大大缩减查找bug所需要的时间。</p>
+</blockquote>
+<blockquote>
+<p>12、频繁的运行测试。每次编译请把测试也考虑进去——每天至少执行每个测试一次。</p>
+</blockquote>
+<blockquote>
+<p>13、每当你收到bug报告，请先写一个单元测试来暴露这只bug。</p>
+</blockquote>
+<blockquote>
+<p>14、编写未臻完善的测试并实际运行，好过对完美测试的无尽等待。</p>
+</blockquote>
+<blockquote>
+<p>15、考虑可能出错的边界条件，把测试火力集中在那儿。</p>
+</blockquote>
+<blockquote>
+<p>16、当事情被大家认为应该出错时，别忘了检查是否抛出了预期的异常。</p>
+</blockquote>
+<blockquote>
+<p>17、不要因为测试无法捕捉到所有bug就不写测试，因为测试的确可以捕捉到大多数bug。</p>
+</blockquote>
+<style>
+.post-content h1 {
+    display: table;
+}
+</style>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hbuecx.com/post-images/mei-ri-yi-ti-or-20200319.png'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></div>
+                 <a href="https://hbuecx.com/post/mei-ri-yi-ti-or-20200309/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2020-03-09 10:34:10">2020-03-09 10:34:10</time>
+                  <h4 class="title white no-margin">每日一题 | 2020.03.09</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hbuecx.com/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://img.freepik.com/free-psd/laptop-mock-up-with-headphones_23-2148373205.jpg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></div>
+                 <a href="https://hbuecx.com/post/ru-he-mock-ben-di-shu-ju/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2020-03-04 03:24:33">2020-03-04 03:24:33</time>
+                  <h4 class="title white no-margin">有哪些mock本地数据的方案？</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hbuecx.com/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+
+              <div id="comments" class="bg-white hosted ">
+
+              
+                
+                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '1c7817279f236848ef3b',
+    clientSecret: 'cc9a052a730aca58df4ac91361957979a7fb5396',
+    repo: 'tanabalu.github.io',
+    owner: 'tanabalu',
+    admin: ['tanabalu'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+                
+                
+              
+                <div class="clear"></div>
+              </div>
+
+              <div class="clear"></div>
+            </div>
+          </div>
+      </main>
+
+          <footer id="footer" class="grid-container">
+        <div class="widgets row gradient-effect">
+            <div class="default-sidebar border-effect">
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+                  <h4 class="widget-title title white bordered">最新文章</h4>
+                  
+                  
+                  <article class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hbuecx.com/post/gridea-shang-shou-jiao-cheng/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display: block;background-image: url('https://hbuecx.com/media/images/logo.jpeg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2026-02-11 10:00:01">2026-02-11 10:00:01</time>
+                      <h4 class="title usmall">
+                        <a href="https://hbuecx.com/post/gridea-shang-shou-jiao-cheng/">Gridea 上手教程</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hbuecx.com/post/zhuang-shi-qi-de-miao-yong/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display: block;background-image: url('https://hbuecx.com/post-images/zhuang-shi-qi-de-miao-yong.png'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2024-03-18 10:38:08">2024-03-18 10:38:08</time>
+                      <h4 class="title usmall">
+                        <a href="https://hbuecx.com/post/zhuang-shi-qi-de-miao-yong/">装饰器的妙用</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hbuecx.com/post/kai-jia-yu-lao-long/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display: block;background-image: url('https://hbuecx.com/post-images/kai-jia-yu-lao-long.jpg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2024-02-25 11:40:58">2024-02-25 11:40:58</time>
+                      <h4 class="title usmall">
+                        <a href="https://hbuecx.com/post/kai-jia-yu-lao-long/">铠甲与牢笼</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+                  <h4 class="widget-title title white bordered">标签云</h4>
+                  <div class="tagcloud">
+                    
+                      <a href="https://hbuecx.com/tag/VlIS0yH5e/" class="ctag ctag-0 ctag-VlIS0yH5e" aria-label="">三省吾身</a>
+                    
+                      <a href="https://hbuecx.com/tag/ufGbQYqvJv/" class="ctag ctag-1 ctag-ufGbQYqvJv" aria-label="">踩坑</a>
+                    
+                      <a href="https://hbuecx.com/tag/9tN60Dg0i/" class="ctag ctag-2 ctag-9tN60Dg0i" aria-label="">随笔</a>
+                    
+                      <a href="https://hbuecx.com/tag/6WltqJasa/" class="ctag ctag-3 ctag-6WltqJasa" aria-label="">学习笔记</a>
+                    
+                      <a href="https://hbuecx.com/tag/8JblbPCl7/" class="ctag ctag-4 ctag-8JblbPCl7" aria-label="">游记</a>
+                    
+                      <a href="https://hbuecx.com/tag/i8tx5BWEe/" class="ctag ctag-5 ctag-i8tx5BWEe" aria-label="">面经</a>
+                    
+                      <a href="https://hbuecx.com/tag/M9JFSzGuU/" class="ctag ctag-6 ctag-M9JFSzGuU" aria-label="">React</a>
+                    
+                      <a href="https://hbuecx.com/tag/upoIx-adY/" class="ctag ctag-7 ctag-upoIx-adY" aria-label="">JS</a>
+                    
+                      <a href="https://hbuecx.com/tag/PyjodOK1i/" class="ctag ctag-8 ctag-PyjodOK1i" aria-label="">CSS</a>
+                    
+                      <a href="https://hbuecx.com/tag/Qd6JthZND/" class="ctag ctag-9 ctag-Qd6JthZND" aria-label="">Webpack</a>
+                    
+                      <a href="https://hbuecx.com/tag/gf_3G38fZ/" class="ctag ctag-10 ctag-gf_3G38fZ" aria-label="">Antd</a>
+                    
+                      <a href="https://hbuecx.com/tag/YePweIBlg/" class="ctag ctag-11 ctag-YePweIBlg" aria-label="">程序人生</a>
+                    
+                      <a href="https://hbuecx.com/tag/QXbkbGufZ/" class="ctag ctag-12 ctag-QXbkbGufZ" aria-label="">Jenkins</a>
+                    
+                      <a href="https://hbuecx.com/tag/7NGOks4Ws/" class="ctag ctag-13 ctag-7NGOks4Ws" aria-label="">产品</a>
+                    
+                      <a href="https://hbuecx.com/tag/_HICEyo5P3/" class="ctag ctag-14 ctag-_HICEyo5P3" aria-label="">微信小程序</a>
+                    
+                      <a href="https://hbuecx.com/tag/HBuRD1neJ/" class="ctag ctag-15 ctag-HBuRD1neJ" aria-label="">总结</a>
+                    
+                      <a href="https://hbuecx.com/tag/vau2C2Y2S/" class="ctag ctag-16 ctag-vau2C2Y2S" aria-label="">Github</a>
+                    
+                      <a href="https://hbuecx.com/tag/38T520puD/" class="ctag ctag-17 ctag-38T520puD" aria-label="">Git</a>
+                    
+                      <a href="https://hbuecx.com/tag/k3pxvspvg/" class="ctag ctag-18 ctag-k3pxvspvg" aria-label="">编码规范</a>
+                    
+                      <a href="https://hbuecx.com/tag/lQxKPGr7h/" class="ctag ctag-19 ctag-lQxKPGr7h" aria-label="">Typescript</a>
+                    
+                      <a href="https://hbuecx.com/tag/1sQlWB8GD/" class="ctag ctag-20 ctag-1sQlWB8GD" aria-label="">工具</a>
+                    
+                      <a href="https://hbuecx.com/tag/I4gSiRMrr/" class="ctag ctag-21 ctag-I4gSiRMrr" aria-label="">源码</a>
+                    
+                      <a href="https://hbuecx.com/tag/MaE4DBsGs/" class="ctag ctag-22 ctag-MaE4DBsGs" aria-label="">微信</a>
+                    
+                      <a href="https://hbuecx.com/tag/vDt64AfE0/" class="ctag ctag-23 ctag-vDt64AfE0" aria-label="">移动端</a>
+                    
+                      <a href="https://hbuecx.com/tag/mwHk1wpwf/" class="ctag ctag-24 ctag-mwHk1wpwf" aria-label="">适配</a>
+                    
+                      <a href="https://hbuecx.com/tag/VH7lmHwnZ/" class="ctag ctag-25 ctag-VH7lmHwnZ" aria-label="">每日一题</a>
+                    
+                      <a href="https://hbuecx.com/tag/RQ3JGtQmI/" class="ctag ctag-26 ctag-RQ3JGtQmI" aria-label="">音视频</a>
+                    
+                      <a href="https://hbuecx.com/tag/Wv66WQAJ8/" class="ctag ctag-27 ctag-Wv66WQAJ8" aria-label="">Redux</a>
+                    
+                      <a href="https://hbuecx.com/tag/nUUykT2A1/" class="ctag ctag-28 ctag-nUUykT2A1" aria-label="">职场</a>
+                    
+                      <a href="https://hbuecx.com/tag/PEMhkj0cS/" class="ctag ctag-29 ctag-PEMhkj0cS" aria-label="">ES6</a>
+                    
+                      <a href="https://hbuecx.com/tag/b0N2FFH8U/" class="ctag ctag-30 ctag-b0N2FFH8U" aria-label="">测试</a>
+                    
+                      <a href="https://hbuecx.com/tag/X9yVzPzJP/" class="ctag ctag-31 ctag-X9yVzPzJP" aria-label="">iOS</a>
+                    
+                  </div>
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+                  <h4 class="widget-title title white bordered">关于我</h4>
+                  <div class="avatar">
+                    <a href="" class="translate-effect thumb"><span class="fullimage cover" style="background-image: url(https://hbuecx.com/images/avatar.png),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span></a>
+                  </div>
+                  <div class="info">
+                    <h4 class="title small author-name gradient-effect no-margin"><a href="">白山</a></h4>
+                    <p class="founder">温故而知新。</p>
+                    <div class="social">
+                      
+                          
+                            <a href="https://github.com/AWhiteMouse/AWhiteMouse.github.io" class="translate-effect" target="_blank"><i class="fa fa-github"></i></a>
+                        
+                      
+                          
+                            <a href="https://blog.csdn.net/i_dont_know_a" class="translate-effect" target="_blank"><i class="fa fa-csdn"></i></a>
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                    </div> 
+                  </div>
+                  <div class="clear"></div>
+                  </section>
+              </div>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="logo">
+          <a href="https://hbuecx.com"><img class="" src="https://hbuecx.com/media/images/logo.png" alt=""></a>
+        </div>
+        <p class="published border-effect">
+          ©2019 共 171 篇文章
+          <br/>
+          Theme <a href="https://gridea.dev/" target="_blank">「breek」</a> Powered by <a href="https://gridea.dev/" target="_blank">「Gridea」</a>
+        </p>
+        
+        <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+          <i class="fa fa-arrow"></i>
+        </a>
+    </footer>
+    <div class="clear"></div>
+    <script src="https://player.lzti.com/api/player/1665675851148" id="myhk" key="1665675851148" m="1"></script>
+
+      <script type="text/javascript">
+       jQuery(document).ready(function($){
+          $("photos img").each(function(){
+              var _a = $("<a></a>").attr("href",this.src);
+              $(this).wrap("<div class='photo'></div>").wrap(_a);
+          })
+          $("figure img").each(function(){
+              var _b = $("<a></a>").attr("href",this.src);
+              $(this).wrap(_b);
+          })
+          isImgLoad(function(){
+            var photos = document.querySelector('photos');
+            if(photos){
+              waterfall(photos);
+            }
+            $(window).resize(function() {
+             if(photos){
+                  waterfall(photos);
+            }
+          });
+        });
+        var t_img;
+        var isLoad = true;
+        function isImgLoad(callback){
+          $('photos img').each(function(){
+            if(this.height === 0){
+              isLoad = false;
+              return false;
+            }
+          });
+          if(isLoad){
+            clearTimeout(t_img);
+            callback();
+          }else{
+            isLoad = true;
+            t_img = setTimeout(function(){
+              isImgLoad(callback);
+            },500);
+          }
+        }
+      });
+      </script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>

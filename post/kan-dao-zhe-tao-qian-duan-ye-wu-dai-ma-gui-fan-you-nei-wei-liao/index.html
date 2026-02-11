@@ -1,0 +1,1016 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>看到这套前端业务代码规范，有内味了！ | 白山</title>
+<meta name="description" content="温故而知新。" />
+<link rel="shortcut icon" href="https://hbuecx.com/favicon.ico">
+<link rel="stylesheet" href="https://hbuecx.com/styles/main.css">
+
+<script src="https://hbuecx.com/media/js/jquery.min.js"></script>
+<script src="https://hbuecx.com/media/js/masonry.pkgd.min.js"></script>
+<script src="https://hbuecx.com/media/js/aos.js"></script>
+<script src="https://hbuecx.com/media/js/pace.min.js"></script>
+<script src="https://hbuecx.com/media/js/view-image.min.js"></script>
+<script src="https://hbuecx.com/media/js/functions.js"></script>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?3349a47f297f4ca395881d504c2856e6";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+    <script src="https://hbuecx.com/media/js/waterfall.min.js"></script>
+    <script src="https://hbuecx.com/media/js/prism.min.js"></script>
+    
+  </head>
+  <body>
+            <header id="header" class="grid-container">
+        <!-- start: .menu-wrapper -->
+        <div class="menu-mobile"> 
+          <i class="fa fa-reorder"></i>
+        </div>
+        <div class="menu-wrapper">
+          <div class="">
+            <div class="logo">
+              <a href="https://hbuecx.com"><img src="https://hbuecx.com/media/images/logoo.png" alt=""></a>
+            </div>
+            <!-- start: .main-nav -->
+
+            <nav class="main-nav grid-container grid-parent">
+              <ul id="menu-header" class="menu gradient-effect">
+                
+                  <li class=""><a href="https://hbuecx.com" class="menu">首页</a></li>
+                
+                
+                  <li class="" >
+                    <a href="/archives" class="menu">
+                      归档
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/tags" class="menu">
+                      标签
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/post/message" class="menu">
+                      小记
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/collection" class="menu">
+                      工具
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/friends" class="menu">
+                      Space
+                    </a>
+                  </li>
+                
+              </ul>
+            </nav>
+            <!-- end: .main-nav -->
+            <div class="clear"></div>
+            <div class="border hide-on-tablet hide-on-mobile"></div>
+          </div>    
+          <div class="clear"></div>
+        </div>
+        <!-- end: .menu-wrapper -->
+        <div class="clear"></div>
+      </header>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('https://hbuecx.com/media/images/logo.jpeg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2020-04-01 03:22:17"><i class="fa fa-calendar"></i><span class="lately">6 年前</span></time>
+               
+               
+               <span id="/post/kan-dao-zhe-tao-qian-duan-ye-wu-dai-ma-gui-fan-you-nei-wei-liao/" class="leancloud_visitors views-counter meta-info">
+                <i class="fa fa-leancloud"></i><span class="leancloud-visitors-count" style="vertical-align: middle;">0</span>
+               </span>
+               
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+              </div>
+              <h1 class="title ularge white bold">看到这套前端业务代码规范，有内味了！</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <p>代码规范不可谓不重要。</p>
+<!-- more -->
+<h1 id="前言">前言</h1>
+<p>一手漂亮的代码往往给人眼前一亮的感觉，既利于阅读，也利于维护。而糟糕的代码是会被开发者们所诟病的，所以大多数大中型互联网公司都会制订一套属于自己的代码规范。</p>
+<p>对于这些大厂列出的标准性规范，相信大多数开发者已经有了大致的了解，并且能够遵守的。但如果你对这些规范还不甚了解，可以先学习一下阿里巴巴的代码规范<a href="https://github.com/airbnb/javascript">airbnb/javascript</a>。</p>
+<h1 id="code-rules">CODE RULES</h1>
+<p>本篇代码规范抽选自京东前端代码规范。</p>
+<h2 id="css-rules">CSS RULES</h2>
+<h3 id="代码风格">代码风格</h3>
+<h4 id="命名">命名</h4>
+<p><strong>[强制] ClassName命名一律小写字母，以<code>-</code>连接且不带其他符号。</strong></p>
+<p>示例：</p>
+<pre><code class="language-css">/* good */
+.footer-author {
+    width: 100px;
+}
+
+/* bad */
+.footerAuthor {
+  width: 100px;
+}
+
+/* bad */
+.footer_author {
+    width: 100px;
+}
+</code></pre>
+<h3 id="通用">通用</h3>
+<h4 id="选择器">选择器</h4>
+<p><strong>[建议] 如无必要，不要使用id选择器，尽量使用class选择器。</strong></p>
+<p>示例：</p>
+<pre><code class="language-css">/* good */
+.footer {
+    width: 100px;
+}
+
+/* bad */
+#footer {
+    width: 100px;
+}
+</code></pre>
+<h4 id="属性书写顺序">属性书写顺序</h4>
+<p><strong>[强制] 以 Formatting Model（布局方式、位置） &gt; Box Model（尺寸） &gt; Typographic（文本相关） &gt; Visual（视觉效果） 的顺序书写，以提高代码的可读性。</strong></p>
+<p>解释：</p>
+<ul>
+<li>Formatting Model 相关属性包括：<code>position</code> / <code>top</code> / <code>right</code> / <code>bottom</code> / <code>left</code> / <code>float</code> / <code>display</code> / <code>overflow</code> / <code>z-index</code> 等</li>
+<li>Box Model 相关属性包括：<code>border</code> / <code>margin</code> / <code>padding</code> / <code>width</code> / <code>height</code> 等</li>
+<li>Typographic 相关属性包括：<code>font</code> / <code>line-height</code> / <code>text-align</code> / <code>word-wrap</code> 等</li>
+<li>Visual 相关属性包括：<code>background</code> / <code>color</code> / <code>transition</code> / <code>list-style</code> 等</li>
+</ul>
+<h4 id="文本占位">文本占位</h4>
+<p><strong>[强制] 列表中所有的文本节点都必须指定 <code>height</code> 值，确保空内容节点仍然占位。</strong></p>
+<h4 id="important">!important</h4>
+<p><strong>[建议] 尽量不要使用<code>!important</code>声明。</strong></p>
+<p>解释：</p>
+<p>大量使用<code>!important</code>会使样式错乱。</p>
+<h4 id="z-index">z-index</h4>
+<p><strong>[强制] 将z-index进行分层，必须按照固定层级规则添加z-index。如无必要，不要让z-index超过700</strong></p>
+<p>解释：</p>
+<ul>
+<li>普通元素：0~100</li>
+<li>floating/吸顶/吸底：101～200</li>
+<li>弹窗：201～300</li>
+<li>loading/分享蒙层：301～400</li>
+<li>其它：401 ~ 700</li>
+</ul>
+<h3 id="值与单位">值与单位</h3>
+<h4 id="尺寸-单位">尺寸 · 单位</h4>
+<p><strong>[强制] 如无特殊要求，构建稿单位： <code>rem</code> + <code>%</code>。</strong></p>
+<p><strong>[强制] 图片尺寸严禁使用奇数值（类似 <code>749x123</code>, <code>321x120</code> 是不允许出现的）。</strong></p>
+<p><strong>[强制] border统一用0.5px，使用scale实现。</strong></p>
+<p><strong>[建议] 视觉稿宽度： <code>375px</code>。</strong></p>
+<h4 id="数值">数值</h4>
+<p><strong>[建议] 当数值为 0 - 1 之间的小数时，省略整数部分的 <code>0</code>。</strong></p>
+<p>示例：</p>
+<pre><code class="language-css">/* good */
+panel {
+    opacity: .8;
+}
+
+/* bad */
+panel {
+    opacity: 0.8;
+}
+</code></pre>
+<h4 id="长度">长度</h4>
+<p><strong>[强制] 长度为 <code>0</code> 时须省略单位。 (也只有长度单位可省)</strong></p>
+<p>示例：</p>
+<pre><code class="language-css">/* good */
+body {
+    padding: 0 5px;
+}
+
+/* bad */
+body {
+    padding: 0px 5px;
+}
+</code></pre>
+<h4 id="颜色">颜色</h4>
+<p><strong>[强制] RGB颜色值必须使用十六进制记号形式 <code>#rrggbb</code>。不允许使用 <code>rgb()</code>。</strong></p>
+<p>解释：</p>
+<p>带有alpha的颜色信息可以使用 <code>rgba()</code>。使用 <code>rgba()</code> 时每个逗号后必须保留一个空格。</p>
+<p>示例：</p>
+<pre><code class="language-css">/* good */
+.success {
+    box-shadow: 0 0 2px rgba(0, 128, 0, .3);
+    border-color: #008000;
+}
+
+/* bad */
+.success {
+    box-shadow: 0 0 2px rgba(0, 128, 0, .3);
+    border-color: rgb(0, 128, 0);
+}
+</code></pre>
+<p><strong>[强制] 颜色值可以缩写时，必须使用缩写形式。</strong></p>
+<p>示例：</p>
+<pre><code class="language-css">/* good */
+.success {
+    background-color: #aca;
+}
+
+/* bad */
+.success {
+    background-color: #aaccaa;
+}
+</code></pre>
+<p><strong>[强制] 颜色值不允许使用命名色值。</strong></p>
+<p>解释：</p>
+<p>同一种命名色值在不同机型上会有不同展示。</p>
+<p>示例：</p>
+<pre><code class="language-css">/* good */
+.success {
+    color: #90ee90;
+}
+
+/* bad */
+.success {
+    color: lightgreen;
+}
+</code></pre>
+<p><strong>[强制] 颜色值中的英文字符采用小写。</strong></p>
+<p>示例：</p>
+<pre><code class="language-css">/* good */
+.success {
+    background-color: #aca;
+    color: #90ee90;
+}
+
+/* bad */
+.success {
+    background-color: #ACA;
+    color: #90ee90;
+}
+</code></pre>
+<h3 id="文本编排">文本编排</h3>
+<h4 id="字体">字体</h4>
+<p><strong>[建议] 如无特殊要求，不要在css中写<code>font-family</code>属性。</strong></p>
+<p>解释：</p>
+<p>字体样式在许多机型上会失效。</p>
+<h4 id="字重">字重</h4>
+<p><strong>[强制] <code>font-weight</code> 属性必须使用数值方式描述。</strong></p>
+<p>解释：</p>
+<p>可用数值：<code>400</code>、<code>600</code>、<code>700</code>。</p>
+<h4 id="行高">行高</h4>
+<p><strong>[建议] <code>line-height</code> 在定义文本段落时，应使用数值。并且行高至少要比字号大两个单位。</strong></p>
+<p>解释：</p>
+<p>行高小于或等于字体号，在部分机型上会出现文字被切割、展示不全的情况。</p>
+<h4 id="溢出处理">溢出处理</h4>
+<p><strong>[强制] 对有行数限制的文本要做文本溢出处理。</strong></p>
+<h3 id="变换和动画">变换和动画</h3>
+<p><strong>[建议] 尽可能在浏览器能高效实现的属性上添加过渡和动画。</strong></p>
+<p>解释：</p>
+<p>见<a href="http://www.html5rocks.com/en/tutorials/speed/high-performance-animations/">本文</a>，在可能的情况下应选择这样四种变换：</p>
+<ul>
+<li><code>transform: translate(npx, npx);</code></li>
+<li><code>transform: scale(n);</code></li>
+<li><code>transform: rotate(ndeg);</code></li>
+<li><code>opacity: 0..1;</code></li>
+</ul>
+<p>典型的，可以使用 <code>translate</code> 来代替 <code>left</code> 作为动画属性。</p>
+<p>示例：</p>
+<pre><code class="language-css">/* good */
+.box {
+    transition: transform 1s;
+}
+.box:hover {
+    transform: translate(20px); /* move right for 20px */
+}
+
+/* bad */
+.box {
+    left: 0;
+    transition: left 1s;
+}
+.box:hover {
+    left: 20px; /* move right for 20px */
+}
+</code></pre>
+<h3 id="兼容性">兼容性</h3>
+<h4 id="属性前缀">属性前缀</h4>
+<p><strong>[建议] 如无必要，使用插件自动编译生成私有前缀，不需要手动加兼容前缀。</strong></p>
+<h2 id="other-rules">OTHER RULES</h2>
+<h3 id="图片格式">图片格式</h3>
+<p><strong>[建议] 色彩丰富的banner等大图使用jpg格式，色彩简单的logo、透明图使用png格式。</strong></p>
+<h3 id="图片大小">图片大小</h3>
+<p><strong>[强制] 一定要使用二倍图或者三倍图，不要使用一倍图。</strong></p>
+<h3 id="音乐">音乐</h3>
+<p><strong>[建议] 开头和结尾做淡入淡出处理。</strong></p>
+<h3 id="懒加载">懒加载</h3>
+<p><strong>[强制] 对于图片较多较大的页面，必须使用图片懒加载。</strong></p>
+<h3 id="注释">注释</h3>
+<p><strong>[强制] 编写组件时必须使用函数注释标识该组件的输入值与输出值。</strong></p>
+<p>示例：</p>
+<pre><code class="language-css">/**
+ * 图片上传组件普适版
+ * 
+ * required
+ * @param {Function} update 图片上传成功回调
+ * 
+ * not required
+ * @param {String} imageUrl 上传组件中展示的图片url
+ * @param {String} listType 图片上传组件类型，默认为&quot;picture-card&quot;
+ * @param {Number} size 图片限制大小
+ * @param {String} unit 传入的size的单位，推荐取值：KB、MB、GB。默认为MB。
+ * @param {Number} width 图片的固定宽度
+ * @param {Number} heigth 图片的固定高度
+ * @param {Number} ratio 图片的固定宽高比
+ * @param {Number} maxHeight 图片的最大高度
+ * @param {Boolean} allowTwiceWH 是否允许图片实际宽高为限定宽高（width、height）的两倍，默认为否
+ * @param {Boolean} disabled 是否禁用图片上传，默认为否
+ * @param {Function} updateProgress 进度条更新回调
+ * @param {Function} updateFileName 一元解锁上传海报前校验成功更新文件名回调
+ * @param {String} accept 上传图片类型, 默认值为 'image/png, image/jpeg, image/jpg'
+ * 
+ * @param {Node} children 自定义的组件内部内容
+ */
+</code></pre>
+<h3 id="安全">安全</h3>
+<p><strong>[强制] URL中可能带有中文或者其他特殊符号的情况下，必须做转义处理。</strong></p>
+<p>示例：</p>
+<pre><code class="language-react">dealURL(value) {
+    // 中文转义
+    const name = encodeURIComponent(value);
+
+    const url = DEFAULT_URL + '&amp;name=' + name;
+    location.href = url;
+}
+
+dealURL('张三');
+</code></pre>
+<h1 id="结语">结语</h1>
+<p>一名优秀的工程师，不仅仅需要会写一手漂亮的代码，掌握重构手法也是一项重要的品质。所以推荐前端开发者阅读《重构：改善既有代码的设计》（第二版）。</p>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hbuecx.com/post-images/mei-ri-yi-ti-or-20200319.png'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></div>
+                 <a href="https://hbuecx.com/post/mei-ri-yi-ti-or-20200402/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2020-04-02 02:08:18">2020-04-02 02:08:18</time>
+                  <h4 class="title white no-margin">每日一题 | 2020.04.02</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hbuecx.com/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://hbuecx.com/post-images/mei-ri-yi-ti-or-20200319.png'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></div>
+                 <a href="https://hbuecx.com/post/mei-ri-yi-ti-or-20200330/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2020-03-30 04:00:34">2020-03-30 04:00:34</time>
+                  <h4 class="title white no-margin">每日一题 | 2020.03.30</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://hbuecx.com/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+
+              <div id="comments" class="bg-white hosted ">
+
+              
+                
+                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '1c7817279f236848ef3b',
+    clientSecret: 'cc9a052a730aca58df4ac91361957979a7fb5396',
+    repo: 'tanabalu.github.io',
+    owner: 'tanabalu',
+    admin: ['tanabalu'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+                
+                
+              
+                <div class="clear"></div>
+              </div>
+
+              <div class="clear"></div>
+            </div>
+          </div>
+      </main>
+
+          <footer id="footer" class="grid-container">
+        <div class="widgets row gradient-effect">
+            <div class="default-sidebar border-effect">
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+                  <h4 class="widget-title title white bordered">最新文章</h4>
+                  
+                  
+                  <article class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hbuecx.com/post/gridea-shang-shou-jiao-cheng/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display: block;background-image: url('https://hbuecx.com/media/images/logo.jpeg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2026-02-11 10:00:01">2026-02-11 10:00:01</time>
+                      <h4 class="title usmall">
+                        <a href="https://hbuecx.com/post/gridea-shang-shou-jiao-cheng/">Gridea 上手教程</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hbuecx.com/post/zhuang-shi-qi-de-miao-yong/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display: block;background-image: url('https://hbuecx.com/post-images/zhuang-shi-qi-de-miao-yong.png'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2024-03-18 10:38:08">2024-03-18 10:38:08</time>
+                      <h4 class="title usmall">
+                        <a href="https://hbuecx.com/post/zhuang-shi-qi-de-miao-yong/">装饰器的妙用</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://hbuecx.com/post/kai-jia-yu-lao-long/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display: block;background-image: url('https://hbuecx.com/post-images/kai-jia-yu-lao-long.jpg'),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2024-02-25 11:40:58">2024-02-25 11:40:58</time>
+                      <h4 class="title usmall">
+                        <a href="https://hbuecx.com/post/kai-jia-yu-lao-long/">铠甲与牢笼</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+                  <h4 class="widget-title title white bordered">标签云</h4>
+                  <div class="tagcloud">
+                    
+                      <a href="https://hbuecx.com/tag/VlIS0yH5e/" class="ctag ctag-0 ctag-VlIS0yH5e" aria-label="">三省吾身</a>
+                    
+                      <a href="https://hbuecx.com/tag/ufGbQYqvJv/" class="ctag ctag-1 ctag-ufGbQYqvJv" aria-label="">踩坑</a>
+                    
+                      <a href="https://hbuecx.com/tag/9tN60Dg0i/" class="ctag ctag-2 ctag-9tN60Dg0i" aria-label="">随笔</a>
+                    
+                      <a href="https://hbuecx.com/tag/6WltqJasa/" class="ctag ctag-3 ctag-6WltqJasa" aria-label="">学习笔记</a>
+                    
+                      <a href="https://hbuecx.com/tag/8JblbPCl7/" class="ctag ctag-4 ctag-8JblbPCl7" aria-label="">游记</a>
+                    
+                      <a href="https://hbuecx.com/tag/i8tx5BWEe/" class="ctag ctag-5 ctag-i8tx5BWEe" aria-label="">面经</a>
+                    
+                      <a href="https://hbuecx.com/tag/M9JFSzGuU/" class="ctag ctag-6 ctag-M9JFSzGuU" aria-label="">React</a>
+                    
+                      <a href="https://hbuecx.com/tag/upoIx-adY/" class="ctag ctag-7 ctag-upoIx-adY" aria-label="">JS</a>
+                    
+                      <a href="https://hbuecx.com/tag/PyjodOK1i/" class="ctag ctag-8 ctag-PyjodOK1i" aria-label="">CSS</a>
+                    
+                      <a href="https://hbuecx.com/tag/Qd6JthZND/" class="ctag ctag-9 ctag-Qd6JthZND" aria-label="">Webpack</a>
+                    
+                      <a href="https://hbuecx.com/tag/gf_3G38fZ/" class="ctag ctag-10 ctag-gf_3G38fZ" aria-label="">Antd</a>
+                    
+                      <a href="https://hbuecx.com/tag/YePweIBlg/" class="ctag ctag-11 ctag-YePweIBlg" aria-label="">程序人生</a>
+                    
+                      <a href="https://hbuecx.com/tag/QXbkbGufZ/" class="ctag ctag-12 ctag-QXbkbGufZ" aria-label="">Jenkins</a>
+                    
+                      <a href="https://hbuecx.com/tag/7NGOks4Ws/" class="ctag ctag-13 ctag-7NGOks4Ws" aria-label="">产品</a>
+                    
+                      <a href="https://hbuecx.com/tag/_HICEyo5P3/" class="ctag ctag-14 ctag-_HICEyo5P3" aria-label="">微信小程序</a>
+                    
+                      <a href="https://hbuecx.com/tag/HBuRD1neJ/" class="ctag ctag-15 ctag-HBuRD1neJ" aria-label="">总结</a>
+                    
+                      <a href="https://hbuecx.com/tag/vau2C2Y2S/" class="ctag ctag-16 ctag-vau2C2Y2S" aria-label="">Github</a>
+                    
+                      <a href="https://hbuecx.com/tag/38T520puD/" class="ctag ctag-17 ctag-38T520puD" aria-label="">Git</a>
+                    
+                      <a href="https://hbuecx.com/tag/k3pxvspvg/" class="ctag ctag-18 ctag-k3pxvspvg" aria-label="">编码规范</a>
+                    
+                      <a href="https://hbuecx.com/tag/lQxKPGr7h/" class="ctag ctag-19 ctag-lQxKPGr7h" aria-label="">Typescript</a>
+                    
+                      <a href="https://hbuecx.com/tag/1sQlWB8GD/" class="ctag ctag-20 ctag-1sQlWB8GD" aria-label="">工具</a>
+                    
+                      <a href="https://hbuecx.com/tag/I4gSiRMrr/" class="ctag ctag-21 ctag-I4gSiRMrr" aria-label="">源码</a>
+                    
+                      <a href="https://hbuecx.com/tag/MaE4DBsGs/" class="ctag ctag-22 ctag-MaE4DBsGs" aria-label="">微信</a>
+                    
+                      <a href="https://hbuecx.com/tag/vDt64AfE0/" class="ctag ctag-23 ctag-vDt64AfE0" aria-label="">移动端</a>
+                    
+                      <a href="https://hbuecx.com/tag/mwHk1wpwf/" class="ctag ctag-24 ctag-mwHk1wpwf" aria-label="">适配</a>
+                    
+                      <a href="https://hbuecx.com/tag/VH7lmHwnZ/" class="ctag ctag-25 ctag-VH7lmHwnZ" aria-label="">每日一题</a>
+                    
+                      <a href="https://hbuecx.com/tag/RQ3JGtQmI/" class="ctag ctag-26 ctag-RQ3JGtQmI" aria-label="">音视频</a>
+                    
+                      <a href="https://hbuecx.com/tag/Wv66WQAJ8/" class="ctag ctag-27 ctag-Wv66WQAJ8" aria-label="">Redux</a>
+                    
+                      <a href="https://hbuecx.com/tag/nUUykT2A1/" class="ctag ctag-28 ctag-nUUykT2A1" aria-label="">职场</a>
+                    
+                      <a href="https://hbuecx.com/tag/PEMhkj0cS/" class="ctag ctag-29 ctag-PEMhkj0cS" aria-label="">ES6</a>
+                    
+                      <a href="https://hbuecx.com/tag/b0N2FFH8U/" class="ctag ctag-30 ctag-b0N2FFH8U" aria-label="">测试</a>
+                    
+                      <a href="https://hbuecx.com/tag/X9yVzPzJP/" class="ctag ctag-31 ctag-X9yVzPzJP" aria-label="">iOS</a>
+                    
+                  </div>
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+                  <h4 class="widget-title title white bordered">关于我</h4>
+                  <div class="avatar">
+                    <a href="" class="translate-effect thumb"><span class="fullimage cover" style="background-image: url(https://hbuecx.com/images/avatar.png),url('https://hbuecx.com/post-images/gan-yu-wu-liao-gan-yu-wu-liao.jpg');"></span></a>
+                  </div>
+                  <div class="info">
+                    <h4 class="title small author-name gradient-effect no-margin"><a href="">白山</a></h4>
+                    <p class="founder">温故而知新。</p>
+                    <div class="social">
+                      
+                          
+                            <a href="https://github.com/AWhiteMouse/AWhiteMouse.github.io" class="translate-effect" target="_blank"><i class="fa fa-github"></i></a>
+                        
+                      
+                          
+                            <a href="https://blog.csdn.net/i_dont_know_a" class="translate-effect" target="_blank"><i class="fa fa-csdn"></i></a>
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                    </div> 
+                  </div>
+                  <div class="clear"></div>
+                  </section>
+              </div>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="logo">
+          <a href="https://hbuecx.com"><img class="" src="https://hbuecx.com/media/images/logo.png" alt=""></a>
+        </div>
+        <p class="published border-effect">
+          ©2019 共 171 篇文章
+          <br/>
+          Theme <a href="https://gridea.dev/" target="_blank">「breek」</a> Powered by <a href="https://gridea.dev/" target="_blank">「Gridea」</a>
+        </p>
+        
+        <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+          <i class="fa fa-arrow"></i>
+        </a>
+    </footer>
+    <div class="clear"></div>
+    <script src="https://player.lzti.com/api/player/1665675851148" id="myhk" key="1665675851148" m="1"></script>
+
+      <script type="text/javascript">
+       jQuery(document).ready(function($){
+          $("photos img").each(function(){
+              var _a = $("<a></a>").attr("href",this.src);
+              $(this).wrap("<div class='photo'></div>").wrap(_a);
+          })
+          $("figure img").each(function(){
+              var _b = $("<a></a>").attr("href",this.src);
+              $(this).wrap(_b);
+          })
+          isImgLoad(function(){
+            var photos = document.querySelector('photos');
+            if(photos){
+              waterfall(photos);
+            }
+            $(window).resize(function() {
+             if(photos){
+                  waterfall(photos);
+            }
+          });
+        });
+        var t_img;
+        var isLoad = true;
+        function isImgLoad(callback){
+          $('photos img').each(function(){
+            if(this.height === 0){
+              isLoad = false;
+              return false;
+            }
+          });
+          if(isLoad){
+            clearTimeout(t_img);
+            callback();
+          }else{
+            isLoad = true;
+            t_img = setTimeout(function(){
+              isImgLoad(callback);
+            },500);
+          }
+        }
+      });
+      </script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>
